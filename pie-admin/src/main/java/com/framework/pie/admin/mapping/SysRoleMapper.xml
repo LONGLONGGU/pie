@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.pie.admin.dao.SysRoleMapper">
+  <resultMap id="BaseResultMap" type="com.framework.pie.admin.model.SysRole">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="deleted" jdbcType="BIT" property="deleted" />
+    <result column="odr" jdbcType="INTEGER" property="odr" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="iseditor" jdbcType="BIT" property="iseditor" />
+    <result column="isorgrole" jdbcType="BIT" property="isorgrole" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="org_id" jdbcType="VARCHAR" property="orgId" />
+    <result column="permission_id" jdbcType="VARCHAR" property="permissionId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, deleted, odr, code, description, iseditor, isorgrole, name, org_id, permission_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_role
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_role
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.framework.pie.admin.model.SysRole">
+    insert into sys_role (id, deleted, odr, 
+      code, description, iseditor, 
+      isorgrole, name, org_id, 
+      permission_id)
+    values (#{id,jdbcType=VARCHAR}, #{deleted,jdbcType=BIT}, #{odr,jdbcType=INTEGER}, 
+      #{code,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{iseditor,jdbcType=BIT}, 
+      #{isorgrole,jdbcType=BIT}, #{name,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, 
+      #{permissionId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.framework.pie.admin.model.SysRole">
+    insert into sys_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+      <if test="odr != null">
+        odr,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="iseditor != null">
+        iseditor,
+      </if>
+      <if test="isorgrole != null">
+        isorgrole,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="permissionId != null">
+        permission_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=BIT},
+      </if>
+      <if test="odr != null">
+        #{odr,jdbcType=INTEGER},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="iseditor != null">
+        #{iseditor,jdbcType=BIT},
+      </if>
+      <if test="isorgrole != null">
+        #{isorgrole,jdbcType=BIT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionId != null">
+        #{permissionId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.framework.pie.admin.model.SysRole">
+    update sys_role
+    <set>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=BIT},
+      </if>
+      <if test="odr != null">
+        odr = #{odr,jdbcType=INTEGER},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="iseditor != null">
+        iseditor = #{iseditor,jdbcType=BIT},
+      </if>
+      <if test="isorgrole != null">
+        isorgrole = #{isorgrole,jdbcType=BIT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionId != null">
+        permission_id = #{permissionId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.framework.pie.admin.model.SysRole">
+    update sys_role
+    set deleted = #{deleted,jdbcType=BIT},
+      odr = #{odr,jdbcType=INTEGER},
+      code = #{code,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      iseditor = #{iseditor,jdbcType=BIT},
+      isorgrole = #{isorgrole,jdbcType=BIT},
+      name = #{name,jdbcType=VARCHAR},
+      org_id = #{orgId,jdbcType=VARCHAR},
+      permission_id = #{permissionId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

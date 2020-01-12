@@ -1,0 +1,28 @@
+2020-01-12 21:18:58  [ restartedMain:0 ] - [ DEBUG ]  {conn-10001} connected
+2020-01-12 21:19:16  [ Thread-10:17700 ] - [ DEBUG ]  {conn-10001} closed
+2020-01-12 21:19:16  [ restartedMain:18379 ] - [ DEBUG ]  {conn-110001} connected
+2020-01-12 21:19:25  [ SpringContextShutdownHook:26575 ] - [ DEBUG ]  {conn-110001} closed
+2020-01-12 21:44:01  [ restartedMain:0 ] - [ DEBUG ]  {conn-10001} connected
+2020-01-12 21:45:11  [ http-nio-8081-exec-5:70156 ] - [ DEBUG ]  {conn-10001} pool-connect
+2020-01-12 21:45:11  [ http-nio-8081-exec-5:70261 ] - [ DEBUG ]  {conn-10001, pstmt-20000} created. select
+     
+    id, name, nick_name, avatar, password, salt, email, mobile, status, dept_id, create_by, 
+    create_time, last_update_by, last_update_time, del_flag
+   
+    from sys_user
+2020-01-12 21:45:11  [ http-nio-8081-exec-5:70265 ] - [ DEBUG ]  {conn-10001, pstmt-20000} Parameters : []
+2020-01-12 21:45:11  [ http-nio-8081-exec-5:70265 ] - [ DEBUG ]  {conn-10001, pstmt-20000} Types : []
+2020-01-12 21:45:11  [ http-nio-8081-exec-5:70272 ] - [ DEBUG ]  {conn-10001, pstmt-20000} executed. 8.657097 millis. select
+     
+    id, name, nick_name, avatar, password, salt, email, mobile, status, dept_id, create_by, 
+    create_time, last_update_by, last_update_time, del_flag
+   
+    from sys_user
+2020-01-12 21:45:11  [ http-nio-8081-exec-5:70274 ] - [ DEBUG ]  {conn-10001, pstmt-20000, rs-50000} open
+2020-01-12 21:45:11  [ http-nio-8081-exec-5:70276 ] - [ DEBUG ]  {conn-10001, pstmt-20000, rs-50000} Header: [id, name, nick_name, avatar, password, salt, email, mobile, status, dept_id, create_by, create_time, last_update_by, last_update_time, del_flag]
+2020-01-12 21:45:11  [ http-nio-8081-exec-5:70280 ] - [ DEBUG ]  {conn-10001, pstmt-20000, rs-50000} Result: [1, admin, admin, null, null, null, null, null, null, null, null, null, null, null, 0]
+2020-01-12 21:45:11  [ http-nio-8081-exec-5:70282 ] - [ DEBUG ]  {conn-10001, pstmt-20000, rs-50000} closed
+2020-01-12 21:45:11  [ http-nio-8081-exec-5:70282 ] - [ DEBUG ]  {conn-10001, pstmt-20000} clearParameters. 
+2020-01-12 21:45:11  [ http-nio-8081-exec-5:70283 ] - [ DEBUG ]  {conn-10001} pool-recycle
+2020-01-12 21:49:23  [ SpringContextShutdownHook:322147 ] - [ DEBUG ]  {conn-10001, pstmt-20000} closed
+2020-01-12 21:49:23  [ SpringContextShutdownHook:322150 ] - [ DEBUG ]  {conn-10001} closed

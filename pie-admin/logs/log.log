@@ -1,0 +1,10 @@
+2020-01-12 21:21:15  [ main:0 ] - [ DEBUG ]  {conn-10001} connected
+2020-01-12 21:21:16  [ SpringContextShutdownHook:1440 ] - [ DEBUG ]  {conn-10001} closed
+2020-01-12 21:22:15  [ main:0 ] - [ DEBUG ]  {conn-10001} connected
+2020-01-12 21:22:17  [ SpringContextShutdownHook:1380 ] - [ DEBUG ]  {conn-10001} closed
+2020-01-12 21:22:46  [ main:0 ] - [ DEBUG ]  {conn-10001} connected
+2020-01-12 21:22:48  [ SpringContextShutdownHook:1345 ] - [ DEBUG ]  {conn-10001} closed
+2020-01-12 21:41:43  [ main:0 ] - [ DEBUG ]  {conn-10001} connected
+2020-01-12 21:41:44  [ SpringContextShutdownHook:1410 ] - [ DEBUG ]  {conn-10001} closed
+2020-01-12 21:42:33  [ main:0 ] - [ DEBUG ]  {conn-10001} connected
+2020-01-12 21:42:34  [ SpringContextShutdownHook:1402 ] - [ DEBUG ]  {conn-10001} closed

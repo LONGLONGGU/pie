@@ -1,0 +1,2 @@
+2020-01-10 10:15:27  [ restartedMain:0 ] - [ DEBUG ]  {conn-10001} connected
+2020-01-10 10:41:39  [ SpringContextShutdownHook:1572793 ] - [ DEBUG ]  {conn-10001} closed
