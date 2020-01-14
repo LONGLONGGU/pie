@@ -214,4 +214,23 @@
     <include refid="Base_Column_List"/>
     from sys_user
   </select>
+  <select id="findPage" resultMap="BaseResultMap">
+    select u.*, (select d.name from sys_dept d where d.id = u.dept_id) deptName from sys_user u
+  </select>
+  <select id="findByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select u.*, (select d.name from sys_dept d where d.id = u.dept_id) deptName from sys_user u
+    where u.name = #{name,jdbcType=VARCHAR}
+  </select>
+  <select id="findPageByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <bind name="pattern" value="'%' + _parameter.name + '%'" />
+    select u.*, (select d.name from sys_dept d where d.id = u.dept_id) deptName from sys_user u
+    where u.name like #{pattern}
+  </select>
+  <select id="findPageByNameAndEmail" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <bind name="patternName" value="'%' + _parameter.name + '%'" />
+    <bind name="patternEmail" value="'%' + _parameter.email + '%'" />
+    select u.*, (select d.name from sys_dept d where d.id = u.dept_id) deptName from sys_user u
+    where u.name like #{patternName}
+    and u.email like #{patternEmail}
+  </select>
 </mapper>

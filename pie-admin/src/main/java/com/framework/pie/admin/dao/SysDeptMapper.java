@@ -1,7 +1,11 @@
 package com.framework.pie.admin.dao;
 
 import com.framework.pie.admin.model.SysDept;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+@Repository
 public interface SysDeptMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -14,4 +18,9 @@ public interface SysDeptMapper {
     int updateByPrimaryKeySelective(SysDept record);
 
     int updateByPrimaryKey(SysDept record);
+
+
+    List<SysDept> findPage();
+
+    List<SysDept> findAll();
 }
