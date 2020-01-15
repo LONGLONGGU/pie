@@ -13,6 +13,7 @@
         <module>pie-common</module>
         <module>pie-core</module>
         <module>pie-pom</module>
+        <module>pie-backup</module>
     </modules>
 
     

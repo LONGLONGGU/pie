@@ -2,8 +2,7 @@ package com.framework.pie.common.utils;
 
 /**
  * 字符串工具类
- * @author Louis
- * @date Sep 1, 2018
+ * @author longlong
  */
 public class StringUtils {
 
