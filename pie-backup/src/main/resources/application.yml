@@ -1,0 +1,12 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: pie-backup
+pie:
+  backup:
+     datasource:
+        host: 127.0.0.1
+        userName: root
+        password: root
+        database: pie
