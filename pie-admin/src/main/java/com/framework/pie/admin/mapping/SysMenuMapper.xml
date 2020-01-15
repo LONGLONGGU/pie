@@ -185,4 +185,31 @@
       del_flag = #{delFlag,jdbcType=TINYINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="findAll"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_menu
+  </select>
+  <select id="findPage"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_menu
+  </select>
+  <select id="findPageByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <bind name="pattern" value="'%' + _parameter.name + '%'" />
+    select
+    <include refid="Base_Column_List" />
+    from sys_menu
+    where name like #{pattern}
+  </select>
+  <select id="findByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select m.* from sys_menu m, sys_user u, sys_user_role ur, sys_role_menu rm
+  	where u.name = #{userName,jdbcType=BIGINT} and u.id = ur.user_id
+  	and ur.role_id = rm.role_id and rm.menu_id = m.id
+  </select>
+  <select id="findRoleMenus" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select m.* from sys_menu m, sys_role_menu rm
+    where rm.role_id = #{roleId,jdbcType=BIGINT}
+    and m.id = rm.menu_id
+  </select>
 </mapper>

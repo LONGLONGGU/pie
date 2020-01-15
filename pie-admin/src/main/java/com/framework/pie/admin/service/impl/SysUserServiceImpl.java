@@ -1,8 +1,13 @@
 package com.framework.pie.admin.service.impl;
 
+import com.framework.pie.admin.dao.SysMenuMapper;
+import com.framework.pie.admin.dao.SysRoleMapper;
+import com.framework.pie.admin.dao.SysUserRoleMapper;
+import com.framework.pie.admin.model.SysMenu;
 import com.framework.pie.admin.model.SysUser;
 import com.framework.pie.admin.dao.SysUserMapper;
 import com.framework.pie.admin.model.SysUserRole;
+import com.framework.pie.admin.service.SysMenuService;
 import com.framework.pie.admin.service.SysUserService;
 import com.framework.pie.common.utils.DateTimeUtils;
 import com.framework.pie.common.utils.PoiUtils;
@@ -18,21 +23,24 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 @Service
-
 public class SysUserServiceImpl implements SysUserService {
 
     @Autowired
     private SysUserMapper sysUserMapper;
+    @Autowired
+    private SysUserRoleMapper sysUserRoleMapper;
+    @Autowired
+    private SysMenuService sysMenuService;
 
     @Override
     public SysUser findByName(String username) {
-        return null;
+        return sysUserMapper.findByName(username);
     }
-
     @Override
     public List<SysUser> findAll() {
         return sysUserMapper.findAll();
@@ -40,7 +48,14 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public Set<String> findPermissions(String userName) {
-        return null;
+        Set<String> perms = new HashSet<>();
+        List<SysMenu> sysMenus = sysMenuService.findByUser(userName);
+        for(SysMenu sysMenu:sysMenus) {
+            if(sysMenu.getPerms() != null && !"".equals(sysMenu.getPerms())) {
+                perms.add(sysMenu.getPerms());
+            }
+        }
+        return perms;
     }
 
     @Override
@@ -54,7 +69,30 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public int save(SysUser record) {
-        return 0;
+        Long id = null;
+        if(record.getId() == null || record.getId() == 0) {
+            // 新增用户
+            sysUserMapper.insertSelective(record);
+            id = record.getId();
+        } else {
+            // 更新用户信息
+            sysUserMapper.updateByPrimaryKeySelective(record);
+        }
+        // 更新用户角色
+        if(id != null && id == 0) {
+            return 1;
+        }
+        if(id != null) {
+            for(SysUserRole sysUserRole:record.getUserRoles()) {
+                sysUserRole.setUserId(id);
+            }
+        } else {
+            sysUserRoleMapper.deleteByUserId(record.getId());
+        }
+        for(SysUserRole sysUserRole:record.getUserRoles()) {
+            sysUserRoleMapper.insertSelective(sysUserRole);
+        }
+        return 1;
     }
 
     @Override
