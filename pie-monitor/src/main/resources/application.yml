@@ -1,12 +1,8 @@
 server:
-  port: 8082
+  port: 8000
 spring:
   application:
-    name: pie-backup
-  boot:
-    admin:
-      client:
-        url: "http://localhost:8000"
+    name: pie-monitor
   cloud:
     consul:
       host: localhost
@@ -20,13 +16,5 @@ management:
       exposure:
         include: "*"
   endpoint:
-      health:
-        show-details: ALWAYS
-#back datasource
-pie:
-  backup:
-     datasource:
-        host: 127.0.0.1
-        userName: root
-        password: root
-        database: pie
+    health:
+      show-details: ALWAYS

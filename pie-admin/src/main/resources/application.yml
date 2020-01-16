@@ -1,6 +1,12 @@
 server:
   port: 8081
 spring:
+  application:
+    name: pie-admin
+  boot:
+    admin:
+      client:
+        url: "http://localhost:8000"
   datasource:
     name: druidDataSource
     type: com.alibaba.druid.pool.DruidDataSource
@@ -23,9 +29,21 @@ spring:
       pool-prepared-statements: true
       max-open-prepared-statements: 50
       max-pool-prepared-statement-per-connection-size: 20
-      removeAbandoned: true
-      removeAbandonedTimeout: 180
-      logAbandoned: true
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        serviceName: ${spring.application.name}	# 注册到consul的服务名称
+# 开放健康检查接口
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
 pagehelper:
   helper-dialect: mysql
   reasonable: true

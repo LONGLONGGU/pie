@@ -1,14 +1,15 @@
-package com.framework.pie;
+package com.framework.pie.monitor;
 
+import de.codecentric.boot.admin.server.config.EnableAdminServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
+@EnableAdminServer
 @EnableDiscoveryClient
-@SpringBootApplication(scanBasePackages = {"com.framework.pie"})
-public class PieBackupApplication {
-
+@SpringBootApplication
+public class PieMonitorApplication {
     public static void main(String[] args){
-        SpringApplication.run(PieBackupApplication.class,args);
+        SpringApplication.run(PieMonitorApplication.class,args);
     }
 }

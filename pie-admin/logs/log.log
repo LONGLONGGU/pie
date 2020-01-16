@@ -1,2 +1,4 @@
 2020-01-15 10:39:40  [ main:0 ] - [ DEBUG ]  {conn-10001} connected
 2020-01-15 10:39:42  [ SpringContextShutdownHook:2487 ] - [ DEBUG ]  {conn-10001} closed
+2020-01-16 14:11:31  [ main:0 ] - [ DEBUG ]  {conn-10001} connected
+2020-01-16 14:11:33  [ main:1596 ] - [ DEBUG ]  {conn-10001} closed

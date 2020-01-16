@@ -2,6 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -9,42 +10,33 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.framework</groupId>
-    <modelVersion>4.0.0</modelVersion>
-    <artifactId>pie-backup</artifactId>
+    <artifactId>pie-monitor</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
-    <name>pie-backup</name>
-    <description>pie-backup</description>
+    <name>pie-monitor</name>
+    <description>pie-monitor</description>
+
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
     </properties>
     <dependencies>
         <!-- spring boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>spring-boot-starter</artifactId>
         </dependency>
-        <!-- swagger -->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>2.9.2</version>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.9.2</version>
-        </dependency>
-        <!--spring-boot-admin-client-->
+        <!--spring-boot-admin-->
         <dependency>
             <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-client</artifactId>
+            <artifactId>spring-boot-admin-server</artifactId>
             <version>2.0.4</version>
         </dependency>
         <dependency>
-            <groupId>com.framework</groupId>
-            <artifactId>pie-common</artifactId>
-            <version>1.0.0</version>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-server-ui</artifactId>
+            <version>2.0.4</version>
         </dependency>
         <!--consul-->
         <dependency>
@@ -67,15 +59,6 @@
     </dependencyManagement>
 
     <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <includes>
-                    <include>**/*</include>
-                </includes>
-                <filtering>false</filtering>
-            </resource>
-        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -83,4 +66,7 @@
             </plugin>
         </plugins>
     </build>
+
+
+
 </project>
