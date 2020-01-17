@@ -14,6 +14,10 @@
         <module>pie-core</module>
         <module>pie-pom</module>
         <module>pie-backup</module>
+        <module>pie-monitor</module>
+        <module>pie-producer</module>
+        <module>pie-producer2</module>
+        <module>pie-consumer</module>
     </modules>
 
     
