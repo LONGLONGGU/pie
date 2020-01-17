@@ -1,4 +1,4 @@
-package com.framework.pie.consumer.FeignInterface;
+package com.framework.pie.consumer.feignInterface;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,6 +1,6 @@
 package com.framework.pie.consumer.controller;
 
-import com.framework.pie.consumer.FeignInterface.PieProducerService;
+import com.framework.pie.consumer.feignInterface.PieProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
