@@ -7,8 +7,15 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="pie-admin" />
+        <module name="pie-backup" />
         <module name="pie-common" />
+        <module name="pie-consumer" />
         <module name="pie-core" />
+        <module name="pie-hystrix" />
+        <module name="pie-monitor" />
+        <module name="pie-producer" />
+        <module name="pie-producer2" />
+        <module name="pie-zuul" />
       </profile>
     </annotationProcessing>
   </component>

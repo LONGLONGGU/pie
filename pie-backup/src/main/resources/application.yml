@@ -12,6 +12,7 @@ spring:
       host: localhost
       port: 8500
       discovery:
+        hostname: localhost
         serviceName: ${spring.application.name}	# 注册到consul的服务名称
 # 开放健康检查接口
 management:

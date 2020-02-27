@@ -18,6 +18,8 @@
         <module>pie-producer</module>
         <module>pie-producer2</module>
         <module>pie-consumer</module>
+        <module>pie-hystrix</module>
+        <module>pie-zuul</module>
     </modules>
 
     

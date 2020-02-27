@@ -5,10 +5,10 @@ spring:
     name: pie-monitor
   cloud:
     consul:
-      host: localhost
       port: 8500
       discovery:
-        serviceName: ${spring.application.name}	# 注册到consul的服务名称
+        hostname: localhost
+        serviceName: ${spring.application.name} # 注册到consul的服务名称
 # 开放健康检查接口
 management:
   endpoints:

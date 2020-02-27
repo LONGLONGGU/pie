@@ -7,7 +7,9 @@ spring:
     consul:
       host: localhost
       port: 8500
-      discovery: ${spring.application.name} #注册到consul的服务名称
+      discovery:
+        hostname: localhost
+        serviceName: ${spring.application.name}	# 注册到consul的服务名称
   boot:
     admin:
       client:
