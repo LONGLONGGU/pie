@@ -20,6 +20,7 @@
         <module>pie-consumer</module>
         <module>pie-hystrix</module>
         <module>pie-zuul</module>
+        <module>pie-config</module>
     </modules>
 
     
