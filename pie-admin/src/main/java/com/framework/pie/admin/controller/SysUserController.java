@@ -66,6 +66,7 @@ public class SysUserController {
         return HttpResult.ok(sysUserService.findByName(name));
     }
 
+    //查询用户权限
     @GetMapping(value="/findPermissions")
     public HttpResult findPermissions(@RequestParam String name) {
         return HttpResult.ok(sysUserService.findPermissions(name));

@@ -1,7 +1,9 @@
 package com.framework.pie.admin.dao;
 
 import com.framework.pie.admin.model.SysRoleMenu;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface SysRoleMenuMapper {
     int deleteByPrimaryKey(Long id);
 
