@@ -125,4 +125,8 @@
       del_flag = #{delFlag,jdbcType=TINYINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <delete id="deleteByRoleId" parameterType="java.lang.Long">
+    delete from sys_role_menu
+    where role_id = #{roleId,jdbcType=BIGINT}
+  </delete>
 </mapper>

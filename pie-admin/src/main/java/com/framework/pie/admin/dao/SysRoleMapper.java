@@ -14,7 +14,7 @@ public interface SysRoleMapper {
 
     int insertSelective(SysRole record);
 
-    SysRole selectByPrimaryKey(Long id);
+    SysRole  selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(SysRole record);
 

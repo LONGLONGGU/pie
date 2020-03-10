@@ -1,80 +1,30 @@
 package com.framework.pie.admin.model;
 
+import java.util.Date;
+
 public class SysRole {
-    private String id;
-
-    private Boolean deleted;
-
-    private Integer odr;
-
-    private String code;
-
-    private String description;
-
-    private Boolean iseditor;
-
-    private Boolean isorgrole;
+    private Long id;
 
     private String name;
 
-    private String orgId;
+    private String remark;
 
-    private String permissionId;
+    private Byte delFlag;
 
-    public String getId() {
+    private String createBy;
+
+    private Date createTime;
+
+    private String lastUpdateBy;
+
+    private Date lastUpdateTime;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
-    }
-
-    public Boolean getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Boolean deleted) {
-        this.deleted = deleted;
-    }
-
-    public Integer getOdr() {
-        return odr;
-    }
-
-    public void setOdr(Integer odr) {
-        this.odr = odr;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code == null ? null : code.trim();
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description == null ? null : description.trim();
-    }
-
-    public Boolean getIseditor() {
-        return iseditor;
-    }
-
-    public void setIseditor(Boolean iseditor) {
-        this.iseditor = iseditor;
-    }
-
-    public Boolean getIsorgrole() {
-        return isorgrole;
-    }
-
-    public void setIsorgrole(Boolean isorgrole) {
-        this.isorgrole = isorgrole;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -82,22 +32,54 @@ public class SysRole {
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
-    public String getOrgId() {
-        return orgId;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setOrgId(String orgId) {
-        this.orgId = orgId == null ? null : orgId.trim();
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
-    public String getPermissionId() {
-        return permissionId;
+    public Byte getDelFlag() {
+        return delFlag;
     }
 
-    public void setPermissionId(String permissionId) {
-        this.permissionId = permissionId == null ? null : permissionId.trim();
+    public void setDelFlag(Byte delFlag) {
+        this.delFlag = delFlag;
+    }
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getLastUpdateBy() {
+        return lastUpdateBy;
+    }
+
+    public void setLastUpdateBy(String lastUpdateBy) {
+        this.lastUpdateBy = lastUpdateBy;
+    }
+
+    public Date getLastUpdateTime() {
+        return lastUpdateTime;
+    }
+
+    public void setLastUpdateTime(Date lastUpdateTime) {
+        this.lastUpdateTime = lastUpdateTime;
     }
 }

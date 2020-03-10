@@ -1,6 +1,7 @@
 package com.framework.pie.admin.dao;
 
 import com.framework.pie.admin.model.SysRoleMenu;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -16,4 +17,6 @@ public interface SysRoleMenuMapper {
     int updateByPrimaryKeySelective(SysRoleMenu record);
 
     int updateByPrimaryKey(SysRoleMenu record);
+
+    int deleteByRoleId(@Param(value="roleId") Long roleId);
 }

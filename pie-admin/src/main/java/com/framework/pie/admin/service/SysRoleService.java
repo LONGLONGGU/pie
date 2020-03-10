@@ -28,7 +28,7 @@ public interface SysRoleService extends CurdService<SysRole> {
      * @param records
      * @return
      */
-    int saveRoleMenus(List<SysRoleMenu> records);
+    int saveRoleMenus(Long roleId,List<SysRoleMenu> records);
 
     /**
      * 根据名称查询

@@ -1,5 +1,6 @@
 package com.framework.pie.admin.service.impl;
 
+import com.framework.pie.admin.constant.SysConstants;
 import com.framework.pie.admin.dao.SysMenuMapper;
 import com.framework.pie.admin.dao.SysRoleMapper;
 import com.framework.pie.admin.dao.SysRoleMenuMapper;
@@ -30,22 +31,38 @@ public class SysRoleServiceImpl implements SysRoleService {
 
     @Override
     public List<SysMenu> findRoleMenus(Long roleId) {
-        return null;
+        SysRole sysRole = sysRoleMapper.selectByPrimaryKey(roleId);
+        if(SysConstants.ADMIN.equalsIgnoreCase(sysRole.getName())) {
+            // 如果是超级管理员，返回全部
+            return sysMenuMapper.findAll();
+        }
+        return sysMenuMapper.findRoleMenus(roleId);
     }
 
     @Override
-    public int saveRoleMenus(List<SysRoleMenu> records) {
-        return 0;
+    public int saveRoleMenus(Long roleId,List<SysRoleMenu> records) {
+        if(records == null || records.isEmpty()) {
+            sysRoleMenuMapper.deleteByRoleId(roleId);
+            return 1;
+        }
+        sysRoleMenuMapper.deleteByRoleId(roleId);
+        for(SysRoleMenu record:records) {
+            sysRoleMenuMapper.insertSelective(record);
+        }
+        return 1;
     }
 
     @Override
     public List<SysRole> findByName(String name) {
-        return null;
+        return sysRoleMapper.findByName(name);
     }
 
     @Override
     public int save(SysRole record) {
-        return 0;
+        if(record.getId() == null || record.getId() == 0) {
+            return sysRoleMapper.insertSelective(record);
+        }
+        return sysRoleMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override

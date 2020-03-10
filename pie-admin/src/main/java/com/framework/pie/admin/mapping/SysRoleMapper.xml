@@ -2,39 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.framework.pie.admin.dao.SysRoleMapper">
   <resultMap id="BaseResultMap" type="com.framework.pie.admin.model.SysRole">
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="deleted" jdbcType="BIT" property="deleted" />
-    <result column="odr" jdbcType="INTEGER" property="odr" />
-    <result column="code" jdbcType="VARCHAR" property="code" />
-    <result column="description" jdbcType="VARCHAR" property="description" />
-    <result column="iseditor" jdbcType="BIT" property="iseditor" />
-    <result column="isorgrole" jdbcType="BIT" property="isorgrole" />
+    <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="org_id" jdbcType="VARCHAR" property="orgId" />
-    <result column="permission_id" jdbcType="VARCHAR" property="permissionId" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="last_update_by" jdbcType="VARCHAR" property="lastUpdateBy" />
+    <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+    <result column="del_flag" jdbcType="TINYINT" property="delFlag" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, deleted, odr, code, description, iseditor, isorgrole, name, org_id, permission_id
+    id, name, remark, create_by, create_time, last_update_by, last_update_time, del_flag
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
     <include refid="Base_Column_List" />
     from sys_role
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from sys_role
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.framework.pie.admin.model.SysRole">
-    insert into sys_role (id, deleted, odr, 
-      code, description, iseditor, 
-      isorgrole, name, org_id, 
-      permission_id)
-    values (#{id,jdbcType=VARCHAR}, #{deleted,jdbcType=BIT}, #{odr,jdbcType=INTEGER}, 
-      #{code,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{iseditor,jdbcType=BIT}, 
-      #{isorgrole,jdbcType=BIT}, #{name,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, 
-      #{permissionId,jdbcType=VARCHAR})
+    insert into sys_role (id, name, remark,
+      create_by, create_time, last_update_by,
+      last_update_time, del_flag)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
+      #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUpdateBy,jdbcType=VARCHAR},
+      #{lastUpdateTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="com.framework.pie.admin.model.SysRole">
     insert into sys_role
@@ -42,111 +38,114 @@
       <if test="id != null">
         id,
       </if>
-      <if test="deleted != null">
-        deleted,
-      </if>
-      <if test="odr != null">
-        odr,
-      </if>
-      <if test="code != null">
-        code,
-      </if>
-      <if test="description != null">
-        description,
-      </if>
-      <if test="iseditor != null">
-        iseditor,
-      </if>
-      <if test="isorgrole != null">
-        isorgrole,
-      </if>
       <if test="name != null">
         name,
       </if>
-      <if test="orgId != null">
-        org_id,
+      <if test="remark != null">
+        remark,
       </if>
-      <if test="permissionId != null">
-        permission_id,
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="lastUpdateBy != null">
+        last_update_by,
+      </if>
+      <if test="lastUpdateTime != null">
+        last_update_time,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="deleted != null">
-        #{deleted,jdbcType=BIT},
-      </if>
-      <if test="odr != null">
-        #{odr,jdbcType=INTEGER},
-      </if>
-      <if test="code != null">
-        #{code,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null">
-        #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="iseditor != null">
-        #{iseditor,jdbcType=BIT},
-      </if>
-      <if test="isorgrole != null">
-        #{isorgrole,jdbcType=BIT},
+        #{id,jdbcType=BIGINT},
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="orgId != null">
-        #{orgId,jdbcType=VARCHAR},
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="permissionId != null">
-        #{permissionId,jdbcType=VARCHAR},
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateBy != null">
+        #{lastUpdateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateTime != null">
+        #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.framework.pie.admin.model.SysRole">
     update sys_role
     <set>
-      <if test="deleted != null">
-        deleted = #{deleted,jdbcType=BIT},
-      </if>
-      <if test="odr != null">
-        odr = #{odr,jdbcType=INTEGER},
-      </if>
-      <if test="code != null">
-        code = #{code,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null">
-        description = #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="iseditor != null">
-        iseditor = #{iseditor,jdbcType=BIT},
-      </if>
-      <if test="isorgrole != null">
-        isorgrole = #{isorgrole,jdbcType=BIT},
-      </if>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="orgId != null">
-        org_id = #{orgId,jdbcType=VARCHAR},
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="permissionId != null">
-        permission_id = #{permissionId,jdbcType=VARCHAR},
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateBy != null">
+        last_update_by = #{lastUpdateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateTime != null">
+        last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=TINYINT},
       </if>
     </set>
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.framework.pie.admin.model.SysRole">
     update sys_role
-    set deleted = #{deleted,jdbcType=BIT},
-      odr = #{odr,jdbcType=INTEGER},
-      code = #{code,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR},
-      iseditor = #{iseditor,jdbcType=BIT},
-      isorgrole = #{isorgrole,jdbcType=BIT},
-      name = #{name,jdbcType=VARCHAR},
-      org_id = #{orgId,jdbcType=VARCHAR},
-      permission_id = #{permissionId,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=VARCHAR}
+    set name = #{name,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      last_update_by = #{lastUpdateBy,jdbcType=VARCHAR},
+      last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      del_flag = #{delFlag,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="findPage" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_role
+  </select>
+  <select id="findAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_role
+  </select>
+  <select id="findPageByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <bind name="pattern" value="'%' + _parameter.name + '%'" />
+    select
+    <include refid="Base_Column_List" />
+    from sys_role
+    where name like #{pattern}
+  </select>
+  <select id="findByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_role
+    where name = #{name,jdbcType=VARCHAR}
+  </select>
 </mapper>
