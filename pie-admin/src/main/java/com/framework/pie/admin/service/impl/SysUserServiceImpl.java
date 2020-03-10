@@ -60,7 +60,7 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public List<SysUserRole> findUserRoles(Long userId) {
-        return null;
+        return sysUserRoleMapper.findUserRoles(userId);
     }
     @Override
     public PageResult findPage(PageRequest pageRequest) {
@@ -107,7 +107,7 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public SysUser findById(Long id) {
-        return null;
+        return sysUserMapper.selectByPrimaryKey(id);
     }
 
     @Override

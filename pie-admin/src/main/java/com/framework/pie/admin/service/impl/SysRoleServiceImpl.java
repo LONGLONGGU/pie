@@ -26,7 +26,7 @@ public class SysRoleServiceImpl implements SysRoleService {
     private SysMenuMapper sysMenuMapper;
     @Override
     public List<SysRole> findAll() {
-        return null;
+        return sysRoleMapper.findAll();
     }
 
     @Override
