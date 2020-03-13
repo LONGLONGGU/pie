@@ -29,4 +29,6 @@ public interface SysMenuMapper {
     List<SysMenu> findByUserName(@Param(value="userName") String userName);
 
     List<SysMenu> findRoleMenus(@Param(value="roleId") Long roleId);
+
+    List<SysMenu> findOrgMenus(@Param(value="orgId") Long orgId);
 }

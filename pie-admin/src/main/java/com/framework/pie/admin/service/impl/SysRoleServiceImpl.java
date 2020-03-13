@@ -77,7 +77,7 @@ public class SysRoleServiceImpl implements SysRoleService {
 
     @Override
     public SysRole findById(Long id) {
-        return null;
+        return sysRoleMapper.selectByPrimaryKey(id);
     }
 
     @Override

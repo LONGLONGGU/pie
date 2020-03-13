@@ -21,16 +21,16 @@
         </javaTypeResolver>
         <!--生成mapper.xml时覆盖原文件-->
         <!--生成Model类存放位置-->
-        <javaModelGenerator targetPackage="com.framework.pie.model" targetProject="./src/main/java">
+        <javaModelGenerator targetPackage="com.framework.pie.admin.model" targetProject="./src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
         <!--生成映射文件存放位置-->
-        <sqlMapGenerator targetPackage="com.framework.pie.mapping" targetProject="./src/main/java">
+        <sqlMapGenerator targetPackage="com.framework.pie.admin.mapping" targetProject="./src/main/java">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
         <!--生成Dao类存放位置-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.framework.pie.dao" targetProject="./src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.framework.pie.admin.dao" targetProject="./src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!--对应的数据库表及model中生成的类名-->
@@ -45,5 +45,8 @@
         <table tableName="sys_config" domainObjectName="SysConfig" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
         <table tableName="sys_log" domainObjectName="SysLog" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
         <table tableName="sys_login_log" domainObjectName="SysLoginLog" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="sys_org" domainObjectName="SysOrg" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="sys_org_dept" domainObjectName="sysOrgDept" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="sys_org_menu" domainObjectName="sysOrgMenu" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
     </context>
 </generatorConfiguration>
