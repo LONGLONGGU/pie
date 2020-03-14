@@ -5,8 +5,10 @@ import com.framework.pie.admin.dao.SysMenuMapper;
 import com.framework.pie.admin.dao.SysRoleMapper;
 import com.framework.pie.admin.dao.SysRoleMenuMapper;
 import com.framework.pie.admin.model.SysMenu;
+import com.framework.pie.admin.model.SysOrg;
 import com.framework.pie.admin.model.SysRole;
 import com.framework.pie.admin.model.SysRoleMenu;
+import com.framework.pie.admin.service.SysOrgService;
 import com.framework.pie.admin.service.SysRoleService;
 import com.framework.pie.core.page.MybatisPageHelper;
 import com.framework.pie.core.page.PageRequest;
@@ -24,6 +26,10 @@ public class SysRoleServiceImpl implements SysRoleService {
     private SysRoleMenuMapper sysRoleMenuMapper;
     @Autowired
     private SysMenuMapper sysMenuMapper;
+    @Autowired
+    private SysOrgService sysOrgService;
+
+
     @Override
     public List<SysRole> findAll() {
         return sysRoleMapper.findAll();
@@ -59,6 +65,8 @@ public class SysRoleServiceImpl implements SysRoleService {
 
     @Override
     public int save(SysRole record) {
+        SysOrg sysOrg = sysOrgService.findByOrg();
+        record.setOrgId(sysOrg.getId());
         if(record.getId() == null || record.getId() == 0) {
             return sysRoleMapper.insertSelective(record);
         }

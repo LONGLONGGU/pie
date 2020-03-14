@@ -9,7 +9,7 @@ public class SysRole {
 
     private String remark;
 
-    private Byte delFlag;
+    private Long orgId;
 
     private String createBy;
 
@@ -18,6 +18,8 @@ public class SysRole {
     private String lastUpdateBy;
 
     private Date lastUpdateTime;
+
+    private Byte delFlag;
 
     public Long getId() {
         return id;
@@ -32,7 +34,7 @@ public class SysRole {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name == null ? null : name.trim();
     }
 
     public String getRemark() {
@@ -40,15 +42,15 @@ public class SysRole {
     }
 
     public void setRemark(String remark) {
-        this.remark = remark;
+        this.remark = remark == null ? null : remark.trim();
     }
 
-    public Byte getDelFlag() {
-        return delFlag;
+    public Long getOrgId() {
+        return orgId;
     }
 
-    public void setDelFlag(Byte delFlag) {
-        this.delFlag = delFlag;
+    public void setOrgId(Long orgId) {
+        this.orgId = orgId;
     }
 
     public String getCreateBy() {
@@ -56,7 +58,7 @@ public class SysRole {
     }
 
     public void setCreateBy(String createBy) {
-        this.createBy = createBy;
+        this.createBy = createBy == null ? null : createBy.trim();
     }
 
     public Date getCreateTime() {
@@ -72,7 +74,7 @@ public class SysRole {
     }
 
     public void setLastUpdateBy(String lastUpdateBy) {
-        this.lastUpdateBy = lastUpdateBy;
+        this.lastUpdateBy = lastUpdateBy == null ? null : lastUpdateBy.trim();
     }
 
     public Date getLastUpdateTime() {
@@ -81,5 +83,13 @@ public class SysRole {
 
     public void setLastUpdateTime(Date lastUpdateTime) {
         this.lastUpdateTime = lastUpdateTime;
+    }
+
+    public Byte getDelFlag() {
+        return delFlag;
+    }
+
+    public void setDelFlag(Byte delFlag) {
+        this.delFlag = delFlag;
     }
 }

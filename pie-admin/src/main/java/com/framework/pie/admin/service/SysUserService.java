@@ -1,5 +1,6 @@
 package com.framework.pie.admin.service;
 
+import com.framework.pie.admin.model.SysOrg;
 import com.framework.pie.admin.model.SysUser;
 import com.framework.pie.admin.model.SysUserRole;
 import com.framework.pie.core.http.HttpResult;

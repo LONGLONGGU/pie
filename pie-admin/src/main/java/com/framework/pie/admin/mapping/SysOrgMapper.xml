@@ -151,4 +151,11 @@
     from sys_org
     where name = #{name,jdbcType=VARCHAR}
   </select>
+  <select id="findByOrg" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select o.*
+    from sys_user u,sys_org_dept d,sys_org o
+    where u.name = #{username,jdbcType=VARCHAR}
+    and d.dept_id = u.dept_id and o.id = d.org_id
+
+  </select>
 </mapper>

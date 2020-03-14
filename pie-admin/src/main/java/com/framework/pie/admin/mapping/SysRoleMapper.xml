@@ -5,6 +5,7 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="org_id" jdbcType="BIGINT" property="orgId" />
     <result column="create_by" jdbcType="VARCHAR" property="createBy" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="last_update_by" jdbcType="VARCHAR" property="lastUpdateBy" />
@@ -12,10 +13,11 @@
     <result column="del_flag" jdbcType="TINYINT" property="delFlag" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, remark, create_by, create_time, last_update_by, last_update_time, del_flag
+    id, name, remark, org_id, create_by, create_time, last_update_by, last_update_time, 
+    del_flag
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select
+    select 
     <include refid="Base_Column_List" />
     from sys_role
     where id = #{id,jdbcType=BIGINT}
@@ -25,12 +27,14 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.framework.pie.admin.model.SysRole">
-    insert into sys_role (id, name, remark,
-      create_by, create_time, last_update_by,
-      last_update_time, del_flag)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
-      #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUpdateBy,jdbcType=VARCHAR},
-      #{lastUpdateTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=TINYINT})
+    insert into sys_role (id, name, remark, 
+      org_id, create_by, create_time, 
+      last_update_by, last_update_time, del_flag
+      )
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{orgId,jdbcType=BIGINT}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{lastUpdateBy,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=TINYINT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.framework.pie.admin.model.SysRole">
     <selectKey  keyProperty="id" resultType="java.lang.Long" order="AFTER">
@@ -46,6 +50,9 @@
       </if>
       <if test="remark != null">
         remark,
+      </if>
+      <if test="orgId != null">
+        org_id,
       </if>
       <if test="createBy != null">
         create_by,
@@ -73,6 +80,9 @@
       <if test="remark != null">
         #{remark,jdbcType=VARCHAR},
       </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=BIGINT},
+      </if>
       <if test="createBy != null">
         #{createBy,jdbcType=VARCHAR},
       </if>
@@ -99,6 +109,9 @@
       <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
       </if>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=BIGINT},
+      </if>
       <if test="createBy != null">
         create_by = #{createBy,jdbcType=VARCHAR},
       </if>
@@ -121,6 +134,7 @@
     update sys_role
     set name = #{name,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
+      org_id = #{orgId,jdbcType=BIGINT},
       create_by = #{createBy,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       last_update_by = #{lastUpdateBy,jdbcType=VARCHAR},

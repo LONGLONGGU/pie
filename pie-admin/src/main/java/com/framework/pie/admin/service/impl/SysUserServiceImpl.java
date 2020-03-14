@@ -5,6 +5,7 @@ import com.framework.pie.admin.dao.SysMenuMapper;
 import com.framework.pie.admin.dao.SysRoleMapper;
 import com.framework.pie.admin.dao.SysUserRoleMapper;
 import com.framework.pie.admin.model.SysMenu;
+import com.framework.pie.admin.model.SysOrg;
 import com.framework.pie.admin.model.SysUser;
 import com.framework.pie.admin.dao.SysUserMapper;
 import com.framework.pie.admin.model.SysUserRole;

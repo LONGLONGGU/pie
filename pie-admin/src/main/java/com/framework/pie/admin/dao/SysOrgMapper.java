@@ -27,4 +27,6 @@ public interface SysOrgMapper {
     List<SysOrg> findPageByName(@Param(value="name") String name);
 
     List<SysOrg> findByName(@Param(value="name") String name);
+
+    SysOrg findByOrg(@Param(value="username") String username);
 }

@@ -28,4 +28,11 @@ public interface SysOrgService extends CurdService<SysOrg> {
      * @return
      */
     int saveRoleMenus(Long orgId,List<SysOrgMenu> records);
+
+    /**
+     * 通过用户名查询用户所属机构
+     * @return
+     */
+
+    SysOrg findByOrg();
 }

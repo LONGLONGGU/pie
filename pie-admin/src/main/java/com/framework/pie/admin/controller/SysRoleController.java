@@ -3,9 +3,12 @@ package com.framework.pie.admin.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.framework.pie.admin.constant.SysConstants;
 import com.framework.pie.admin.dao.SysRoleMapper;
+import com.framework.pie.admin.model.SysOrg;
 import com.framework.pie.admin.model.SysRole;
 import com.framework.pie.admin.model.SysRoleMenu;
+import com.framework.pie.admin.service.SysOrgService;
 import com.framework.pie.admin.service.SysRoleService;
+import com.framework.pie.admin.util.SecurityUtils;
 import com.framework.pie.core.http.HttpResult;
 import com.framework.pie.core.page.PageRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +29,8 @@ public class SysRoleController {
     private SysRoleService sysRoleService;
     @Autowired
     private SysRoleMapper sysRoleMapper;
+    @Autowired
+    private SysOrgService sysOrgService;
 
     @PreAuthorize("hasAuthority('sys:role:add') AND hasAuthority('sys:role:edit')")
     @PostMapping(value="/save")

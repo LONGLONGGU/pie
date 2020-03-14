@@ -7,6 +7,7 @@ import com.framework.pie.admin.service.SysDeptService;
 import com.framework.pie.admin.service.SysOrgService;
 import com.framework.pie.admin.service.SysRoleService;
 import com.framework.pie.admin.service.SysUserService;
+import com.framework.pie.admin.util.SecurityUtils;
 import com.framework.pie.common.utils.PinyinUtils;
 import com.framework.pie.core.page.MybatisPageHelper;
 import com.framework.pie.core.page.PageRequest;
@@ -127,5 +128,11 @@ public class SysOrgServiceImpl implements SysOrgService {
             sysOrgMenuMapper.insertSelective(record);
         }
         return 1;
+    }
+
+    @Override
+    public SysOrg findByOrg() {
+        String username =  SecurityUtils.getUsername();
+        return sysOrgMapper.findByOrg(username);
     }
 }
