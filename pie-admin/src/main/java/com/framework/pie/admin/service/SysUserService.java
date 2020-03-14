@@ -2,6 +2,7 @@ package com.framework.pie.admin.service;
 
 import com.framework.pie.admin.model.SysUser;
 import com.framework.pie.admin.model.SysUserRole;
+import com.framework.pie.core.http.HttpResult;
 import com.framework.pie.core.page.PageRequest;
 import com.framework.pie.core.service.CurdService;
 
@@ -14,6 +15,13 @@ import java.util.Set;
  * @author longlong
  */
 public interface SysUserService extends CurdService<SysUser> {
+
+    /**
+     * 通过用户名查询用户
+     * @return
+     */
+
+     HttpResult saveUser(SysUser record);
     /**
      * 通过用户名查询用户
      * @return

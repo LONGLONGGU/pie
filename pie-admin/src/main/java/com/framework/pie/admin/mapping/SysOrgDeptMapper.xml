@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.framework.pie.admin.dao.sysOrgDeptMapper">
-  <resultMap id="BaseResultMap" type="com.framework.pie.admin.model.sysOrgDept">
+<mapper namespace="com.framework.pie.admin.dao.SysOrgDeptMapper">
+  <resultMap id="BaseResultMap" type="com.framework.pie.admin.model.SysOrgDept">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="org_id" jdbcType="BIGINT" property="orgId" />
     <result column="dept_id" jdbcType="BIGINT" property="deptId" />
@@ -24,7 +24,7 @@
     delete from sys_org_dept
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.framework.pie.admin.model.sysOrgDept">
+  <insert id="insert" parameterType="com.framework.pie.admin.model.SysOrgDept">
     insert into sys_org_dept (id, org_id, dept_id, 
       create_by, create_time, last_update_by, 
       last_update_time, del_flag)
@@ -32,7 +32,7 @@
       #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUpdateBy,jdbcType=VARCHAR}, 
       #{lastUpdateTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=TINYINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.framework.pie.admin.model.sysOrgDept">
+  <insert id="insertSelective" parameterType="com.framework.pie.admin.model.SysOrgDept">
     insert into sys_org_dept
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -87,7 +87,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.framework.pie.admin.model.sysOrgDept">
+  <update id="updateByPrimaryKeySelective" parameterType="com.framework.pie.admin.model.SysOrgDept">
     update sys_org_dept
     <set>
       <if test="orgId != null">
@@ -114,7 +114,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.framework.pie.admin.model.sysOrgDept">
+  <update id="updateByPrimaryKey" parameterType="com.framework.pie.admin.model.SysOrgDept">
     update sys_org_dept
     set org_id = #{orgId,jdbcType=BIGINT},
       dept_id = #{deptId,jdbcType=BIGINT},

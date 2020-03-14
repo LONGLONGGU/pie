@@ -1,5 +1,6 @@
 package com.framework.pie.admin.service.impl;
 
+import com.framework.pie.admin.constant.SysConstants;
 import com.framework.pie.admin.dao.SysMenuMapper;
 import com.framework.pie.admin.dao.SysRoleMapper;
 import com.framework.pie.admin.dao.SysUserRoleMapper;
@@ -9,8 +10,10 @@ import com.framework.pie.admin.dao.SysUserMapper;
 import com.framework.pie.admin.model.SysUserRole;
 import com.framework.pie.admin.service.SysMenuService;
 import com.framework.pie.admin.service.SysUserService;
+import com.framework.pie.admin.util.PasswordUtils;
 import com.framework.pie.common.utils.DateTimeUtils;
 import com.framework.pie.common.utils.PoiUtils;
+import com.framework.pie.core.http.HttpResult;
 import com.framework.pie.core.page.MybatisPageHelper;
 import com.framework.pie.core.page.PageRequest;
 import com.framework.pie.core.page.PageResult;
@@ -68,8 +71,33 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    public int save(SysUser record) {
+    public HttpResult saveUser(SysUser record) {
+        SysUser user = this.findById(record.getId());
         Long id = null;
+        if(user != null) {
+            if(SysConstants.ADMIN.equalsIgnoreCase(user.getName())) {
+                return HttpResult.error("超级管理员不允许修改!");
+            }
+        }
+        if(record.getPassword() != null) {
+            String salt = PasswordUtils.getSalt();
+            if(user == null) {
+                // 新增用户
+                if(this.findByName(record.getName()) != null) {
+                    return HttpResult.error("用户名已存在!");
+                }
+                String password = PasswordUtils.encode(record.getPassword(), salt);
+                record.setSalt(salt);
+                record.setPassword(password);
+            } else {
+                // 修改用户, 且修改了密码
+                if(!record.getPassword().equals(user.getPassword())) {
+                    String password = PasswordUtils.encode(record.getPassword(), salt);
+                    record.setSalt(salt);
+                    record.setPassword(password);
+                }
+            }
+        }
         if(record.getId() == null || record.getId() == 0) {
             // 新增用户
             sysUserMapper.insertSelective(record);
@@ -80,7 +108,7 @@ public class SysUserServiceImpl implements SysUserService {
         }
         // 更新用户角色
         if(id != null && id == 0) {
-            return 1;
+            return HttpResult.ok("1");
         }
         if(id != null) {
             for(SysUserRole sysUserRole:record.getUserRoles()) {
@@ -92,7 +120,12 @@ public class SysUserServiceImpl implements SysUserService {
         for(SysUserRole sysUserRole:record.getUserRoles()) {
             sysUserRoleMapper.insertSelective(sysUserRole);
         }
-        return 1;
+        return HttpResult.ok("1");
+    }
+
+    @Override
+    public int save(SysUser record) {
+        return 0;
     }
 
     @Override

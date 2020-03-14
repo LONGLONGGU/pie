@@ -33,6 +33,9 @@
       #{lastUpdateTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="com.framework.pie.admin.model.SysRole">
+    <selectKey  keyProperty="id" resultType="java.lang.Long" order="AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into sys_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

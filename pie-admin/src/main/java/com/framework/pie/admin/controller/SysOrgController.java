@@ -36,7 +36,7 @@ public class SysOrgController {
         }
         // 新增机构
         if((record.getId() == null || record.getId() == 0) && !sysOrgService.findByName(record.getName()).isEmpty()) {
-            return HttpResult.error("角色名已存在!");
+            return HttpResult.error("机构已存在!");
         }
         return HttpResult.ok(sysOrgService.save(record));
     }

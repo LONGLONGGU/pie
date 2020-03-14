@@ -1,14 +1,13 @@
 package com.framework.pie.admin.service.impl;
 
 import com.framework.pie.admin.constant.SysConstants;
-import com.framework.pie.admin.dao.SysMenuMapper;
-import com.framework.pie.admin.dao.SysOrgMapper;
-import com.framework.pie.admin.dao.SysOrgMenuMapper;
-import com.framework.pie.admin.model.SysMenu;
-import com.framework.pie.admin.model.SysOrg;
-import com.framework.pie.admin.model.SysOrgMenu;
-import com.framework.pie.admin.model.SysRoleMenu;
+import com.framework.pie.admin.dao.*;
+import com.framework.pie.admin.model.*;
+import com.framework.pie.admin.service.SysDeptService;
 import com.framework.pie.admin.service.SysOrgService;
+import com.framework.pie.admin.service.SysRoleService;
+import com.framework.pie.admin.service.SysUserService;
+import com.framework.pie.common.utils.PinyinUtils;
 import com.framework.pie.core.page.MybatisPageHelper;
 import com.framework.pie.core.page.PageRequest;
 import com.framework.pie.core.page.PageResult;
@@ -27,13 +26,55 @@ public class SysOrgServiceImpl implements SysOrgService {
     private SysMenuMapper sysMenuMapper;
     @Autowired
     private SysOrgMenuMapper sysOrgMenuMapper;
+    @Autowired
+    private SysDeptService sysDeptService;
+    @Autowired
+    private SysOrgDeptMapper sysOrgDeptMapper;
+    @Autowired
+    private SysRoleService sysRoleService;
+    @Autowired
+    private SysUserService sysUserService;
+    @Autowired
+    private SysUserRoleMapper sysUserRoleMapper;
 
     @Override
-    public int save(SysOrg record) {
-        if(record.getId() == null || record.getId() == 0) {
-            return sysOrgMapper.insertSelective(record);
+    public int save(SysOrg sysOrg) {
+        if(sysOrg.getId() == null || sysOrg.getId() == 0) {
+            //新建默认部门
+            SysDept sysDept = new SysDept();
+            sysDept.setName("系统管理");
+            sysDept.setOrderNum(1);
+            sysDeptService.save(sysDept);
+            Long deptId = sysDept.getId();
+            sysOrgMapper.insertSelective(sysOrg);
+            Long orgId = sysOrg.getId();
+            SysOrgDept sysOrgDept = new SysOrgDept();
+            sysOrgDept.setOrgId(orgId);
+            sysOrgDept.setDeptId(deptId);
+            sysOrgDeptMapper.insertSelective(sysOrgDept);
+            //新建默认角色
+            SysRole sysRole = new SysRole();
+            sysRole.setName("admin");
+            sysRole.setRemark("超级管理员");
+            sysRole.setCreateBy("SuperAdmin");
+            sysRoleService.save(sysRole);
+            Long roleId = sysRole.getId();
+            //新建默认机构管理员
+            SysUser sysUser = new SysUser();
+            String name = PinyinUtils.getPingYin(sysOrg.getName());
+            sysUser.setName(name);
+            sysUser.setPassword("1233456");
+            sysUser.setDeptId(deptId);
+            sysUserService.saveUser(sysUser);
+            Long userId = sysUser.getId();
+            //保存管理员角色关系
+            SysUserRole sysUserRole = new SysUserRole();
+            sysUserRole.setUserId(userId);
+            sysUserRole.setRoleId(roleId);
+            sysUserRoleMapper.insertSelective(sysUserRole);
+            return  sysUserRoleMapper.insertSelective(sysUserRole);
         }
-        return sysOrgMapper.updateByPrimaryKeySelective(record);
+        return sysOrgMapper.updateByPrimaryKeySelective(sysOrg);
     }
 
     @Override

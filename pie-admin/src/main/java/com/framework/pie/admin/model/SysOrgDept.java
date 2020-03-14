@@ -2,7 +2,7 @@ package com.framework.pie.admin.model;
 
 import java.util.Date;
 
-public class sysOrgDept {
+public class SysOrgDept {
     private Long id;
 
     private Long orgId;

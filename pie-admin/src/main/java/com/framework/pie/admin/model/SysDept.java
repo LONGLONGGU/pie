@@ -124,4 +124,9 @@ public class SysDept {
     public void setLevel(Integer level) {
         this.level = level;
     }
+
+//    public SysDept(String name,Integer orderNum){
+//        this.name = name;
+//        this.orderNum =orderNum;
+//    }
 }
