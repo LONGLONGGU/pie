@@ -10,6 +10,7 @@ import com.framework.pie.admin.model.SysRole;
 import com.framework.pie.admin.model.SysRoleMenu;
 import com.framework.pie.admin.service.SysOrgService;
 import com.framework.pie.admin.service.SysRoleService;
+import com.framework.pie.admin.util.SecurityUtils;
 import com.framework.pie.core.page.MybatisPageHelper;
 import com.framework.pie.core.page.PageRequest;
 import com.framework.pie.core.page.PageResult;
@@ -32,7 +33,13 @@ public class SysRoleServiceImpl implements SysRoleService {
 
     @Override
     public List<SysRole> findAll() {
+
         return sysRoleMapper.findAll();
+    }
+
+    @Override
+    public List<SysRole> findByOrgId() {
+        return sysRoleMapper.findByOrgId(sysOrgService.findByOrg().getId());
     }
 
     @Override
@@ -65,8 +72,6 @@ public class SysRoleServiceImpl implements SysRoleService {
 
     @Override
     public int save(SysRole record) {
-        SysOrg sysOrg = sysOrgService.findByOrg();
-        record.setOrgId(sysOrg.getId());
         if(record.getId() == null || record.getId() == 0) {
             return sysRoleMapper.insertSelective(record);
         }
@@ -90,10 +95,29 @@ public class SysRoleServiceImpl implements SysRoleService {
 
     @Override
     public PageResult findPage(PageRequest pageRequest) {
-        Object label = pageRequest.getParam("name");
-        if(!StringUtils.isEmpty(label.toString())) {
-            return MybatisPageHelper.findPage(pageRequest, sysRoleMapper, "findPageByName", label);
+        Object name = pageRequest.getParam("name");
+        return MybatisPageHelper.findPage(pageRequest, sysRoleMapper,"findPageByOrgAndName",sysOrgService.findByOrg().getId(),name);
+    }
+
+    //验证是否拥有该角色
+    public boolean checkedRole(String roleName){
+        List<SysRole> roles = sysRoleMapper.findRoles(SecurityUtils.getUsername());
+        for (SysRole role: roles){
+            if (roleName.equals(role.getName())){
+                return true;
+            }
         }
-        return MybatisPageHelper.findPage(pageRequest, sysRoleMapper);
+        return false;
+    }
+
+    //验证该用户是否拥有该角色
+    public boolean checkedRole(String username,String roleName){
+        List<SysRole> roles = sysRoleMapper.findRoles(username);
+        for (SysRole role: roles){
+            if (roleName.equals(role.getName())){
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -2,6 +2,7 @@ package com.framework.pie.admin.controller;
 
 import com.framework.pie.admin.constant.SysConstants;
 import com.framework.pie.admin.model.SysUser;
+import com.framework.pie.admin.service.SysRoleService;
 import com.framework.pie.admin.service.SysUserService;
 import com.framework.pie.admin.util.PasswordUtils;
 import com.framework.pie.common.utils.FileUtils;
@@ -19,6 +20,8 @@ import java.util.List;
 public class SysUserController {
     @Autowired
     private SysUserService sysUserService;
+    @Autowired
+    private SysRoleService sysRoleService;
 
     @PostMapping(value="/save")
     public HttpResult save(@RequestBody SysUser record) {
@@ -30,8 +33,11 @@ public class SysUserController {
     public HttpResult delete(@RequestBody List<SysUser> records) {
         for(SysUser record:records) {
             SysUser sysUser = sysUserService.findById(record.getId());
-            if(sysUser != null && SysConstants.ADMIN.equalsIgnoreCase(sysUser.getName())) {
+            if(sysUser != null && sysRoleService.checkedRole(SysConstants.SUPERADMIN)) {
                 return HttpResult.error("超级管理员不允许删除!");
+            }
+            if(sysUser != null && sysRoleService.checkedRole(SysConstants.ADMIN)) {
+                return HttpResult.error("系统管理员不允许删除!");
             }
         }
         return HttpResult.ok(sysUserService.delete(records));

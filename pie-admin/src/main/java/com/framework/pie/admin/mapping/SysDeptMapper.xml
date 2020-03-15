@@ -147,6 +147,12 @@
     <include refid="Base_Column_List" />
     from sys_dept
   </select>
+  <select id="findByDeptAll" resultMap="BaseResultMap">
+    select a.*
+    from sys_dept a
+    INNER JOIN sys_org_dept b ON  a.id = b.dept_id
+    and b.org_id =#{orgId,jdbcType=BIGINT}
+  </select>
   <select id="findPage" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

@@ -152,17 +152,36 @@
     <include refid="Base_Column_List" />
     from sys_role
   </select>
-  <select id="findPageByName" parameterType="java.lang.String" resultMap="BaseResultMap">
-    <bind name="pattern" value="'%' + _parameter.name + '%'" />
+  <select id="findPageByOrgAndName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <bind name="patternOrgId" value="orgId" />
+    <bind name="patternName" value="'%' + _parameter.name + '%'" />
     select
     <include refid="Base_Column_List" />
     from sys_role
-    where name like #{pattern}
+    where org_id = #{patternOrgId}
+    <if test="name != null and name != ''">
+     and name like #{patternName}
+    </if>
+
   </select>
   <select id="findByName" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from sys_role
     where name = #{name,jdbcType=VARCHAR}
+  </select>
+  <select id="findByOrgId"  resultMap="BaseResultMap">
+    <bind name="patternOrgId" value="orgId" />
+    select
+    <include refid="Base_Column_List" />
+    from sys_role
+    where org_id = #{patternOrgId}
+  </select>
+  <select id="findRoles" resultMap="BaseResultMap">
+    <bind name="patternUserName" value="username" />
+    select distinct r.*
+    from sys_role r
+    INNER JOIN sys_user_role ur ON ur.role_id = r.id where ur.user_id =
+    (select u.id from sys_user u  where u.name = #{patternUserName})
   </select>
 </mapper>

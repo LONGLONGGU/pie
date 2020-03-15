@@ -49,4 +49,11 @@ public interface SysUserMapper {
      * @return
      */
     List<SysUser> findPageByNameAndEmail(@Param(value="name") String name, @Param(value="email") String email);
+
+    /**
+     * 根据org查询
+     * @param orgId
+     * @return
+     */
+    List<SysUser> findPageByOrgAndName(@Param(value="orgId") Long orgId, @Param(value="name") String name);
 }

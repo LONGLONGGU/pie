@@ -18,6 +18,12 @@ public interface SysRoleService extends CurdService<SysRole> {
     List<SysRole> findAll();
 
     /**
+     * 通过机构查询查询全部
+     * @return
+     */
+    List<SysRole> findByOrgId();
+
+    /**
      * 查询角色菜单集合
      * @return
      */
@@ -36,4 +42,18 @@ public interface SysRoleService extends CurdService<SysRole> {
      * @return
      */
     List<SysRole> findByName(String name);
+
+    /**
+     * 校验是否拥有该角色
+     * @param roleName
+     * @return
+     */
+    boolean checkedRole(String roleName);
+
+    /**
+     * 校验该用户否拥有该角色
+     * @param roleName
+     * @return
+     */
+     boolean checkedRole(String username,String roleName);
 }

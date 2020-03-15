@@ -23,4 +23,6 @@ public interface SysDeptMapper {
     List<SysDept> findPage();
 
     List<SysDept> findAll();
+
+    List<SysDept> findByDeptAll(Long orgId);
 }

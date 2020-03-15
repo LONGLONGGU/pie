@@ -58,13 +58,15 @@ public class SysOrgServiceImpl implements SysOrgService {
             sysRole.setName("admin");
             sysRole.setRemark("超级管理员");
             sysRole.setCreateBy("SuperAdmin");
+            sysRole.setOrgId(orgId);
             sysRoleService.save(sysRole);
             Long roleId = sysRole.getId();
             //新建默认机构管理员
             SysUser sysUser = new SysUser();
             String name = PinyinUtils.getPingYin(sysOrg.getName());
             sysUser.setName(name);
-            sysUser.setPassword("1233456");
+            sysUser.setPassword("123456");
+            sysUser.setStatus((byte) 1);
             sysUser.setDeptId(deptId);
             sysUserService.saveUser(sysUser);
             Long userId = sysUser.getId();
@@ -72,7 +74,6 @@ public class SysOrgServiceImpl implements SysOrgService {
             SysUserRole sysUserRole = new SysUserRole();
             sysUserRole.setUserId(userId);
             sysUserRole.setRoleId(roleId);
-            sysUserRoleMapper.insertSelective(sysUserRole);
             return  sysUserRoleMapper.insertSelective(sysUserRole);
         }
         return sysOrgMapper.updateByPrimaryKeySelective(sysOrg);

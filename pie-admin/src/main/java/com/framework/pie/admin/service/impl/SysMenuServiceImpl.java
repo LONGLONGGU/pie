@@ -2,8 +2,13 @@ package com.framework.pie.admin.service.impl;
 
 import com.framework.pie.admin.constant.SysConstants;
 import com.framework.pie.admin.dao.SysMenuMapper;
+import com.framework.pie.admin.dao.SysRoleMapper;
 import com.framework.pie.admin.model.SysMenu;
+import com.framework.pie.admin.model.SysRole;
 import com.framework.pie.admin.service.SysMenuService;
+import com.framework.pie.admin.service.SysOrgService;
+import com.framework.pie.admin.service.SysRoleService;
+import com.framework.pie.admin.util.SecurityUtils;
 import com.framework.pie.core.page.PageRequest;
 import com.framework.pie.core.page.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +21,10 @@ import java.util.List;
 public class SysMenuServiceImpl implements SysMenuService {
     @Autowired
     private SysMenuMapper sysMenuMapper;
+    @Autowired
+    private SysOrgService sysOrgService;
+    @Autowired
+    private SysRoleService sysRoleService;
 
     @Override
     public List<SysMenu> findTree(String userName, int menuType) {
@@ -36,9 +45,15 @@ public class SysMenuServiceImpl implements SysMenuService {
 
     @Override
     public List<SysMenu> findByUser(String userName) {
-        if(userName == null || "".equals(userName) || SysConstants.ADMIN.equalsIgnoreCase(userName)) {
+        //超级机构管理员
+        if(userName == null || "".equals(userName) || sysRoleService.checkedRole(SysConstants.SUPERADMIN)) {
             return sysMenuMapper.findAll();
         }
+        //普通机构管理员
+        if(userName == null || "".equals(userName) ||  sysRoleService.checkedRole(SysConstants.ADMIN)) {
+            return sysMenuMapper.findOrgMenus(sysOrgService.findByOrg().getId());
+        }
+        //普通用户
         return sysMenuMapper.findByUserName(userName);
     }
 

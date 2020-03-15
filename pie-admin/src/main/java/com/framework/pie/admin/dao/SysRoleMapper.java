@@ -24,7 +24,11 @@ public interface SysRoleMapper {
 
     List<SysRole> findAll();
 
-    List<SysRole> findPageByName(@Param(value="name") String name);
+    List<SysRole> findPageByOrgAndName(@Param(value = "orgId") Long orgId,@Param(value="name") String name);
 
     List<SysRole> findByName(@Param(value="name") String name);
+
+    List<SysRole> findRoles(@Param(value="username") String username);
+
+    List<SysRole> findByOrgId(@Param(value = "orgId") Long orgId);
 }

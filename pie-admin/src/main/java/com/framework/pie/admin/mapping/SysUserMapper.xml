@@ -219,6 +219,7 @@
   </select>
   <select id="findPage" resultMap="BaseResultMap">
     select u.*, (select d.name from sys_dept d where d.id = u.dept_id) deptName from sys_user u
+    where u.name
   </select>
   <select id="findByName" parameterType="java.lang.String" resultMap="BaseResultMap">
     select u.*, (select d.name from sys_dept d where d.id = u.dept_id) deptName from sys_user u
@@ -235,5 +236,15 @@
     select u.*, (select d.name from sys_dept d where d.id = u.dept_id) deptName from sys_user u
     where u.name like #{patternName}
     and u.email like #{patternEmail}
+  </select>
+  <select id="findPageByOrgAndName" resultMap="BaseResultMap">
+    <bind name="patternOrgId" value="orgId" />
+    select u.*, (select d.name from sys_dept d where d.id = u.dept_id) deptName from sys_user u
+    INNER JOIN sys_org_dept o ON o.dept_id = u.dept_id
+    and o.org_id = #{patternOrgId}
+    <if test="name != null and name != '' ">
+      <bind name="patternName" value="'%' + _parameter.name + '%'" />
+      where u.name like #{patternName}
+    </if>
   </select>
 </mapper>

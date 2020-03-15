@@ -1,8 +1,11 @@
 package com.framework.pie.admin.service.impl;
 
 import com.framework.pie.admin.dao.SysDeptMapper;
+import com.framework.pie.admin.dao.SysOrgDeptMapper;
 import com.framework.pie.admin.model.SysDept;
+import com.framework.pie.admin.model.SysOrgDept;
 import com.framework.pie.admin.service.SysDeptService;
+import com.framework.pie.admin.service.SysOrgService;
 import com.framework.pie.core.page.MybatisPageHelper;
 import com.framework.pie.core.page.PageRequest;
 import com.framework.pie.core.page.PageResult;
@@ -17,11 +20,20 @@ public class SysDeptServiceImpl implements SysDeptService {
 
     @Autowired
     private SysDeptMapper sysDeptMapper;
+    @Autowired
+    private SysOrgService sysOrgService;
+    @Autowired
+    private SysOrgDeptMapper sysOrgDeptMapper;
 
     @Override
     public int save(SysDept record) {
         if(record.getId() == null || record.getId() == 0) {
-            return sysDeptMapper.insertSelective(record);
+            sysDeptMapper.insertSelective(record);
+            Long deptId = record.getId();
+            SysOrgDept sysOrgDept= new SysOrgDept();
+            sysOrgDept.setDeptId(deptId);
+            sysOrgDept.setOrgId(sysOrgService.findByOrg().getId());
+            return sysOrgDeptMapper.insertSelective(sysOrgDept);
         }
         return sysDeptMapper.updateByPrimaryKeySelective(record);
     }
@@ -52,7 +64,7 @@ public class SysDeptServiceImpl implements SysDeptService {
     @Override
     public List<SysDept> findTree() {
         List<SysDept> sysDepts = new ArrayList<>();
-        List<SysDept> depts = sysDeptMapper.findAll();
+        List<SysDept> depts = sysDeptMapper.findByDeptAll(sysOrgService.findByOrg().getId());
         for (SysDept dept : depts) {
             if (dept.getParentId() == null || dept.getParentId() == 0) {
                 dept.setLevel(0);

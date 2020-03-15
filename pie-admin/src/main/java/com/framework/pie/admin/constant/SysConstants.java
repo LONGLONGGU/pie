@@ -5,9 +5,13 @@ package com.framework.pie.admin.constant;
  * @author longlong
  */
 public interface SysConstants {
+	/**
+	 * 超级系统管理员用户名
+	 */
+	String SUPERADMIN = "SuperAdmin";
 
 	/**
-	 * 系统管理员用户名
+	 * 普通系统管理员用户名
 	 */
 	String ADMIN = "admin";
 	

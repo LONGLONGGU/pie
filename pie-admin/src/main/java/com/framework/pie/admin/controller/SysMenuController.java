@@ -2,6 +2,7 @@ package com.framework.pie.admin.controller;
 
 import com.framework.pie.admin.model.SysMenu;
 import com.framework.pie.admin.service.SysMenuService;
+import com.framework.pie.admin.util.SecurityUtils;
 import com.framework.pie.core.http.HttpResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -32,7 +33,7 @@ public class SysMenuController {
     @PreAuthorize("hasAuthority('sys:menu:view')")
     @GetMapping(value="/findMenuTree")
     public HttpResult findMenuTree() {
-        List<SysMenu> tree = sysMenuService.findTree(null, 0);
+        List<SysMenu> tree = sysMenuService.findTree(SecurityUtils.getUsername(), 0);
         return HttpResult.ok(tree);
     }
 

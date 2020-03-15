@@ -37,14 +37,19 @@ public class SysRoleController {
     public HttpResult save(@RequestBody SysRole record) {
         SysRole role = sysRoleService.findById(record.getId());
         if(role != null) {
-            if(SysConstants.ADMIN.equalsIgnoreCase(role.getName())) {
+            if(SysConstants.SUPERADMIN.equalsIgnoreCase(role.getName())) {
                 return HttpResult.error("超级管理员不允许修改!");
+            }
+            if(SysConstants.ADMIN.equalsIgnoreCase(role.getName())) {
+                return HttpResult.error("系统管理员不允许修改!");
             }
         }
         // 新增角色
         if((record.getId() == null || record.getId() == 0) && !sysRoleService.findByName(record.getName()).isEmpty()) {
             return HttpResult.error("角色名已存在!");
         }
+        SysOrg sysOrg = sysOrgService.findByOrg();
+        record.setOrgId(sysOrg.getId());
         return HttpResult.ok(sysRoleService.save(record));
     }
 
@@ -63,7 +68,7 @@ public class SysRoleController {
     @PreAuthorize("hasAuthority('sys:role:view')")
     @GetMapping(value="/findAll")
     public HttpResult findAll() {
-        return HttpResult.ok(sysRoleService.findAll());
+        return HttpResult.ok(sysRoleService.findByOrgId());
     }
 
     @PreAuthorize("hasAuthority('sys:role:view')")
@@ -79,9 +84,13 @@ public class SysRoleController {
         List<SysRoleMenu> records = JSONArray.parseArray(JSONArray.toJSONString(models.get("roleMenus")),SysRoleMenu.class);
         for(SysRoleMenu record:records) {
             SysRole sysRole = sysRoleMapper.selectByPrimaryKey(record.getRoleId());
-            if(SysConstants.ADMIN.equalsIgnoreCase(sysRole.getName())) {
+            if(SysConstants.SUPERADMIN.equalsIgnoreCase(sysRole.getName())) {
                 // 如果是超级管理员，不允许修改
                 return HttpResult.error("超级管理员拥有所有菜单权限，不允许修改！");
+            }
+            if(SysConstants.ADMIN.equalsIgnoreCase(sysRole.getName())) {
+                // 如果是超级管理员，不允许修改
+                return HttpResult.error("系统管理员拥有所有菜单权限，不允许修改！");
             }
         }
         return HttpResult.ok(sysRoleService.saveRoleMenus(roleId,records));

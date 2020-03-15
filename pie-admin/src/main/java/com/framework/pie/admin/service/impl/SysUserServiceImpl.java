@@ -10,6 +10,8 @@ import com.framework.pie.admin.model.SysUser;
 import com.framework.pie.admin.dao.SysUserMapper;
 import com.framework.pie.admin.model.SysUserRole;
 import com.framework.pie.admin.service.SysMenuService;
+import com.framework.pie.admin.service.SysOrgService;
+import com.framework.pie.admin.service.SysRoleService;
 import com.framework.pie.admin.service.SysUserService;
 import com.framework.pie.admin.util.PasswordUtils;
 import com.framework.pie.common.utils.DateTimeUtils;
@@ -26,10 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class SysUserServiceImpl implements SysUserService {
@@ -40,6 +39,12 @@ public class SysUserServiceImpl implements SysUserService {
     private SysUserRoleMapper sysUserRoleMapper;
     @Autowired
     private SysMenuService sysMenuService;
+    @Autowired
+    private SysOrgService sysOrgService;
+    @Autowired
+    private SysMenuMapper sysMenuMapper;
+    @Autowired
+    private SysRoleService sysRoleService;
 
     @Override
     public SysUser findByName(String username) {
@@ -53,7 +58,11 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     public Set<String> findPermissions(String userName) {
         Set<String> perms = new HashSet<>();
-        List<SysMenu> sysMenus = sysMenuService.findByUser(userName);
+        List<SysMenu> sysMenus = new ArrayList<>();
+        //添加机构权限
+        sysMenus.addAll(sysMenuMapper.findOrgMenus(sysOrgService.findByOrg().getId()));
+        //添加用户权限
+        sysMenus.addAll(sysMenuService.findByUser(userName));
         for(SysMenu sysMenu:sysMenus) {
             if(sysMenu.getPerms() != null && !"".equals(sysMenu.getPerms())) {
                 perms.add(sysMenu.getPerms());
@@ -66,9 +75,17 @@ public class SysUserServiceImpl implements SysUserService {
     public List<SysUserRole> findUserRoles(Long userId) {
         return sysUserRoleMapper.findUserRoles(userId);
     }
+
     @Override
     public PageResult findPage(PageRequest pageRequest) {
-        return MybatisPageHelper.findPage(pageRequest,sysUserMapper);
+//        Map<String,Object> params = pageRequest.getParams();
+//        params.put("name","admin");
+//        pageRequest.setParams(params);
+        PageResult pageResult = null;
+        Object name = "";
+        Object orgId = sysOrgService.findByOrg().getId();
+        pageResult = MybatisPageHelper.findPage(pageRequest, sysUserMapper, "findPageByOrgAndName", orgId,name);
+        return pageResult;
     }
 
     @Override
@@ -76,8 +93,11 @@ public class SysUserServiceImpl implements SysUserService {
         SysUser user = this.findById(record.getId());
         Long id = null;
         if(user != null) {
-            if(SysConstants.ADMIN.equalsIgnoreCase(user.getName())) {
+            if(sysRoleService.checkedRole(user.getName(),SysConstants.SUPERADMIN)) {
                 return HttpResult.error("超级管理员不允许修改!");
+            }
+            if(sysRoleService.checkedRole(user.getName(),SysConstants.ADMIN)) {
+                return HttpResult.error("系统管理员不允许修改!");
             }
         }
         if(record.getPassword() != null) {
