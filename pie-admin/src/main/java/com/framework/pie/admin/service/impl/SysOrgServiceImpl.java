@@ -16,6 +16,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -58,6 +59,7 @@ public class SysOrgServiceImpl implements SysOrgService {
             sysRole.setName("admin");
             sysRole.setRemark("超级管理员");
             sysRole.setCreateBy("SuperAdmin");
+            sysRole.setCreateTime(new Date());
             sysRole.setOrgId(orgId);
             sysRoleService.save(sysRole);
             Long roleId = sysRole.getId();

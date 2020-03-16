@@ -2,8 +2,10 @@ package com.framework.pie.admin.service.impl;
 
 import com.framework.pie.admin.constant.SysConstants;
 import com.framework.pie.admin.dao.SysMenuMapper;
+import com.framework.pie.admin.dao.SysOrgMapper;
 import com.framework.pie.admin.dao.SysRoleMapper;
 import com.framework.pie.admin.model.SysMenu;
+import com.framework.pie.admin.model.SysOrg;
 import com.framework.pie.admin.model.SysRole;
 import com.framework.pie.admin.service.SysMenuService;
 import com.framework.pie.admin.service.SysOrgService;
@@ -25,6 +27,8 @@ public class SysMenuServiceImpl implements SysMenuService {
     private SysOrgService sysOrgService;
     @Autowired
     private SysRoleService sysRoleService;
+    @Autowired
+    private SysOrgMapper sysOrgMapper;
 
     @Override
     public List<SysMenu> findTree(String userName, int menuType) {
@@ -46,12 +50,14 @@ public class SysMenuServiceImpl implements SysMenuService {
     @Override
     public List<SysMenu> findByUser(String userName) {
         //超级机构管理员
-        if(userName == null || "".equals(userName) || sysRoleService.checkedRole(SysConstants.SUPERADMIN)) {
+        if(userName == null || "".equals(userName) || sysRoleService.checkedRole(userName,SysConstants.SUPERADMIN)) {
             return sysMenuMapper.findAll();
         }
         //普通机构管理员
-        if(userName == null || "".equals(userName) ||  sysRoleService.checkedRole(SysConstants.ADMIN)) {
-            return sysMenuMapper.findOrgMenus(sysOrgService.findByOrg().getId());
+        if(userName == null || "".equals(userName) ||  sysRoleService.checkedRole(userName,SysConstants.ADMIN)) {
+            //查询用户所属机构
+            SysOrg sysOrg = sysOrgMapper.findByOrg(userName);
+            return sysMenuMapper.findOrgMenus(sysOrg.getId());
         }
         //普通用户
         return sysMenuMapper.findByUserName(userName);

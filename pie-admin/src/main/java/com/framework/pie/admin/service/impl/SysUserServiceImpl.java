@@ -1,13 +1,10 @@
 package com.framework.pie.admin.service.impl;
 
 import com.framework.pie.admin.constant.SysConstants;
-import com.framework.pie.admin.dao.SysMenuMapper;
-import com.framework.pie.admin.dao.SysRoleMapper;
-import com.framework.pie.admin.dao.SysUserRoleMapper;
+import com.framework.pie.admin.dao.*;
 import com.framework.pie.admin.model.SysMenu;
 import com.framework.pie.admin.model.SysOrg;
 import com.framework.pie.admin.model.SysUser;
-import com.framework.pie.admin.dao.SysUserMapper;
 import com.framework.pie.admin.model.SysUserRole;
 import com.framework.pie.admin.service.SysMenuService;
 import com.framework.pie.admin.service.SysOrgService;
@@ -45,6 +42,8 @@ public class SysUserServiceImpl implements SysUserService {
     private SysMenuMapper sysMenuMapper;
     @Autowired
     private SysRoleService sysRoleService;
+    @Autowired
+    private SysOrgMapper sysOrgMapper;
 
     @Override
     public SysUser findByName(String username) {
@@ -60,7 +59,8 @@ public class SysUserServiceImpl implements SysUserService {
         Set<String> perms = new HashSet<>();
         List<SysMenu> sysMenus = new ArrayList<>();
         //添加机构权限
-        sysMenus.addAll(sysMenuMapper.findOrgMenus(sysOrgService.findByOrg().getId()));
+        SysOrg sysOrg = sysOrgMapper.findByOrg(userName);
+        sysMenus.addAll(sysMenuMapper.findOrgMenus(sysOrg.getId()));
         //添加用户权限
         sysMenus.addAll(sysMenuService.findByUser(userName));
         for(SysMenu sysMenu:sysMenus) {

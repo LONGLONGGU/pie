@@ -74,6 +74,4 @@ public class SysUserController {
         return sysUserService.findAll();
     }
 
-
-
 }
