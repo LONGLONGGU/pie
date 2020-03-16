@@ -78,14 +78,9 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public PageResult findPage(PageRequest pageRequest) {
-//        Map<String,Object> params = pageRequest.getParams();
-//        params.put("name","admin");
-//        pageRequest.setParams(params);
-        PageResult pageResult = null;
-        Object name = "";
+        Object name = pageRequest.getParam("name");
         Object orgId = sysOrgService.findByOrg().getId();
-        pageResult = MybatisPageHelper.findPage(pageRequest, sysUserMapper, "findPageByOrgAndName", orgId,name);
-        return pageResult;
+        return MybatisPageHelper.findPage(pageRequest, sysUserMapper, "findPageByOrgAndName", orgId,name);
     }
 
     @Override
@@ -151,12 +146,15 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public int delete(SysUser record) {
-        return 0;
+        return sysUserMapper.deleteByPrimaryKey(record.getId());
     }
 
     @Override
     public int delete(List<SysUser> records) {
-        return 0;
+        for (SysUser sysUser : records){
+            this.delete(sysUser);
+        }
+        return 1;
     }
 
     @Override

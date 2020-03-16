@@ -2,10 +2,13 @@ package com.framework.pie.admin.service.impl;
 
 import com.framework.pie.admin.dao.SysDeptMapper;
 import com.framework.pie.admin.dao.SysOrgDeptMapper;
+import com.framework.pie.admin.dao.SysUserMapper;
 import com.framework.pie.admin.model.SysDept;
 import com.framework.pie.admin.model.SysOrgDept;
+import com.framework.pie.admin.model.SysUser;
 import com.framework.pie.admin.service.SysDeptService;
 import com.framework.pie.admin.service.SysOrgService;
+import com.framework.pie.core.http.HttpResult;
 import com.framework.pie.core.page.MybatisPageHelper;
 import com.framework.pie.core.page.PageRequest;
 import com.framework.pie.core.page.PageResult;
@@ -24,6 +27,8 @@ public class SysDeptServiceImpl implements SysDeptService {
     private SysOrgService sysOrgService;
     @Autowired
     private SysOrgDeptMapper sysOrgDeptMapper;
+    @Autowired
+    private SysUserMapper sysUserMapper;
 
     @Override
     public int save(SysDept record) {
@@ -45,10 +50,19 @@ public class SysDeptServiceImpl implements SysDeptService {
 
     @Override
     public int delete(List<SysDept> records) {
+        return 0;
+    }
+
+    @Override
+    public HttpResult remove(List<SysDept> records) {
         for(SysDept record:records) {
+            List<SysUser> userList = sysUserMapper.findByDept(record.getId());
+            if (userList.size() > 0){
+                return HttpResult.error("所选部门存在合法用户，不允许删除！");
+            }
             delete(record);
         }
-        return 1;
+        return HttpResult.ok("删除成功！");
     }
 
     @Override

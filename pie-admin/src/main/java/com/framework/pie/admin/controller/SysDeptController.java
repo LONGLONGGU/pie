@@ -33,7 +33,8 @@ public class SysDeptController {
 	@PreAuthorize("hasAuthority('sys:dept:delete')")
 	@PostMapping(value="/delete")
 	public HttpResult delete(@RequestBody List<SysDept> records) {
-		return HttpResult.ok(sysDeptService.delete(records));
+
+		return sysDeptService.remove(records);
 	}
 
 	@PreAuthorize("hasAuthority('sys:dept:view')")

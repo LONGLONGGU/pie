@@ -9,6 +9,7 @@ import com.framework.pie.common.utils.FileUtils;
 import com.framework.pie.core.http.HttpResult;
 import com.framework.pie.core.page.PageRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -25,18 +26,18 @@ public class SysUserController {
 
     @PostMapping(value="/save")
     public HttpResult save(@RequestBody SysUser record) {
-
-        return HttpResult.ok(sysUserService.saveUser(record));
+        return sysUserService.saveUser(record);
     }
 
+    @PreAuthorize("hasAuthority('sys:user:delete')")
     @PostMapping(value="/delete")
     public HttpResult delete(@RequestBody List<SysUser> records) {
         for(SysUser record:records) {
             SysUser sysUser = sysUserService.findById(record.getId());
-            if(sysUser != null && sysRoleService.checkedRole(SysConstants.SUPERADMIN)) {
+            if(sysUser != null && sysRoleService.checkedRole(sysUser.getName(),SysConstants.SUPERADMIN)) {
                 return HttpResult.error("超级管理员不允许删除!");
             }
-            if(sysUser != null && sysRoleService.checkedRole(SysConstants.ADMIN)) {
+            if(sysUser != null && sysRoleService.checkedRole(sysUser.getName(),SysConstants.ADMIN)) {
                 return HttpResult.error("系统管理员不允许删除!");
             }
         }

@@ -225,6 +225,11 @@
     select u.*, (select d.name from sys_dept d where d.id = u.dept_id) deptName from sys_user u
     where u.name = #{name,jdbcType=VARCHAR}
   </select>
+  <select id="findByDept" resultMap="BaseResultMap">
+    <bind name="patternDeptId" value="deptId" />
+    select u.*, (select d.name from sys_dept d where d.id = u.dept_id) deptName from sys_user u
+    where u.dept_id = #{patternDeptId}
+  </select>
   <select id="findPageByName" parameterType="java.lang.String" resultMap="BaseResultMap">
     <bind name="pattern" value="'%' + _parameter.name + '%'" />
     select u.*, (select d.name from sys_dept d where d.id = u.dept_id) deptName from sys_user u

@@ -37,6 +37,8 @@ public interface SysUserMapper {
      */
     SysUser findByName(@Param(value="name") String name);
 
+    List<SysUser> findByDept(@Param(value = "deptId") Long deptId);
+
     /**
      * 根据用户名分页查询
      * @param name
