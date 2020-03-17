@@ -26,6 +26,13 @@ public interface SysUserRoleMapper {
      * @return
      */
     List<SysUserRole> findUserRoles(@Param(value="userId") Long userId);
+
+    /**
+     * 查询用户角色
+     * @param roleId
+     * @return
+     */
+    List<SysUserRole> findRoles(@Param(value="roleId") Long roleId);
     /**
      * 删除用户角色信息
      * @param userId

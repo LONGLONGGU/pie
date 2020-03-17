@@ -56,7 +56,11 @@ public class SysRoleController {
     @PreAuthorize("hasAuthority('sys:role:delete')")
     @PostMapping(value="/delete")
     public HttpResult delete(@RequestBody List<SysRole> records) {
-        return HttpResult.ok(sysRoleService.delete(records));
+        int result = sysRoleService.delete(records);
+        if (result ==1){
+          return  HttpResult.error("角色被已经被使用，无法删除！");
+        }
+        return HttpResult.ok(result);
     }
 
     @PreAuthorize("hasAuthority('sys:role:view')")

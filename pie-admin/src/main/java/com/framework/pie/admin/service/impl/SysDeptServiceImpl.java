@@ -45,6 +45,7 @@ public class SysDeptServiceImpl implements SysDeptService {
 
     @Override
     public int delete(SysDept record) {
+        sysOrgDeptMapper.deleteByDept(record.getId());
         return sysDeptMapper.deleteByPrimaryKey(record.getId());
     }
 

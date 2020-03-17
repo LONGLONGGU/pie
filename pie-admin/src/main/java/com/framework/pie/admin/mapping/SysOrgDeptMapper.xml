@@ -24,6 +24,10 @@
     delete from sys_org_dept
     where id = #{id,jdbcType=BIGINT}
   </delete>
+  <delete id="deleteByDept" parameterType="java.lang.Long">
+    delete from sys_org_dept
+    where dept_id = #{dept_id,jdbcType=BIGINT}
+  </delete>
   <insert id="insert" parameterType="com.framework.pie.admin.model.SysOrgDept">
     insert into sys_org_dept (id, org_id, dept_id, 
       create_by, create_time, last_update_by, 

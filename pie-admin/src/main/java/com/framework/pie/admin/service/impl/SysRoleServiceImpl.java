@@ -4,10 +4,8 @@ import com.framework.pie.admin.constant.SysConstants;
 import com.framework.pie.admin.dao.SysMenuMapper;
 import com.framework.pie.admin.dao.SysRoleMapper;
 import com.framework.pie.admin.dao.SysRoleMenuMapper;
-import com.framework.pie.admin.model.SysMenu;
-import com.framework.pie.admin.model.SysOrg;
-import com.framework.pie.admin.model.SysRole;
-import com.framework.pie.admin.model.SysRoleMenu;
+import com.framework.pie.admin.dao.SysUserRoleMapper;
+import com.framework.pie.admin.model.*;
 import com.framework.pie.admin.service.SysOrgService;
 import com.framework.pie.admin.service.SysRoleService;
 import com.framework.pie.admin.util.SecurityUtils;
@@ -29,6 +27,8 @@ public class SysRoleServiceImpl implements SysRoleService {
     private SysMenuMapper sysMenuMapper;
     @Autowired
     private SysOrgService sysOrgService;
+    @Autowired
+    private SysUserRoleMapper sysUserRoleMapper;
 
 
     @Override
@@ -80,11 +80,18 @@ public class SysRoleServiceImpl implements SysRoleService {
 
     @Override
     public int delete(SysRole record) {
-        return 0;
+        return sysRoleMapper.deleteByPrimaryKey(record.getId());
     }
 
     @Override
     public int delete(List<SysRole> records) {
+        for (SysRole sysRole : records){
+          List<SysUserRole> sysUserRoles = sysUserRoleMapper.findRoles(sysRole.getId());
+          if (sysUserRoles.size() > 0){
+              return 1;
+          }
+          delete(sysRole);
+        }
         return 0;
     }
 
