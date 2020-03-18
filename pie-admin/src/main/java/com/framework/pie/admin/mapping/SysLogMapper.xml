@@ -164,6 +164,10 @@
   <select id="findPageByName" resultMap="BaseResultMap">
     <bind name="patternName" value="'%' + _parameter.name + '%'" />
     select * from sys_log
-    where  user_name like #{patternName}
+    where
+    <if test="name != null || name!=''">
+      user_name like #{patternName}
+    </if>
+    ORDER BY  create_time DESC
   </select>
 </mapper>

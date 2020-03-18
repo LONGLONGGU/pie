@@ -9,6 +9,7 @@ import com.framework.pie.admin.model.SysRoleMenu;
 import com.framework.pie.admin.service.SysOrgService;
 import com.framework.pie.admin.service.SysRoleService;
 import com.framework.pie.admin.util.SecurityUtils;
+import com.framework.pie.admin.util.syslog.Log;
 import com.framework.pie.core.http.HttpResult;
 import com.framework.pie.core.page.PageRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ public class SysRoleController {
     @Autowired
     private SysOrgService sysOrgService;
 
+    @Log(value = "新增修改角色")
     @PreAuthorize("hasAuthority('sys:role:add') AND hasAuthority('sys:role:edit')")
     @PostMapping(value="/save")
     public HttpResult save(@RequestBody SysRole record) {
@@ -53,6 +55,7 @@ public class SysRoleController {
         return HttpResult.ok(sysRoleService.save(record));
     }
 
+    @Log(value = "删除角色")
     @PreAuthorize("hasAuthority('sys:role:delete')")
     @PostMapping(value="/delete")
     public HttpResult delete(@RequestBody List<SysRole> records) {

@@ -5,6 +5,7 @@ import com.framework.pie.admin.model.SysUser;
 import com.framework.pie.admin.service.SysRoleService;
 import com.framework.pie.admin.service.SysUserService;
 import com.framework.pie.admin.util.PasswordUtils;
+import com.framework.pie.admin.util.syslog.Log;
 import com.framework.pie.common.utils.FileUtils;
 import com.framework.pie.core.http.HttpResult;
 import com.framework.pie.core.page.PageRequest;
@@ -24,11 +25,13 @@ public class SysUserController {
     @Autowired
     private SysRoleService sysRoleService;
 
+    @Log(value = "新增修改用户")
     @PostMapping(value="/save")
     public HttpResult save(@RequestBody SysUser record) {
         return sysUserService.saveUser(record);
     }
 
+    @Log(value = "删除用户")
     @PreAuthorize("hasAuthority('sys:user:delete')")
     @PostMapping(value="/delete")
     public HttpResult delete(@RequestBody List<SysUser> records) {

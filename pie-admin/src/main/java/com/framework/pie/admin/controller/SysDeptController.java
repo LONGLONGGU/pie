@@ -2,6 +2,7 @@ package com.framework.pie.admin.controller;
 
 import com.framework.pie.admin.model.SysDept;
 import com.framework.pie.admin.service.SysDeptService;
+import com.framework.pie.admin.util.syslog.Log;
 import com.framework.pie.core.http.HttpResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,12 +25,14 @@ public class SysDeptController {
 	@Autowired
 	private SysDeptService sysDeptService;
 
+	@Log(value = "新增修改部门")
 	@PreAuthorize("hasAuthority('sys:dept:add') AND hasAuthority('sys:dept:edit')")
 	@PostMapping(value="/save")
 	public HttpResult save(@RequestBody SysDept record) {
 		return HttpResult.ok(sysDeptService.save(record));
 	}
 
+	@Log(value = "删除部门")
 	@PreAuthorize("hasAuthority('sys:dept:delete')")
 	@PostMapping(value="/delete")
 	public HttpResult delete(@RequestBody List<SysDept> records) {

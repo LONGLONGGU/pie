@@ -5,6 +5,7 @@ import com.framework.pie.admin.constant.SysConstants;
 import com.framework.pie.admin.dao.SysOrgMapper;
 import com.framework.pie.admin.model.*;
 import com.framework.pie.admin.service.SysOrgService;
+import com.framework.pie.admin.util.syslog.Log;
 import com.framework.pie.core.http.HttpResult;
 import com.framework.pie.core.page.PageRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,8 @@ public class SysOrgController {
     @Autowired
     private SysOrgMapper sysOrgMapper;
 
-//    @PreAuthorize("hasAuthority('sys:role:add') AND hasAuthority('sys:role:edit')")
+    @Log(value = "新增修改机构")
+    @PreAuthorize("hasAuthority('sys:org:add') AND hasAuthority('sys:org:edit')")
     @PostMapping(value="/save")
     public HttpResult save(@RequestBody SysOrg record){
         SysOrg org = sysOrgService.findById(record.getId());
@@ -40,7 +42,7 @@ public class SysOrgController {
         }
         return HttpResult.ok(sysOrgService.save(record));
     }
-//    @PreAuthorize("hasAuthority('sys:role:view')")
+    @PreAuthorize("hasAuthority('sys:org:view')")
     @PostMapping(value="/findPage")
     public HttpResult findPage(@RequestBody PageRequest pageRequest) {
         return HttpResult.ok(sysOrgService.findPage(pageRequest));
@@ -51,6 +53,7 @@ public class SysOrgController {
         return HttpResult.ok(sysOrgService.findOrgMenus(orgId));
     }
 
+    @Log(value = "操作机构权限")
     @PostMapping(value = "/saveOrgMenus")
     public HttpResult saveOrgMenus(@RequestBody Map<String,Object> models){
         Long orgId = Long.parseLong(models.get("orgId").toString());
