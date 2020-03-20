@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.framework.pie.admin.model.SysUser;
 import com.framework.pie.admin.security.JwtAuthenticatioToken;
+import com.framework.pie.admin.service.SysLoginLogService;
 import com.framework.pie.admin.service.SysUserService;
+import com.framework.pie.admin.util.IPUtils;
 import com.framework.pie.admin.util.PasswordUtils;
 import com.framework.pie.admin.util.SecurityUtils;
 import com.framework.pie.admin.vo.LoginBean;
@@ -39,6 +41,8 @@ public class SysLoginController {
 	private SysUserService sysUserService;
 	@Autowired
 	private AuthenticationManager authenticationManager;
+	@Autowired
+	private SysLoginLogService sysLoginLogService;
 
 
 	@GetMapping("captcha.jpg")
@@ -92,6 +96,8 @@ public class SysLoginController {
 		}
 		// 系统登录认证
 		JwtAuthenticatioToken token = SecurityUtils.login(request, username, password, authenticationManager);
+		// 记录登录日志
+		sysLoginLogService.writeLoginLog(username, IPUtils.getIpAddr(request));
 		return HttpResult.ok(token);
 	}
 }

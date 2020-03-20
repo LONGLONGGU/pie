@@ -5,4 +5,12 @@ import com.framework.pie.core.service.CurdService;
 
 public interface SysLoginLogService extends CurdService<SysLoginLog> {
 
+    /**
+     * 记录登录日志
+     * @param userName
+     * @param ip
+     * @return
+     */
+    int writeLoginLog(String userName, String ip);
+
 }

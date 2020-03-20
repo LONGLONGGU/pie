@@ -125,13 +125,39 @@
       last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select id="findPageByName" resultMap="BaseResultMap">
-    <bind name="patternName" value="'%' + _parameter.name + '%'" />
-    select * from sys_login_log
-    where
-    <if test="name != null || name!=''">
-      user_name like #{patternName}
-    </if>
-    ORDER BY  create_time DESC
+  <select id="findPage" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_login_log
+  </select>
+  <select id="findPageByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <bind name="pattern" value="'%' + _parameter.userName + '%'" />
+    select
+    <include refid="Base_Column_List" />
+    from sys_login_log
+    where user_name like #{pattern}
+  </select>
+  <select id="findPageByStatus" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <bind name="pattern" value="'%' + _parameter.status + '%'" />
+    select
+    <include refid="Base_Column_List" />
+    from sys_login_log
+    where status like #{pattern}
+  </select>
+  <select id="findPageByUserNameAndStatus" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <bind name="userNamePattern" value="'%' + _parameter.userName + '%'" />
+    <bind name="statusPattern" value="'%' + _parameter.status + '%'" />
+    select
+    <include refid="Base_Column_List" />
+    from sys_login_log
+    where user_name like #{userNamePattern}
+    and status like #{statusPattern}
+  </select>
+  <select id="findByUserNameAndStatus" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_login_log
+    where user_name = #{userName,jdbcType=VARCHAR}
+    and status = #{status,jdbcType=VARCHAR}
   </select>
 </mapper>

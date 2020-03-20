@@ -5,6 +5,7 @@ import com.framework.pie.admin.model.SysUser;
 import com.framework.pie.admin.service.SysRoleService;
 import com.framework.pie.admin.service.SysUserService;
 import com.framework.pie.admin.util.PasswordUtils;
+import com.framework.pie.admin.util.SecurityUtils;
 import com.framework.pie.admin.util.syslog.Log;
 import com.framework.pie.common.utils.FileUtils;
 import com.framework.pie.core.http.HttpResult;
@@ -78,4 +79,20 @@ public class SysUserController {
         return sysUserService.findAll();
     }
 
+    @PreAuthorize("hasAuthority('sys:user:edit')")
+    @GetMapping(value="/updatePassword")
+    public HttpResult updatePassword(@RequestParam String password, @RequestParam String newPassword) {
+        SysUser user = sysUserService.findByName(SecurityUtils.getUsername());
+        if(user == null) {
+            HttpResult.error("用户不存在!");
+        }
+//        if(SysConstants.ADMIN.equalsIgnoreCase(user.getName())) {
+//            return HttpResult.error("超级管理员不允许修改!");
+//        }
+        if(!PasswordUtils.matches(user.getSalt(), password, user.getPassword())) {
+            return HttpResult.error("原密码不正确!");
+        }
+        user.setPassword(PasswordUtils.encode(newPassword, user.getSalt()));
+        return HttpResult.ok(sysUserService.save(user));
+    }
 }

@@ -141,7 +141,7 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public int save(SysUser record) {
-        return 0;
+        return sysUserMapper.insertSelective(record);
     }
 
     @Override

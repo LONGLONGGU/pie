@@ -20,5 +20,13 @@ public interface SysLoginLogMapper {
 
     int updateByPrimaryKey(SysLoginLog record);
 
-    List<SysLoginLog> findPageByName(@Param("name") String name);
+    List<SysLoginLog> findPage();
+
+    List<SysLoginLog> findPageByUserName(@Param(value="userName") String userName);
+
+    List<SysLoginLog> findPageByStatus(@Param(value="status") String status);
+
+    List<SysLoginLog> findPageByUserNameAndStatus(@Param(value="userName") String userName, @Param(value="status") String status);
+
+    List<SysLoginLog> findByUserNameAndStatus(@Param(value="userName") String userName, @Param(value="status") String status);
 }

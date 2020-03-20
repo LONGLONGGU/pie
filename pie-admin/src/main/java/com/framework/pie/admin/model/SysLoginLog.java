@@ -3,6 +3,10 @@ package com.framework.pie.admin.model;
 import java.util.Date;
 
 public class SysLoginLog {
+    public static final String STATUS_LOGIN = "login";
+    public static final String STATUS_LOGOUT = "logout";
+    public static final String STATUS_ONLINE = "online";
+
     private Long id;
 
     private String userName;
@@ -13,7 +17,7 @@ public class SysLoginLog {
 
     private String createBy;
 
-    private Date createTime;
+    private Date createTime = new Date();
 
     private String lastUpdateBy;
 

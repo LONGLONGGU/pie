@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.framework.pie.admin.model.SysOrg">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="status" jdbcType="TINYINT" property="status" />
     <result column="order_num" jdbcType="INTEGER" property="orderNum" />
     <result column="create_by" jdbcType="VARCHAR" property="createBy" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -12,7 +13,8 @@
     <result column="del_flag" jdbcType="TINYINT" property="delFlag" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, order_num, create_by, create_time, last_update_by, last_update_time, del_flag
+    id, name, status, order_num, create_by, create_time, last_update_by, last_update_time, 
+    del_flag
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -25,12 +27,17 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.framework.pie.admin.model.SysOrg">
-    insert into sys_org (id, name, order_num, 
-      create_by, create_time, last_update_by, 
-      last_update_time, del_flag)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{orderNum,jdbcType=INTEGER}, 
-      #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUpdateBy,jdbcType=VARCHAR}, 
-      #{lastUpdateTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=TINYINT})
+    <selectKey  keyProperty="id" resultType="java.lang.Long" order="AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_org (id, name, status, 
+      order_num, create_by, create_time, 
+      last_update_by, last_update_time, del_flag
+      )
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
+      #{orderNum,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{lastUpdateBy,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=TINYINT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.framework.pie.admin.model.SysOrg">
     <selectKey  keyProperty="id" resultType="java.lang.Long" order="AFTER">
@@ -43,6 +50,9 @@
       </if>
       <if test="name != null">
         name,
+      </if>
+      <if test="status != null">
+        status,
       </if>
       <if test="orderNum != null">
         order_num,
@@ -70,6 +80,9 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
       <if test="orderNum != null">
         #{orderNum,jdbcType=INTEGER},
       </if>
@@ -96,6 +109,9 @@
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
       <if test="orderNum != null">
         order_num = #{orderNum,jdbcType=INTEGER},
       </if>
@@ -120,6 +136,7 @@
   <update id="updateByPrimaryKey" parameterType="com.framework.pie.admin.model.SysOrg">
     update sys_org
     set name = #{name,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
       order_num = #{orderNum,jdbcType=INTEGER},
       create_by = #{createBy,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},

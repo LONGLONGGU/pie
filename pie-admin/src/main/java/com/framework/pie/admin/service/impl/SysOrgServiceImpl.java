@@ -29,7 +29,7 @@ public class SysOrgServiceImpl implements SysOrgService {
     @Autowired
     private SysOrgMenuMapper sysOrgMenuMapper;
     @Autowired
-    private SysDeptService sysDeptService;
+    private SysDeptMapper sysDeptMapper;
     @Autowired
     private SysOrgDeptMapper sysOrgDeptMapper;
     @Autowired
@@ -46,7 +46,7 @@ public class SysOrgServiceImpl implements SysOrgService {
             SysDept sysDept = new SysDept();
             sysDept.setName("系统管理");
             sysDept.setOrderNum(1);
-            sysDeptService.save(sysDept);
+            sysDeptMapper.insertSelective(sysDept);
             Long deptId = sysDept.getId();
             sysOrgMapper.insertSelective(sysOrg);
             Long orgId = sysOrg.getId();

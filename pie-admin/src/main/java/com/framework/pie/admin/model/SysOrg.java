@@ -7,6 +7,8 @@ public class SysOrg {
 
     private String name;
 
+    private Byte status = 1;
+
     private Integer orderNum;
 
     private String createBy;
@@ -33,6 +35,14 @@ public class SysOrg {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public Byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(Byte status) {
+        this.status = status;
     }
 
     public Integer getOrderNum() {
