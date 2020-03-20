@@ -1,22 +1,19 @@
 package com.framework.pie.admin.controller;
 
-import com.framework.pie.admin.service.SysLogService;
+import com.framework.pie.admin.service.SysLoginLogService;
 import com.framework.pie.core.http.HttpResult;
 import com.framework.pie.core.page.PageRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-/**
- * 系统日志控制器
- */
 @RestController
-@RequestMapping(value = "log")
-public class SysLogController {
+@RequestMapping(value = "loginlog")
+public class SysLoginLogController {
     @Autowired
-    private SysLogService sysLogService;
+    private SysLoginLogService sysLoginLogService;
 
     @PostMapping(value = "/findPage")
     public HttpResult findPage(@RequestBody PageRequest pageRequest){
-        return HttpResult.ok(sysLogService.findPage(pageRequest));
+        return HttpResult.ok(sysLoginLogService.findPage(pageRequest));
     }
 }

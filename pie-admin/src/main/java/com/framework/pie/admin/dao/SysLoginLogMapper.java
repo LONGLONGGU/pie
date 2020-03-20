@@ -1,7 +1,12 @@
 package com.framework.pie.admin.dao;
 
 import com.framework.pie.admin.model.SysLoginLog;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+@Repository
 public interface SysLoginLogMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -14,4 +19,6 @@ public interface SysLoginLogMapper {
     int updateByPrimaryKeySelective(SysLoginLog record);
 
     int updateByPrimaryKey(SysLoginLog record);
+
+    List<SysLoginLog> findPageByName(@Param("name") String name);
 }

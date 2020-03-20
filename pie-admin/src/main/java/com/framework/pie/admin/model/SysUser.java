@@ -21,7 +21,7 @@ public class SysUser {
 
     private String mobile;
 
-    private Byte status;
+    private Byte status = 1;
 
     private Long deptId;
 
