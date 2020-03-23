@@ -69,4 +69,15 @@ public class SysLoginLogServiceImpl implements SysLoginLogService {
         sysLoginLogMapper.insertSelective(record);
         return 0;
     }
+
+    @Transactional
+    @Override
+    public int  writeLoginOut(String userName, String ip){
+        List<SysLoginLog> sysLoginLogs = sysLoginLogMapper.findByUserNameAndStatus(userName, SysLoginLog.STATUS_ONLINE);
+        for(SysLoginLog sysLoginLog:sysLoginLogs) {
+            sysLoginLog.setStatus(SysLoginLog.STATUS_LOGOUT);
+            sysLoginLogMapper.updateByPrimaryKey(sysLoginLog);
+        }
+        return 0;
+    }
 }

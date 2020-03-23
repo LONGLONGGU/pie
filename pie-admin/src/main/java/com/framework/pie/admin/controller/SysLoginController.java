@@ -100,4 +100,5 @@ public class SysLoginController {
 		sysLoginLogService.writeLoginLog(username, IPUtils.getIpAddr(request));
 		return HttpResult.ok(token);
 	}
+
 }

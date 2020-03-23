@@ -3,6 +3,9 @@ package com.framework.pie.admin.config;
 import com.framework.pie.admin.security.JwtAuthenticationFilter;
 import com.framework.pie.admin.security.JwtAuthenticationProvider;
 import com.framework.pie.admin.security.UserDetailsServiceImpl;
+import com.framework.pie.admin.service.SysLoginLogService;
+import com.framework.pie.admin.util.IPUtils;
+import com.framework.pie.admin.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +24,9 @@ import org.springframework.security.web.authentication.logout.HttpStatusReturnin
 @EnableWebSecurity	// 开启Spring Security
 @EnableGlobalMethodSecurity(prePostEnabled = true)	// 开启权限注解，如：@PreAuthorize注解
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private SysLoginLogService sysLoginLogService;
 
    @Bean
    public UserDetailsService userDetailsService(){
@@ -61,7 +67,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated();
         http.headers().frameOptions().disable();
         // 退出登录处理器
-        http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());
+        http.logout().logoutSuccessHandler((request,response,authentication) -> {
+            System.out.println("退出成功！");
+            // 记录登录日志
+            String userName = SecurityUtils.getUsername(authentication);
+            sysLoginLogService.writeLoginOut(userName, IPUtils.getIpAddr(request));
+//            Map<String,Object> map = new HashMap<String,Object>();
+//            map.put("code",200);
+//            map.put("message","退出成功");
+//            map.put("data",authentication);
+//            response.setContentType("application/json;charset=utf-8");
+//            PrintWriter out = response.getWriter();
+//            out.write(objectMapper.writeValueAsString(map));
+//            out.flush();
+//            out.close();
+        });
         // token验证过滤器
         http.addFilterBefore(new JwtAuthenticationFilter(authenticationManager()), UsernamePasswordAuthenticationFilter.class);
     }

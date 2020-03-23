@@ -13,4 +13,12 @@ public interface SysLoginLogService extends CurdService<SysLoginLog> {
      */
     int writeLoginLog(String userName, String ip);
 
+    /**
+     * 记录登出日志
+     * @param userName
+     * @param ip
+     * @return
+     */
+    int writeLoginOut(String userName, String ip);
+
 }
