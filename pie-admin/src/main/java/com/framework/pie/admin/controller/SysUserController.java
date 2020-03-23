@@ -32,6 +32,12 @@ public class SysUserController {
         return sysUserService.saveUser(record);
     }
 
+    @Log(value = "切换用户状态")
+    @PostMapping(value="/userStatusSwitching")
+    public HttpResult userStatusSwitching(@RequestBody SysUser record) {
+        return sysUserService.userStatusSwitching(record);
+    }
+
     @Log(value = "删除用户")
     @PreAuthorize("hasAuthority('sys:user:delete')")
     @PostMapping(value="/delete")

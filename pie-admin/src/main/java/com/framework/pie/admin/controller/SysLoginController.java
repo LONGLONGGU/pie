@@ -9,9 +9,12 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.framework.pie.admin.dao.SysOrgMapper;
+import com.framework.pie.admin.model.SysOrg;
 import com.framework.pie.admin.model.SysUser;
 import com.framework.pie.admin.security.JwtAuthenticatioToken;
 import com.framework.pie.admin.service.SysLoginLogService;
+import com.framework.pie.admin.service.SysOrgService;
 import com.framework.pie.admin.service.SysUserService;
 import com.framework.pie.admin.util.IPUtils;
 import com.framework.pie.admin.util.PasswordUtils;
@@ -43,6 +46,8 @@ public class SysLoginController {
 	private AuthenticationManager authenticationManager;
 	@Autowired
 	private SysLoginLogService sysLoginLogService;
+	@Autowired
+	private SysOrgMapper sysOrgMapper;
 
 
 	@GetMapping("captcha.jpg")
@@ -76,23 +81,28 @@ public class SysLoginController {
 		// 从session中获取之前保存的验证码跟前台传来的验证码进行匹配
 		Object kaptcha = request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
 		if(kaptcha == null){
-			return HttpResult.error("验证码已失效");
+			return HttpResult.error("验证码已失效！");
 		}
 		if(!captcha.equals(kaptcha)){
-			return HttpResult.error("验证码不正确");
+			return HttpResult.error("验证码不正确！");
 		}
 		// 用户信息
 		SysUser user = sysUserService.findByName(username);
 		// 账号不存在、密码错误
 		if (user == null) {
-			return HttpResult.error("账号不存在");
+			return HttpResult.error("账号不存在！");
 		}
 		if (!PasswordUtils.matches(user.getSalt(), password, user.getPassword())) {
-			return HttpResult.error("密码不正确");
+			return HttpResult.error("密码不正确！");
+		}
+		//检查机构是否禁用
+		SysOrg sysOrg = sysOrgMapper.findByOrg(username);
+		if (sysOrg.getStatus() == 0){
+			return HttpResult.error("机构已停用,请联系服务提供商！");
 		}
 		// 账号锁定
 		if (user.getStatus() == 0) {
-			return HttpResult.error("账号已被锁定,请联系管理员");
+			return HttpResult.error("账号已被锁定,请联系管理员！");
 		}
 		// 系统登录认证
 		JwtAuthenticatioToken token = SecurityUtils.login(request, username, password, authenticationManager);

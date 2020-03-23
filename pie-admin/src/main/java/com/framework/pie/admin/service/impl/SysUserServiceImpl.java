@@ -138,6 +138,22 @@ public class SysUserServiceImpl implements SysUserService {
         }
         return HttpResult.ok("1");
     }
+    @Override
+    public HttpResult userStatusSwitching(SysUser record){
+        SysUser user = this.findById(record.getId());
+        Long id = null;
+        if(user != null) {
+            if(sysRoleService.checkedRole(user.getName(),SysConstants.SUPERADMIN)) {
+                return HttpResult.error("超级管理员不允许切换状态!");
+            }
+            if(sysRoleService.checkedRole(user.getName(),SysConstants.ADMIN)) {
+                return HttpResult.error("系统管理员不允许切换状态!");
+            }
+        }
+        // 更新用户信息
+        sysUserMapper.updateByPrimaryKeySelective(record);
+        return HttpResult.ok("1");
+    }
 
     @Override
     public int save(SysUser record) {

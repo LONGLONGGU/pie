@@ -23,6 +23,11 @@ public interface SysUserService extends CurdService<SysUser> {
      */
 
      HttpResult saveUser(SysUser record);
+
+    /**
+     * 用户状态切换
+     */
+    HttpResult userStatusSwitching(SysUser record);
     /**
      * 通过用户名查询用户
      * @return
