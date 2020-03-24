@@ -32,8 +32,11 @@ public class SysOrgController {
     public HttpResult save(@RequestBody SysOrg record){
         SysOrg org = sysOrgService.findById(record.getId());
         if(org != null) {
+            if(SysConstants.SUPERADMIN.equalsIgnoreCase(org.getName())) {
+                return HttpResult.error("机构超级管理员不允许修改!");
+            }
             if(SysConstants.ADMIN.equalsIgnoreCase(org.getName())) {
-                return HttpResult.error("超级管理员不允许修改!");
+                return HttpResult.error("机构系统管理员不允许修改!");
             }
         }
         // 新增机构
