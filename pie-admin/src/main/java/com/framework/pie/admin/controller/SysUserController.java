@@ -2,6 +2,7 @@ package com.framework.pie.admin.controller;
 
 import com.framework.pie.admin.constant.SysConstants;
 import com.framework.pie.admin.model.SysUser;
+import com.framework.pie.admin.service.UploadService;
 import com.framework.pie.admin.service.SysRoleService;
 import com.framework.pie.admin.service.SysUserService;
 import com.framework.pie.admin.util.PasswordUtils;
@@ -13,6 +14,7 @@ import com.framework.pie.core.page.PageRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
@@ -21,6 +23,8 @@ import java.util.List;
 @RestController
 @RequestMapping("user")
 public class SysUserController {
+    @Autowired
+    private UploadService fileService;
     @Autowired
     private SysUserService sysUserService;
     @Autowired
@@ -100,5 +104,11 @@ public class SysUserController {
         }
         user.setPassword(PasswordUtils.encode(newPassword, user.getSalt()));
         return HttpResult.ok(sysUserService.save(user));
+    }
+    @PostMapping("/fileUpload")
+    @ResponseBody
+    public HttpResult upload(@RequestParam("file") MultipartFile file){
+        return fileService.upload(file);
+
     }
 }

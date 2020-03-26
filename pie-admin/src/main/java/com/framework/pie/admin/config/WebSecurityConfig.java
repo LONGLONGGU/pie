@@ -72,15 +72,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             // 记录登录日志
             String userName = SecurityUtils.getUsername(authentication);
             sysLoginLogService.writeLoginOut(userName, IPUtils.getIpAddr(request));
-//            Map<String,Object> map = new HashMap<String,Object>();
-//            map.put("code",200);
-//            map.put("message","退出成功");
-//            map.put("data",authentication);
-//            response.setContentType("application/json;charset=utf-8");
-//            PrintWriter out = response.getWriter();
-//            out.write(objectMapper.writeValueAsString(map));
-//            out.flush();
-//            out.close();
         });
         // token验证过滤器
         http.addFilterBefore(new JwtAuthenticationFilter(authenticationManager()), UsernamePasswordAuthenticationFilter.class);

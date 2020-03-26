@@ -35,7 +35,11 @@ spring:
       port: 8500
       discovery:
         hostname: localhost
-        serviceName: ${spring.application.name}	# 注册到consul的服务名称
+        serviceName: ${spring.application.name} # 注册到consul的服务名称
+  servlet:
+    multipart:
+      max-request-size: 10MB # 上传文件总的最大值
+      max-file-size: 10MB # 单个文件的最大值
 # 开放健康检查接口
 management:
   endpoints:
