@@ -11,7 +11,7 @@ public class SysUser {
 
     private String nickName;
 
-    private String avatar;
+    private Long avatarId;
 
     private String password;
 
@@ -42,6 +42,7 @@ public class SysUser {
     // 非数据库字段
     private List<SysUserRole> userRoles = new ArrayList<>();
 
+
     public Long getId() {
         return id;
     }
@@ -66,12 +67,12 @@ public class SysUser {
         this.nickName = nickName == null ? null : nickName.trim();
     }
 
-    public String getAvatar() {
-        return avatar;
+    public Long getAvatarId() {
+        return avatarId;
     }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar == null ? null : avatar.trim();
+    public void setAvatarId(Long avatarId) {
+        this.avatarId = avatarId;
     }
 
     public String getPassword() {
@@ -161,6 +162,7 @@ public class SysUser {
     public void setDelFlag(Byte delFlag) {
         this.delFlag = delFlag;
     }
+
     public String getDeptName() {
         return deptName;
     }

@@ -5,7 +5,7 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
-    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="avatar_id" jdbcType="BIGINT" property="avatarId" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="salt" jdbcType="VARCHAR" property="salt" />
     <result column="email" jdbcType="VARCHAR" property="email" />
@@ -19,7 +19,7 @@
     <result column="del_flag" jdbcType="TINYINT" property="delFlag" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, nick_name, avatar, password, salt, email, mobile, status, dept_id, create_by, 
+    id, name, nick_name, avatar_id, password, salt, email, mobile, status, dept_id, create_by, 
     create_time, last_update_by, last_update_time, del_flag
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -34,13 +34,13 @@
   </delete>
   <insert id="insert" parameterType="com.framework.pie.admin.model.SysUser">
     insert into sys_user (id, name, nick_name, 
-      avatar, password, salt, 
+      avatar_id, password, salt, 
       email, mobile, status, 
       dept_id, create_by, create_time, 
       last_update_by, last_update_time, del_flag
       )
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
-      #{avatar,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, 
+      #{avatarId,jdbcType=BIGINT}, #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
       #{deptId,jdbcType=BIGINT}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{lastUpdateBy,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=TINYINT}
@@ -61,8 +61,8 @@
       <if test="nickName != null">
         nick_name,
       </if>
-      <if test="avatar != null">
-        avatar,
+      <if test="avatarId != null">
+        avatar_id,
       </if>
       <if test="password != null">
         password,
@@ -108,8 +108,8 @@
       <if test="nickName != null">
         #{nickName,jdbcType=VARCHAR},
       </if>
-      <if test="avatar != null">
-        #{avatar,jdbcType=VARCHAR},
+      <if test="avatarId != null">
+        #{avatarId,jdbcType=BIGINT},
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
@@ -155,8 +155,8 @@
       <if test="nickName != null">
         nick_name = #{nickName,jdbcType=VARCHAR},
       </if>
-      <if test="avatar != null">
-        avatar = #{avatar,jdbcType=VARCHAR},
+      <if test="avatarId != null">
+        avatar_id = #{avatarId,jdbcType=BIGINT},
       </if>
       <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
@@ -198,7 +198,7 @@
     update sys_user
     set name = #{name,jdbcType=VARCHAR},
       nick_name = #{nickName,jdbcType=VARCHAR},
-      avatar = #{avatar,jdbcType=VARCHAR},
+      avatar_id = #{avatarId,jdbcType=BIGINT},
       password = #{password,jdbcType=VARCHAR},
       salt = #{salt,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},

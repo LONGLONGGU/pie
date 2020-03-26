@@ -6,6 +6,7 @@ import com.framework.pie.admin.model.SysUserRole;
 import com.framework.pie.core.http.HttpResult;
 import com.framework.pie.core.page.PageRequest;
 import com.framework.pie.core.service.CurdService;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.io.File;
 import java.util.List;
@@ -23,6 +24,13 @@ public interface SysUserService extends CurdService<SysUser> {
      */
 
      HttpResult saveUser(SysUser record);
+
+    /**
+     * 修改个人信息
+     * @param record
+     * @return
+     */
+     int updatePersonal(SysUser record);
 
     /**
      * 用户状态切换

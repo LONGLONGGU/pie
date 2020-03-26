@@ -61,6 +61,7 @@ public class UploadController {
                 }
                 os.close();
                 fis.close();
+                return null;
 
             } catch (Exception e) {
                 // TODO Auto-generated catch block

@@ -138,6 +138,13 @@ public class SysUserServiceImpl implements SysUserService {
         }
         return HttpResult.ok("1");
     }
+
+    @Override
+    public int updatePersonal(SysUser record) {
+        // 更新用户信息
+        return sysUserMapper.updateByPrimaryKeySelective(record);
+    }
+
     @Override
     public HttpResult userStatusSwitching(SysUser record){
         SysUser user = this.findById(record.getId());
@@ -221,7 +228,7 @@ public class SysUserServiceImpl implements SysUserService {
             row.getCell(++columnIndex).setCellValue(user.getRoleNames());
             row.getCell(++columnIndex).setCellValue(user.getEmail());
             row.getCell(++columnIndex).setCellValue(user.getStatus());
-            row.getCell(++columnIndex).setCellValue(user.getAvatar());
+            row.getCell(++columnIndex).setCellValue(user.getAvatarId());
             row.getCell(++columnIndex).setCellValue(user.getCreateBy());
             row.getCell(++columnIndex).setCellValue(DateTimeUtils.getDateTime(user.getCreateTime()));
             row.getCell(++columnIndex).setCellValue(user.getLastUpdateBy());

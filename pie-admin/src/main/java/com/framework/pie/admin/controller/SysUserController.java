@@ -36,6 +36,11 @@ public class SysUserController {
         return sysUserService.saveUser(record);
     }
 
+    @Log(value = "修改个人信息")
+    @PostMapping(value="/updatePersonal")
+    public HttpResult updatePersonal(@RequestBody SysUser record) {
+        return HttpResult.ok(sysUserService.updatePersonal(record));
+    }
     @Log(value = "切换用户状态")
     @PostMapping(value="/userStatusSwitching")
     public HttpResult userStatusSwitching(@RequestBody SysUser record) {
