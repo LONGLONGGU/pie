@@ -1,11 +1,13 @@
 package com.framework.pie.admin.service.impl;
 
+import com.framework.pie.admin.config.UploadFileConfig;
 import com.framework.pie.admin.model.SysAttachments;
 import com.framework.pie.admin.service.UploadService;
 import com.framework.pie.admin.service.SysAttachmentsService;
 import com.framework.pie.admin.util.SecurityUtils;
 import com.framework.pie.core.http.HttpResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,6 +21,9 @@ import java.util.UUID;
 public class UploadServiceImpl implements UploadService {
     @Autowired
     private SysAttachmentsService sysAttachmentsService;
+    @Autowired
+    UploadFileConfig uploadFileConfig;
+
 
     @Override
     public HttpResult upload(MultipartFile file) {
@@ -32,7 +37,7 @@ public class UploadServiceImpl implements UploadService {
         // 获取文件的后缀名
         String suffixName = fileName.substring(fileName.lastIndexOf("."));
         String folder = new SimpleDateFormat("yyyyMMdd").format(new Date()).toString();
-        String filePath = "/Users/longlong/working/files/" + folder + "/";
+        String filePath = uploadFileConfig.getUploadFolder() + folder + "/";
         String uuid = UUID.randomUUID().toString().replace("-", "") + suffixName;
         File dest = new File(filePath);
         if (!dest.exists() && !dest.isDirectory()) //判断文件夹是否存在

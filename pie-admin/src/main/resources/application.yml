@@ -54,3 +54,6 @@ pagehelper:
   reasonable: true
   support-methods-arguments: true
   params: count=countSql
+file:
+  # 文件上传目录
+  uploadFolder: /Users/longlong/working/files/
