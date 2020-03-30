@@ -93,7 +93,7 @@ public class SysOrgServiceImpl implements SysOrgService {
 
     @Override
     public SysOrg findById(Long id) {
-        return null;
+        return sysOrgMapper.selectByPrimaryKey(id);
     }
 
     @Override
