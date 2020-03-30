@@ -38,6 +38,8 @@ public class SysOrgServiceImpl implements SysOrgService {
     private SysUserService sysUserService;
     @Autowired
     private SysUserRoleMapper sysUserRoleMapper;
+    @Autowired
+    private SysRoleMapper sysRoleMapper;
 
     @Override
     public int save(SysOrg sysOrg) {
@@ -61,7 +63,7 @@ public class SysOrgServiceImpl implements SysOrgService {
             sysRole.setCreateBy("SuperAdmin");
             sysRole.setCreateTime(new Date());
             sysRole.setOrgId(orgId);
-            sysRoleService.save(sysRole);
+            sysRoleMapper.insertSelective(sysRole);
             Long roleId = sysRole.getId();
             //新建默认机构管理员
             SysUser sysUser = new SysUser();

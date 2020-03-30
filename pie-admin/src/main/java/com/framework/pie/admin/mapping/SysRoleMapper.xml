@@ -27,6 +27,9 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.framework.pie.admin.model.SysRole">
+    <selectKey  keyProperty="id" resultType="java.lang.Long" order="AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into sys_role (id, name, remark, 
       org_id, create_by, create_time, 
       last_update_by, last_update_time, del_flag
