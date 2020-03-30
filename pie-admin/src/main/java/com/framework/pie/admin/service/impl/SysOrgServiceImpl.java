@@ -114,7 +114,7 @@ public class SysOrgServiceImpl implements SysOrgService {
     public List<SysMenu> findOrgMenus(Long orgId) {
         SysOrg sysRole = sysOrgMapper.selectByPrimaryKey(orgId);
         //超级管理员返回全部权限
-        if (SysConstants.ADMIN.equals(sysRole.getName())){
+        if (SysConstants.SUPERADMIN.equals(sysRole.getName())){
             return  sysMenuMapper.findAll();
         }
         return sysMenuMapper.findOrgMenus(orgId);
