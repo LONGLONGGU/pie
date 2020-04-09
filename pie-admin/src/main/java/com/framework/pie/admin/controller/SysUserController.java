@@ -79,6 +79,7 @@ public class SysUserController {
         return HttpResult.ok(sysUserService.findUserRoles(userId));
     }
 
+    @PreAuthorize("hasAuthority('sys:user:view')")
     @PostMapping(value="/findPage")
     public HttpResult findPage(@RequestBody PageRequest pageRequest) {
         return HttpResult.ok(sysUserService.findPage(pageRequest));

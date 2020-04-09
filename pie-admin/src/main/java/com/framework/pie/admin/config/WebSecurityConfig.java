@@ -1,5 +1,7 @@
 package com.framework.pie.admin.config;
 
+import com.framework.pie.admin.security.SimpleAccessDeniedHandler;
+import com.framework.pie.admin.security.SimpleAuthenticationEntryPoint;
 import com.framework.pie.admin.security.JwtAuthenticationFilter;
 import com.framework.pie.admin.security.JwtAuthenticationProvider;
 import com.framework.pie.admin.security.UserDetailsServiceImpl;
@@ -18,7 +20,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 
 @Configuration
 @EnableWebSecurity	// 开启Spring Security
@@ -75,6 +76,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         });
         // token验证过滤器
         http.addFilterBefore(new JwtAuthenticationFilter(authenticationManager()), UsernamePasswordAuthenticationFilter.class);
+        //security异常处理
+        http.exceptionHandling().accessDeniedHandler(new SimpleAccessDeniedHandler()).authenticationEntryPoint(new SimpleAuthenticationEntryPoint());
     }
 
     @Bean
