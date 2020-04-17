@@ -186,10 +186,27 @@
     from sys_dict
     where label like #{pattern}
   </select>
+  <select id="findPageByTypeAndLabel" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <bind name="patternLabel" value="'%' + _parameter.label + '%'" />
+    <bind name="patternType" value="_parameter.type" />
+    select
+    <include refid="Base_Column_List" />
+    from sys_dict
+    where label like #{patternLabel} and type = #{patternType}
+  </select>
   <select id="findByLable" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from sys_dict
     where label = #{label,jdbcType=VARCHAR}
+  </select>
+  <select id="findByType"  parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_dict
+    where type = #{type,jdbcType=VARCHAR}
+  </select>
+  <select id="findTypes" resultType="java.lang.String">
+    select DISTINCT type from sys_dict
   </select>
 </mapper>

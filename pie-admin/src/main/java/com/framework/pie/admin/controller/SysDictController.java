@@ -41,4 +41,16 @@ public class SysDictController {
     public HttpResult findByLable(@RequestParam String lable) {
         return HttpResult.ok(sysDictService.findByLable(lable));
     }
+
+    @PreAuthorize("hasAuthority('sys:dict:typeview')")
+    @GetMapping(value="/findTypes")
+    public HttpResult findTypes(){
+        return HttpResult.ok(sysDictService.findTypes());
+    }
+
+    @PreAuthorize("hasAuthority('sys:dict:typeview')")
+    @GetMapping(value="/findByType")
+    public HttpResult findByType(@RequestParam String type){
+        return HttpResult.ok(sysDictService.findByLable(type));
+    }
 }

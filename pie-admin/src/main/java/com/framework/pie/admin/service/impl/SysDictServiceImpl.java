@@ -6,6 +6,7 @@ import com.framework.pie.admin.service.SysDictService;
 import com.framework.pie.core.page.MybatisPageHelper;
 import com.framework.pie.core.page.PageRequest;
 import com.framework.pie.core.page.PageResult;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,14 +47,31 @@ public class SysDictServiceImpl implements SysDictService {
     @Override
     public PageResult findPage(PageRequest pageRequest) {
         Object label = pageRequest.getParam("label");
-        if(label != null) {
+        Object type = pageRequest.getParam("type");
+        if (label != "" && type != ""){
+            return MybatisPageHelper.findPage(pageRequest, sysDictMapper, "findPageByTypeAndLabel", type,label);
+        }
+        if(label != "") {
             return MybatisPageHelper.findPage(pageRequest, sysDictMapper, "findPageByLabel", label);
+        }
+        if (type != ""){
+            return MybatisPageHelper.findPage(pageRequest, sysDictMapper, "findByType", type);
         }
         return MybatisPageHelper.findPage(pageRequest, sysDictMapper);
     }
-
     @Override
     public List<SysDict> findByLable(String lable) {
         return sysDictMapper.findByLable(lable);
+    }
+
+    @Override
+    public List<SysDict> findByType(String type) {
+
+        return sysDictMapper.findByType(type);
+    }
+
+    @Override
+    public List<String> findTypes() {
+        return sysDictMapper.findTypes();
     }
 }

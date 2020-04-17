@@ -39,4 +39,24 @@ public interface SysDictMapper {
      */
     List<SysDict> findPageByLabel(@Param(value = "label") String label);
 
+    /**
+     * 根据标签名称和类型分页查询
+     * @param label
+     * @return
+     */
+    List<SysDict> findPageByTypeAndLabel(@Param(value = "type") String type ,@Param(value = "label") String label);
+
+    /**
+     * 根据类型查询
+     * @param type
+     * @return
+     */
+    List<SysDict> findByType(@Param(value = "type") String type);
+
+    /**
+     * 获取数据字典全部类型
+     * @return
+     */
+     List<String> findTypes();
+
 }

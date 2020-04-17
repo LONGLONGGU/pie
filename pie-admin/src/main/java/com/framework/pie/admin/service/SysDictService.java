@@ -20,4 +20,17 @@ public interface SysDictService extends CurdService<SysDict> {
      */
     List<SysDict> findByLable(String lable);
 
+    /**
+     * 根据名称查询
+     * @param type
+     * @return
+     */
+    List<SysDict> findByType(String type);
+
+    /**
+     * 获取数据字典全部类型
+     * @return
+     */
+    List<String> findTypes();
+
 }
