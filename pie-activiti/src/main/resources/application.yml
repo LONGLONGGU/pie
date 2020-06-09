@@ -1,0 +1,27 @@
+server:
+  port: 8089
+spring:
+  application:
+    name: pie-activiti
+  boot:
+      admin:
+        client:
+          url: "http://localhost:8000"
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        hostname: localhost
+        serviceName: ${spring.application.name} # 注册到consul的服务名称
+  datasource:
+    url: jdbc:mysql://localhost:3306/pie-activiti?useUnicode=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&nullCatalogMeansCurrent=true&characterEncoding=utf-8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  activiti:
+    database-schema-update: true
+    database-schema: ACTIVITI
+    history-level: full
+    db-history-used: true
+    check-process-definitions: false
