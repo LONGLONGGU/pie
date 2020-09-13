@@ -76,7 +76,8 @@ public class SysMenuServiceImpl implements SysMenuService {
 
     @Override
     public int delete(SysMenu record) {
-        return 0;
+        sysMenuMapper.deleteByPrimaryKey(record.getId());
+        return 1;
     }
 
     @Override

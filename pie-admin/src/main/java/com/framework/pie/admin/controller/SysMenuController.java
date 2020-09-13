@@ -26,6 +26,12 @@ public class SysMenuController {
         return HttpResult.ok(sysMenuService.save(record));
     }
 
+    @PostMapping(value = "/delete")
+    public HttpResult delete(@RequestBody SysMenu record){
+
+        return HttpResult.ok(sysMenuService.delete(record));
+    }
+
     @PreAuthorize("hasAuthority('sys:menu:view')")
     @GetMapping(value="/findNavTree")
     public HttpResult findNavTree(@RequestParam String userName) {

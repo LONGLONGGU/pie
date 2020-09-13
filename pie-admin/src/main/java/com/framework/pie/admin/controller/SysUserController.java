@@ -5,6 +5,7 @@ import com.framework.pie.admin.model.SysUser;
 import com.framework.pie.admin.service.UploadService;
 import com.framework.pie.admin.service.SysRoleService;
 import com.framework.pie.admin.service.SysUserService;
+import com.framework.pie.admin.util.JwtTokenUtils;
 import com.framework.pie.admin.util.PasswordUtils;
 import com.framework.pie.admin.util.SecurityUtils;
 import com.framework.pie.admin.util.syslog.Log;
@@ -30,6 +31,11 @@ public class SysUserController {
     @Autowired
     private SysRoleService sysRoleService;
 
+    @GetMapping("/info")
+    public HttpResult info(String token){
+        String userNmae= JwtTokenUtils.getUsernameFromToken(token);
+        return HttpResult.ok(this.sysUserService.findByName(userNmae));
+    }
     @Log(value = "新增修改用户")
     @PostMapping(value="/save")
     public HttpResult save(@RequestBody SysUser record) {
