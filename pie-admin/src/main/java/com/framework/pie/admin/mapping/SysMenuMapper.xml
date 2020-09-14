@@ -9,6 +9,7 @@
     <result column="nested_url" jdbcType="VARCHAR" property="nestedUrl" />
     <result column="perms" jdbcType="VARCHAR" property="perms" />
     <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="hidden" jdbcType="TINYINT" property="hidden" />
     <result column="icon" jdbcType="VARCHAR" property="icon" />
     <result column="order_num" jdbcType="INTEGER" property="orderNum" />
     <result column="create_by" jdbcType="VARCHAR" property="createBy" />
@@ -18,7 +19,7 @@
     <result column="del_flag" jdbcType="TINYINT" property="delFlag" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, parent_id, url, nested_url, perms, type, icon, order_num, create_by, create_time, last_update_by,
+    id, name, parent_id, url, nested_url, perms, type, hidden, icon, order_num, create_by, create_time, last_update_by,
     last_update_time, del_flag
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -33,12 +34,12 @@
   </delete>
   <insert id="insert" parameterType="com.framework.pie.admin.model.SysMenu">
     insert into sys_menu (id, name, parent_id, 
-      url,nested_url,perms, type, icon,
+      url,nested_url,perms, type, hidden, icon,
       order_num, create_by, create_time, 
       last_update_by, last_update_time, del_flag
       )
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT}, 
-      #{url,jdbcType=VARCHAR}, #{nested_url,jdbcType=VARCHAR}, #{perms,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{icon,jdbcType=VARCHAR},
+      #{url,jdbcType=VARCHAR}, #{nested_url,jdbcType=VARCHAR}, #{perms,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER},#{hidden,jdbcType=TINYINT} #{icon,jdbcType=VARCHAR},
       #{orderNum,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{lastUpdateBy,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=TINYINT}
       )
@@ -66,6 +67,9 @@
       </if>
       <if test="type != null">
         type,
+      </if>
+      <if test="hidden != null">
+        hidden,
       </if>
       <if test="icon != null">
         icon,
@@ -111,6 +115,9 @@
       <if test="type != null">
         #{type,jdbcType=INTEGER},
       </if>
+      <if test="hidden != null">
+        #{hidden,jdbcType=TINYINT},
+      </if>
       <if test="icon != null">
         #{icon,jdbcType=VARCHAR},
       </if>
@@ -155,6 +162,9 @@
       <if test="type != null">
         type = #{type,jdbcType=INTEGER},
       </if>
+      <if test="hidden != null">
+        hidden = #{hidden,jdbcType=TINYINT},
+      </if>
       <if test="icon != null">
         icon = #{icon,jdbcType=VARCHAR},
       </if>
@@ -187,6 +197,7 @@
       nested_url = #{nestedUrl,jdbcType=VARCHAR},
       perms = #{perms,jdbcType=VARCHAR},
       type = #{type,jdbcType=INTEGER},
+      hidden = #{hidden,jdbcType=TINYINT},
       icon = #{icon,jdbcType=VARCHAR},
       order_num = #{orderNum,jdbcType=INTEGER},
       create_by = #{createBy,jdbcType=VARCHAR},

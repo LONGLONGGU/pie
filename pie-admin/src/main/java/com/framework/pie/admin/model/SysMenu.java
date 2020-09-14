@@ -19,6 +19,8 @@ public class SysMenu {
 
     private Integer type;
 
+    private Boolean hidden;
+
     private String icon;
 
     private Integer orderNum;
@@ -94,6 +96,14 @@ public class SysMenu {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public Boolean getHidden() {
+        return hidden;
+    }
+
+    public void setHidden(Boolean hidden) {
+        this.hidden = hidden;
     }
 
     public String getIcon() {
