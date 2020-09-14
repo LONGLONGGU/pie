@@ -13,6 +13,8 @@ public class SysMenu {
 
     private String url;
 
+    private String nestedUrl;
+
     private String perms;
 
     private Integer type;
@@ -68,6 +70,14 @@ public class SysMenu {
 
     public void setUrl(String url) {
         this.url = url == null ? null : url.trim();
+    }
+
+    public String getNestedUrl() {
+        return nestedUrl;
+    }
+
+    public void setNestedUrl(String nestedUrl) {
+        this.nestedUrl = nestedUrl;
     }
 
     public String getPerms() {
