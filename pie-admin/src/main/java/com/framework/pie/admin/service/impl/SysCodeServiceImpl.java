@@ -66,6 +66,8 @@ public class SysCodeServiceImpl implements SysCodeService {
         // 设置 resultMap
         gc.setBaseResultMap(true);
         gc.setBaseColumnList(true);
+
+        gc.setServiceName("%sService");
         mpg.setGlobalConfig(gc);
 
         // 数据源配置
