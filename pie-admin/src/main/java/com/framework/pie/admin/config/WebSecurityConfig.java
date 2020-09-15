@@ -65,6 +65,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 服务监控
                 .antMatchers("/actuator/**").permitAll()
                 .antMatchers("/user/**").permitAll()
+                .antMatchers("/test-code/**").permitAll()
 
                 // 其他所有请求需要身份认证
                 .anyRequest().authenticated();

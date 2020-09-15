@@ -1,10 +1,18 @@
 package com.framework.pie.admin.model;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-public class SysUser {
+@Data
+@EqualsAndHashCode(callSuper = false)
+public class SysUser  implements Serializable {
+    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     private String name;
