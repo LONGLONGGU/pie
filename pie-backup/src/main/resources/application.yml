@@ -21,6 +21,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   flyway:
     locations: classpath:/db
+    enabled: false
 # 开放健康检查接口
 management:
   endpoints:

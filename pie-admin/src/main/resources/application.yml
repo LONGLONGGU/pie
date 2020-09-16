@@ -54,6 +54,10 @@ pagehelper:
   reasonable: true
   support-methods-arguments: true
   params: count=countSql
+#开启熔断器
+feign:
+  hystrix:
+    enabled: true
 file:
   # 文件上传目录
   uploadFolder: /Users/longlong/working/files/

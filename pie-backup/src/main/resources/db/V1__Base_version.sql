@@ -108,7 +108,7 @@ CREATE TABLE `sys_menu`(
   `del_flag` TINYINT(4) DEFAULT '0' COMMENT'是否删除 -1：已删除 0：正常',
    PRIMARY KEY (`id`)
 )
-ENGINE=InnoDB auto_increment=45 default charset=utf8 COMMENT '菜单管理';
+ENGINE=InnoDB auto_increment=1 default charset=utf8 COMMENT '菜单管理';
 
 
 CREATE TABLE `sys_user_role`(
@@ -122,7 +122,7 @@ CREATE TABLE `sys_user_role`(
   `del_flag` TINYINT(4) DEFAULT '0' COMMENT'是否删除 -1：已删除 0：正常',
    PRIMARY KEY (`id`)
 )
-ENGINE=InnoDB auto_increment=76 default charset=utf8 COMMENT '用户角色';
+ENGINE=InnoDB auto_increment=1 default charset=utf8 COMMENT '用户角色';
 
 
 CREATE TABLE `sys_role_menu`(
@@ -136,7 +136,7 @@ CREATE TABLE `sys_role_menu`(
   `del_flag` TINYINT(4) DEFAULT '0' COMMENT'是否删除 -1：已删除 0：正常',
    PRIMARY KEY (`id`)
 )
-ENGINE=InnoDB auto_increment=469 default charset=utf8 COMMENT '角色菜单';
+ENGINE=InnoDB auto_increment=1 default charset=utf8 COMMENT '角色菜单';
 
 
 CREATE TABLE `sys_role_dept`(
@@ -150,7 +150,7 @@ CREATE TABLE `sys_role_dept`(
   `del_flag` TINYINT(4) DEFAULT '0' COMMENT'是否删除 -1：已删除 0：正常',
    PRIMARY KEY (`id`)
 )
-ENGINE=InnoDB auto_increment=4 default charset=utf8 COMMENT '角色机构';
+ENGINE=InnoDB auto_increment=1 default charset=utf8 COMMENT '角色机构';
 
 
 CREATE TABLE `sys_dict`(
@@ -168,7 +168,7 @@ CREATE TABLE `sys_dict`(
   `del_flag` TINYINT(4) DEFAULT '0' COMMENT'是否删除 -1：已删除 0：正常',
    PRIMARY KEY (`id`)
 )
-ENGINE=InnoDB auto_increment=4 default charset=utf8 COMMENT '字典表';
+ENGINE=InnoDB auto_increment=1 default charset=utf8 COMMENT '字典表';
 
 
 CREATE TABLE `sys_config`(
@@ -202,7 +202,7 @@ CREATE TABLE `sys_log`(
   `last_update_time`  datetime DEFAULT NULL COMMENT '更新时间',
    PRIMARY KEY (`id`)
 )
-ENGINE=InnoDB auto_increment=2798 default charset=utf8 COMMENT '系统操作日志';
+ENGINE=InnoDB auto_increment=1 default charset=utf8 COMMENT '系统操作日志';
 
 CREATE TABLE `sys_login_log`(
    `id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '编号',

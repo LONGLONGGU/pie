@@ -157,6 +157,16 @@
 			<artifactId>pie-core</artifactId>
 			<version>1.0.0</version>
 		</dependency>
+		<!--feign -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
+		<!--hystrix-dashboard-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
+		</dependency>
 	</dependencies>
 
 	<!--srping cloud-->
