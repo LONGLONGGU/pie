@@ -21,6 +21,8 @@
         <module>pie-hystrix</module>
         <module>pie-zuul</module>
         <module>pie-config</module>
+        <module>pie-websocket</module>
+        <module>pie-activiti</module>
     </modules>
 
     
