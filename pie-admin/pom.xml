@@ -142,6 +142,12 @@
 			<artifactId>fastjson</artifactId>
 			<version>1.2.48</version>
 		</dependency>
+		<!--thumbnailator-->
+		<dependency>
+			<groupId>net.coobird</groupId>
+			<artifactId>thumbnailator</artifactId>
+			<version>0.4.12</version>
+		</dependency>
 		<!--websocket-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
