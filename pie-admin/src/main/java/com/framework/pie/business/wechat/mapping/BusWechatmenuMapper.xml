@@ -67,72 +67,54 @@
             <if test="url != null">
                 url,
             </if>
-            <if test="wechatInfo_id != null">
+            <if test="wechatinfoId != null">
                 wechatInfo_id,
             </if>
-            <if test="created_by != null">
+            <if test="createdBy != null">
                 created_by,
             </if>
-            <if test="created_time != null">
+            <if test="createdTime != null">
                 created_time,
             </if>
-            <if test="updated_by != null">
+            <if test="updatedBy != null">
                 updated_by,
             </if>
-            <if test="updated_time != null">
+            <if test="updatedTime != null">
                 updated_time,
             </if>
         </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
              #{id},
             </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="parentId != null">
              #{parentId},
             </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="type != null">
              #{type},
             </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="name != null">
              #{name},
             </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="url != null">
              #{url},
             </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="wechatInfo_id != null">
-             #{wechatInfo_id},
+            <if test="wechatinfoId != null">
+             #{wechatinfoId},
             </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="created_by != null">
-             #{created_by},
+            <if test="createdBy != null">
+             #{createdBy},
             </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="created_time != null">
-             #{created_time},
+            <if test="createdTime != null">
+             #{createdTime},
             </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="updated_by != null">
-             #{updated_by},
+            <if test="updatedBy != null">
+             #{updatedBy},
             </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="updated_time != null">
-             #{updated_time},
+            <if test="updatedTime != null">
+             #{updatedTime},
             </if>
-        </trim>
+    </trim>
     </insert>
 
     <update id="updateByPrimaryKeySelective" parameterType="com.framework.pie.business.wechat.model.BusWechatmenu">
@@ -153,20 +135,20 @@
             <if test="url != null">
                 url = #{url},
             </if>
-            <if test="wechatInfo_id != null">
-                wechatInfo_id = #{wechatInfo_id},
+            <if test="wechatinfoId != null">
+                wechatInfo_id = #{wechatinfoId},
             </if>
-            <if test="created_by != null">
-                created_by = #{created_by},
+            <if test="createdBy != null">
+                created_by = #{createdBy},
             </if>
-            <if test="created_time != null">
-                created_time = #{created_time},
+            <if test="createdTime != null">
+                created_time = #{createdTime},
             </if>
-            <if test="updated_by != null">
-                updated_by = #{updated_by},
+            <if test="updatedBy != null">
+                updated_by = #{updatedBy},
             </if>
-            <if test="updated_time != null">
-                updated_time = #{updated_time},
+            <if test="updatedTime != null">
+                updated_time = #{updatedTime},
             </if>
         </set>
         where id = #{id}
@@ -179,11 +161,11 @@
            type = #{type},
            name = #{name},
            url = #{url},
-           wechatInfo_id = #{wechatInfo_id},
-           created_by = #{created_by},
-           created_time = #{created_time},
-           updated_by = #{updated_by},
-           updated_time = #{updated_time}        where id = #{id}
+           wechatInfo_id = #{wechatinfoId},
+           created_by = #{createdBy},
+           created_time = #{createdTime},
+           updated_by = #{updatedBy},
+           updated_time = #{updatedTime}        where id = #{id}
     </update>
     <select id="findAll" resultMap="BaseResultMap">
         select
