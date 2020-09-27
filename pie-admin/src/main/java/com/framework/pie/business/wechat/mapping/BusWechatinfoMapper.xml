@@ -42,10 +42,10 @@
          #{app_secret},
          #{token},
          #{status},
-         #{createdBy},
-         #{createdTime},
-         #{updatedBy},
-         #{updatedTime},
+         #{created_by},
+         #{created_time},
+         #{updated_by},
+         #{updated_time},
     </trim>
     </insert>
     <insert id="insertSelective" parameterType="com.framework.pie.business.wechat.model.BusWechatinfo">
@@ -88,7 +88,7 @@
                 updated_time,
             </if>
         </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
              #{id},
             </if>
@@ -122,7 +122,7 @@
             <if test="updatedTime != null">
              #{updatedTime},
             </if>
-        </trim>
+    </trim>
     </insert>
 
     <update id="updateByPrimaryKeySelective" parameterType="com.framework.pie.business.wechat.model.BusWechatinfo">
