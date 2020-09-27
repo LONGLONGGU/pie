@@ -16,6 +16,7 @@ import java.util.List;
 * @since 2020-09-25
 */
 public interface SysArticleService extends CurdService<SysArticle> {
+    SysArticle saveArticle(SysArticle record);
 
 }
 

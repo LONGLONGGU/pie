@@ -32,7 +32,7 @@ import javax.servlet.http.HttpServletResponse;
  * @since 2020-09-25
  * @version v1.0
  */
-@Api(tags = {"文章 "})
+@Api(tags = {"文章"})
 @RestController
 @RequestMapping("/article")
 public class SysArticleController {
@@ -61,13 +61,18 @@ public class SysArticleController {
     public HttpResult findPage(@RequestBody PageRequest pageRequest){
       return HttpResult.ok(sysArticleService.findPage(pageRequest));
     }
+
+    @GetMapping("/{articleId}")
+    public HttpResult findByArticle(@PathVariable("articleId") long articleId){
+        return HttpResult.ok(sysArticleService.findById(articleId));
+    }
     /**
      * 新增
      */
     @ApiOperation(value = "新增修改数据")
     @PostMapping(value = "/add")
     public HttpResult add(@RequestBody SysArticle record){
-       return HttpResult.ok(sysArticleService.save(record));
+       return HttpResult.ok(sysArticleService.saveArticle(record));
     }
 
     /**

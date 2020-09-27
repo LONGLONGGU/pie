@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author longlong
- * @since 2020-09-25
+ * @since 2020-09-27
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -31,6 +31,11 @@ public class SysArticle implements Serializable {
      * 标题
      */
     private String title;
+
+    /**
+     * 文章类型
+     */
+    private Integer type;
 
     /**
      * 封面图 900*383
@@ -60,7 +65,7 @@ public class SysArticle implements Serializable {
     /**
      * 点击次数
      */
-    private Integer hitCount;
+    private Integer hitCount = 0;
 
     /**
      * 发布时间
@@ -80,7 +85,7 @@ public class SysArticle implements Serializable {
     /**
      * 创建时间
      */
-    private Date createdTime;
+    private Date createdTime = new Date();
 
     /**
      * 更新人

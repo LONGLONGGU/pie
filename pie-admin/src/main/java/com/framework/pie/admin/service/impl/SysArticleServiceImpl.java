@@ -58,4 +58,13 @@ public class SysArticleServiceImpl implements SysArticleService {
         return MybatisPageHelper.findPage(pageRequest,sysArticleMapper);
     }
 
+    @Override
+    public SysArticle saveArticle(SysArticle record) {
+        if (record.getId() == null || record.getId() == 0){
+            sysArticleMapper.insertSelective(record);
+            return record;
+        }
+        sysArticleMapper.updateByPrimaryKeySelective(record);
+        return record;
+    }
 }
