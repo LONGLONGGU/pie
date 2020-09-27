@@ -77,7 +77,7 @@
     </insert>
 
     <update id="updateByPrimaryKeySelective" parameterType="${package.Entity}.${entity}">
-        update ${table.propertyName}
+        update ${table.name}
         <set>
         <#list table.fields as field>
             <if test="${field.propertyName} != null">
