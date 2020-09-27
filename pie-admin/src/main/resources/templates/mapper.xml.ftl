@@ -62,26 +62,26 @@
         insert into ${table.name}
         <trim prefix="(" suffix=")" suffixOverrides=",">
         <#list table.fields as field>
-            <if test="${field.name} != null">
+            <if test="${field.propertyName} != null">
                 ${field.name},
             </if>
         </#list>
         </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
        <#list table.fields as field>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="${field.name} != null">
-             <@mapperEl field.name/>,
+            <if test="${field.propertyName} != null">
+             <@mapperEl field.propertyName/>,
             </if>
-        </trim>
        </#list>
+    </trim>
     </insert>
 
     <update id="updateByPrimaryKeySelective" parameterType="${package.Entity}.${entity}">
-        update ${table.name}
+        update ${table.propertyName}
         <set>
         <#list table.fields as field>
-            <if test="${field.name} != null">
-                ${field.name} = <@mapperEl field.name/>,
+            <if test="${field.propertyName} != null">
+                ${field.name} = <@mapperEl field.propertyName/>,
             </if>
         </#list>
         </set>
@@ -91,7 +91,7 @@
         update ${table.name}
         set
          <#list table.fields as field>
-           ${field.name} = <@mapperEl field.name/><#sep>,
+           ${field.name} = <@mapperEl field.propertyName/><#sep>,
          </#list>
         where id = <@mapperEl 'id'/>
     </update>

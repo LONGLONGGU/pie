@@ -48,7 +48,7 @@ public class ${table.controllerName} {
     </#if>
     private Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
-    private ${table.serviceName} ${(table.serviceName?substring(1))?uncap_first};
+    private ${table.serviceName} ${table.serviceName?uncap_first};
 
     /**
      * 查询分页数据
@@ -56,7 +56,7 @@ public class ${table.controllerName} {
     @ApiOperation(value = "查询分页数据")
     @PostMapping(value = "/findPage")
     public HttpResult findPage(@RequestBody PageRequest pageRequest){
-      return HttpResult.ok(${(table.serviceName?substring(1))?uncap_first}.findPage(pageRequest));
+      return HttpResult.ok(${table.serviceName?uncap_first}.findPage(pageRequest));
     }
     /**
      * 新增
@@ -64,7 +64,7 @@ public class ${table.controllerName} {
     @ApiOperation(value = "新增修改数据")
     @PostMapping(value = "/add")
     public HttpResult add(@RequestBody ${entity} record){
-       return HttpResult.ok(${(table.serviceName?substring(1))?uncap_first}.save(record));
+       return HttpResult.ok(${table.serviceName?uncap_first}.save(record));
     }
 
     /**
@@ -74,7 +74,7 @@ public class ${table.controllerName} {
     @PostMapping(value = "/delete")
     public HttpResult delete(@RequestBody List<${entity}> records){
 
-        return HttpResult.ok(${(table.serviceName?substring(1))?uncap_first}.delete(records));
+        return HttpResult.ok(${table.serviceName?uncap_first}.delete(records));
     }
 
 }

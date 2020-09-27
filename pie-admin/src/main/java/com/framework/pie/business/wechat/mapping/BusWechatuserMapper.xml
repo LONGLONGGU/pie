@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.pie.business.wechat.dao.BusWechatuserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.framework.pie.business.wechat.model.BusWechatuser">
+        <id column="id" property="id"/>
+        <result column="wechatInfo_id" property="wechatinfoId"/>
+        <result column="unionid" property="unionid"/>
+        <result column="openid" property="openid"/>
+        <result column="headimgurl" property="headimgurl"/>
+        <result column="nickname" property="nickname"/>
+        <result column="sex" property="sex"/>
+        <result column="country" property="country"/>
+        <result column="province" property="province"/>
+        <result column="city" property="city"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_time" property="createdTime"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_time" property="updatedTime"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, wechatInfo_id, unionid, openid, headimgurl, nickname, sex, country, province, city, created_by, created_time, updated_by, updated_time
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from bus_wechatuser
+        where id = #{id}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete  from bus_wechatuser
+        where id = #{id}
+    </delete>
+    <insert id="insert" parameterType="com.framework.pie.business.wechat.model.BusWechatuser">
+        insert into bus_wechatuser(id, wechatInfo_id, unionid, openid, headimgurl, nickname, sex, country, province, city, created_by, created_time, updated_by, updated_time)
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+         #{id},
+         #{wechatInfo_id},
+         #{unionid},
+         #{openid},
+         #{headimgurl},
+         #{nickname},
+         #{sex},
+         #{country},
+         #{province},
+         #{city},
+         #{created_by},
+         #{created_time},
+         #{updated_by},
+         #{updated_time},
+    </trim>
+    </insert>
+    <insert id="insertSelective" parameterType="com.framework.pie.business.wechat.model.BusWechatuser">
+        <selectKey  keyProperty="id" resultType="java.lang.Long" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into bus_wechatuser
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="wechatInfo_id != null">
+                wechatInfo_id,
+            </if>
+            <if test="unionid != null">
+                unionid,
+            </if>
+            <if test="openid != null">
+                openid,
+            </if>
+            <if test="headimgurl != null">
+                headimgurl,
+            </if>
+            <if test="nickname != null">
+                nickname,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="country != null">
+                country,
+            </if>
+            <if test="province != null">
+                province,
+            </if>
+            <if test="city != null">
+                city,
+            </if>
+            <if test="created_by != null">
+                created_by,
+            </if>
+            <if test="created_time != null">
+                created_time,
+            </if>
+            <if test="updated_by != null">
+                updated_by,
+            </if>
+            <if test="updated_time != null">
+                updated_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+             #{id},
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="wechatInfo_id != null">
+             #{wechatInfo_id},
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="unionid != null">
+             #{unionid},
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="openid != null">
+             #{openid},
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="headimgurl != null">
+             #{headimgurl},
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="nickname != null">
+             #{nickname},
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sex != null">
+             #{sex},
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="country != null">
+             #{country},
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="province != null">
+             #{province},
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="city != null">
+             #{city},
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="created_by != null">
+             #{created_by},
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="created_time != null">
+             #{created_time},
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="updated_by != null">
+             #{updated_by},
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="updated_time != null">
+             #{updated_time},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.framework.pie.business.wechat.model.BusWechatuser">
+        update bus_wechatuser
+        <set>
+            <if test="id != null">
+                id = #{id},
+            </if>
+            <if test="wechatInfo_id != null">
+                wechatInfo_id = #{wechatInfo_id},
+            </if>
+            <if test="unionid != null">
+                unionid = #{unionid},
+            </if>
+            <if test="openid != null">
+                openid = #{openid},
+            </if>
+            <if test="headimgurl != null">
+                headimgurl = #{headimgurl},
+            </if>
+            <if test="nickname != null">
+                nickname = #{nickname},
+            </if>
+            <if test="sex != null">
+                sex = #{sex},
+            </if>
+            <if test="country != null">
+                country = #{country},
+            </if>
+            <if test="province != null">
+                province = #{province},
+            </if>
+            <if test="city != null">
+                city = #{city},
+            </if>
+            <if test="created_by != null">
+                created_by = #{created_by},
+            </if>
+            <if test="created_time != null">
+                created_time = #{created_time},
+            </if>
+            <if test="updated_by != null">
+                updated_by = #{updated_by},
+            </if>
+            <if test="updated_time != null">
+                updated_time = #{updated_time},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.framework.pie.business.wechat.model.BusWechatuser">
+        update bus_wechatuser
+        set
+           id = #{id},
+           wechatInfo_id = #{wechatInfo_id},
+           unionid = #{unionid},
+           openid = #{openid},
+           headimgurl = #{headimgurl},
+           nickname = #{nickname},
+           sex = #{sex},
+           country = #{country},
+           province = #{province},
+           city = #{city},
+           created_by = #{created_by},
+           created_time = #{created_time},
+           updated_by = #{updated_by},
+           updated_time = #{updated_time}        where id = #{id}
+    </update>
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from bus_wechatuser
+    </select>
+    <select id="findPage" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from  bus_wechatuser
+    </select>
+</mapper>

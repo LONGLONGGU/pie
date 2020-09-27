@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.pie.business.wechat.dao.BusWechatinfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.framework.pie.business.wechat.model.BusWechatinfo">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="account" property="account"/>
+        <result column="app_id" property="appId"/>
+        <result column="app_secret" property="appSecret"/>
+        <result column="token" property="token"/>
+        <result column="status" property="status"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_time" property="createdTime"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_time" property="updatedTime"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, account, app_id, app_secret, token, status, created_by, created_time, updated_by, updated_time
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from bus_wechatinfo
+        where id = #{id}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete  from bus_wechatinfo
+        where id = #{id}
+    </delete>
+    <insert id="insert" parameterType="com.framework.pie.business.wechat.model.BusWechatinfo">
+        insert into bus_wechatinfo(id, name, account, app_id, app_secret, token, status, created_by, created_time, updated_by, updated_time)
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+         #{id},
+         #{name},
+         #{account},
+         #{app_id},
+         #{app_secret},
+         #{token},
+         #{status},
+         #{createdBy},
+         #{createdTime},
+         #{updatedBy},
+         #{updatedTime},
+    </trim>
+    </insert>
+    <insert id="insertSelective" parameterType="com.framework.pie.business.wechat.model.BusWechatinfo">
+        <selectKey  keyProperty="id" resultType="java.lang.Long" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into bus_wechatinfo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="account != null">
+                account,
+            </if>
+            <if test="appId != null">
+                app_id,
+            </if>
+            <if test="appSecret != null">
+                app_secret,
+            </if>
+            <if test="token != null">
+                token,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createdBy != null">
+                created_by,
+            </if>
+            <if test="createdTime != null">
+                created_time,
+            </if>
+            <if test="updatedBy != null">
+                updated_by,
+            </if>
+            <if test="updatedTime != null">
+                updated_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+             #{id},
+            </if>
+            <if test="name != null">
+             #{name},
+            </if>
+            <if test="account != null">
+             #{account},
+            </if>
+            <if test="appId != null">
+             #{appId},
+            </if>
+            <if test="appSecret != null">
+             #{appSecret},
+            </if>
+            <if test="token != null">
+             #{token},
+            </if>
+            <if test="status != null">
+             #{status},
+            </if>
+            <if test="createdBy != null">
+             #{createdBy},
+            </if>
+            <if test="createdTime != null">
+             #{createdTime},
+            </if>
+            <if test="updatedBy != null">
+             #{updatedBy},
+            </if>
+            <if test="updatedTime != null">
+             #{updatedTime},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.framework.pie.business.wechat.model.BusWechatinfo">
+        update bus_wechatinfo
+        <set>
+            <if test="id != null">
+                id = #{id},
+            </if>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="account != null">
+                account = #{account},
+            </if>
+            <if test="appId != null">
+                app_id = #{appId},
+            </if>
+            <if test="appSecret != null">
+                app_secret = #{appSecret},
+            </if>
+            <if test="token != null">
+                token = #{token},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="createdBy != null">
+                created_by = #{createdBy},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime},
+            </if>
+            <if test="updatedBy != null">
+                updated_by = #{updatedBy},
+            </if>
+            <if test="updatedTime != null">
+                updated_time = #{updatedTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.framework.pie.business.wechat.model.BusWechatinfo">
+        update bus_wechatinfo
+        set
+           id = #{id},
+           name = #{name},
+           account = #{account},
+           app_id = #{appId},
+           app_secret = #{appSecret},
+           token = #{token},
+           status = #{status},
+           created_by = #{createdBy},
+           created_time = #{createdTime},
+           updated_by = #{updatedBy},
+           updated_time = #{updatedTime}        where id = #{id}
+    </update>
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from bus_wechatinfo
+    </select>
+    <select id="findPage" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from  bus_wechatinfo
+    </select>
+</mapper>
