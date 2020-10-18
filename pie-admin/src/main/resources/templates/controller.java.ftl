@@ -62,8 +62,8 @@ public class ${table.controllerName} {
      * 新增
      */
     @ApiOperation(value = "新增修改数据")
-    @PostMapping(value = "/add")
-    public HttpResult add(@RequestBody ${entity} record){
+    @PostMapping(value = "/save")
+    public HttpResult save(@RequestBody ${entity} record){
        return HttpResult.ok(${table.serviceName?uncap_first}.save(record));
     }
 
