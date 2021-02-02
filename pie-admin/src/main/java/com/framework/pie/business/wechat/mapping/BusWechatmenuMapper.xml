@@ -5,10 +5,7 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.framework.pie.business.wechat.model.BusWechatmenu">
         <id column="id" property="id"/>
-        <result column="parentId" property="parentId"/>
-        <result column="type" property="type"/>
-        <result column="name" property="name"/>
-        <result column="url" property="url"/>
+        <result column="menu" property="menu"/>
         <result column="wechatInfo_id" property="wechatinfoId"/>
         <result column="created_by" property="createdBy"/>
         <result column="created_time" property="createdTime"/>
@@ -18,7 +15,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, parentId, type, name, url, wechatInfo_id, created_by, created_time, updated_by, updated_time
+        id, menu, wechatInfo_id, created_by, created_time, updated_by, updated_time
     </sql>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -32,13 +29,10 @@
         where id = #{id}
     </delete>
     <insert id="insert" parameterType="com.framework.pie.business.wechat.model.BusWechatmenu">
-        insert into bus_wechatmenu(id, parentId, type, name, url, wechatInfo_id, created_by, created_time, updated_by, updated_time)
+        insert into bus_wechatmenu(id, menu, wechatInfo_id, created_by, created_time, updated_by, updated_time)
     <trim prefix="values (" suffix=")" suffixOverrides=",">
          #{id},
-         #{parentId},
-         #{type},
-         #{name},
-         #{url},
+         #{menu},
          #{wechatInfo_id},
          #{created_by},
          #{created_time},
@@ -55,17 +49,8 @@
             <if test="id != null">
                 id,
             </if>
-            <if test="parentId != null">
-                parentId,
-            </if>
-            <if test="type != null">
-                type,
-            </if>
-            <if test="name != null">
-                name,
-            </if>
-            <if test="url != null">
-                url,
+            <if test="menu != null">
+                menu,
             </if>
             <if test="wechatinfoId != null">
                 wechatInfo_id,
@@ -87,17 +72,8 @@
             <if test="id != null">
              #{id},
             </if>
-            <if test="parentId != null">
-             #{parentId},
-            </if>
-            <if test="type != null">
-             #{type},
-            </if>
-            <if test="name != null">
-             #{name},
-            </if>
-            <if test="url != null">
-             #{url},
+            <if test="menu != null">
+             #{menu},
             </if>
             <if test="wechatinfoId != null">
              #{wechatinfoId},
@@ -123,17 +99,8 @@
             <if test="id != null">
                 id = #{id},
             </if>
-            <if test="parentId != null">
-                parentId = #{parentId},
-            </if>
-            <if test="type != null">
-                type = #{type},
-            </if>
-            <if test="name != null">
-                name = #{name},
-            </if>
-            <if test="url != null">
-                url = #{url},
+            <if test="menu != null">
+                menu = #{menu},
             </if>
             <if test="wechatinfoId != null">
                 wechatInfo_id = #{wechatinfoId},
@@ -157,10 +124,7 @@
         update bus_wechatmenu
         set
            id = #{id},
-           parentId = #{parentId},
-           type = #{type},
-           name = #{name},
-           url = #{url},
+           menu = #{menu},
            wechatInfo_id = #{wechatinfoId},
            created_by = #{createdBy},
            created_time = #{createdTime},
@@ -176,5 +140,12 @@
         select
         <include refid="Base_Column_List" />
         from  bus_wechatmenu
+    </select>
+    <select id="findMneu" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from  bus_wechatmenu
+        where
+        wechatInfo_id = #{wechatinfoId}
     </select>
 </mapper>

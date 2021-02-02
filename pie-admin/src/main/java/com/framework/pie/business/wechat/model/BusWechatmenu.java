@@ -27,27 +27,10 @@ public class BusWechatmenu implements Serializable {
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
-
     /**
-     * 父级id 父级id
+     * 菜单信息
      */
-    @TableField("parentId")
-    private Long parentId;
-
-    /**
-     * 菜单类型
-     */
-    private Integer type;
-
-    /**
-     * 菜单名称
-     */
-    private String name;
-
-    /**
-     * 链接
-     */
-    private String url;
+    private String menu;
 
     /**
      * wechatInfo_id
@@ -74,6 +57,10 @@ public class BusWechatmenu implements Serializable {
      * 更新时间
      */
     private Date updatedTime;
+    /**
+     * 状态 状态 0：禁用 1：正常
+     */
+    private Integer status = 1;
 
 
 }

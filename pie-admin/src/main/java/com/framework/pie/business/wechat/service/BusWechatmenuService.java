@@ -17,5 +17,6 @@ import java.util.List;
 */
 public interface BusWechatmenuService extends CurdService<BusWechatmenu> {
 
+    BusWechatmenu findMenu(String wechatinfoId);
 }
 

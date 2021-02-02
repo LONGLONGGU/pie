@@ -58,4 +58,9 @@ public class BusWechatmenuServiceImpl implements BusWechatmenuService {
         return MybatisPageHelper.findPage(pageRequest,busWechatmenuMapper);
     }
 
+    @Override
+    public BusWechatmenu findMenu(String wechatinfoId) {
+
+        return busWechatmenuMapper.findMneu(wechatinfoId);
+    }
 }

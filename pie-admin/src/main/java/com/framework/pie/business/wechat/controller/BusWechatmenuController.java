@@ -15,6 +15,8 @@ import com.framework.pie.core.http.HttpResult;
 import com.framework.pie.core.page.PageRequest;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.websocket.server.PathParam;
+
 /**
  * <p>
     * 公众号菜单  前端控制器
@@ -24,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2020-09-25
  * @version v1.0
  */
-@Api(tags = {"公众号菜单 "})
+@Api(tags = {"公众号菜单"})
 @RestController
 @RequestMapping("wechatmenu")
 public class BusWechatmenuController {
@@ -46,6 +48,10 @@ public class BusWechatmenuController {
     @ApiOperation(value = "新增修改数据")
     @PostMapping(value = "/add")
     public HttpResult add(@RequestBody BusWechatmenu record){
+       BusWechatmenu busWechatmenu = busWechatmenuService.findMenu(record.getWechatinfoId()+"");
+       if (null != busWechatmenu){
+           record.setId(busWechatmenu.getId());
+       }
        return HttpResult.ok(busWechatmenuService.save(record));
     }
 
@@ -57,6 +63,15 @@ public class BusWechatmenuController {
     public HttpResult delete(@RequestBody List<BusWechatmenu> records){
 
         return HttpResult.ok(busWechatmenuService.delete(records));
+    }
+    /**
+     * 删除
+     */
+    @ApiOperation(value = "查询菜单信息")
+    @GetMapping(value = "/findMenu/{wechatinfoId}")
+    public  HttpResult findMenu(@PathVariable("wechatinfoId") String wechatinfoId){
+        System.out.println(wechatinfoId);
+        return HttpResult.ok(busWechatmenuService.findMenu(wechatinfoId));
     }
 
 }

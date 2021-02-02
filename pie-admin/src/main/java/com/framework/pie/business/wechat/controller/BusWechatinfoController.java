@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2020-09-25
  * @version v1.0
  */
-@Api(tags = {"公众号信息表 "})
+@Api(tags = {"公众号信息表"})
 @RestController
 @RequestMapping("wechatinfo")
 public class BusWechatinfoController {
