@@ -32,13 +32,13 @@ public class SysMenuController {
         return HttpResult.ok(sysMenuService.delete(record));
     }
 
-    @PreAuthorize("hasAuthority('sys:menu:view')")
+//    @PreAuthorize("hasAuthority('sys:menu:view')")
     @GetMapping(value="/findNavTree")
     public HttpResult findNavTree(@RequestParam String userName) {
         return HttpResult.ok(sysMenuService.findTree(userName, 1));
     }
 
-    @PreAuthorize("hasAuthority('sys:menu:view')")
+//    @PreAuthorize("hasAuthority('sys:menu:view')")
     @GetMapping(value="/findMenuTree")
     public HttpResult findMenuTree() {
         List<SysMenu> tree = sysMenuService.findTree(SecurityUtils.getUsername(), 0);
