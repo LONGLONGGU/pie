@@ -1,6 +1,7 @@
 package com.framework.pie.admin.controller;
 
 import com.framework.pie.admin.constant.SysConstants;
+import com.framework.pie.admin.dao.SysUserMapper;
 import com.framework.pie.admin.model.SysUser;
 import com.framework.pie.admin.service.UploadService;
 import com.framework.pie.admin.service.SysRoleService;
@@ -30,6 +31,8 @@ public class SysUserController {
     private SysUserService sysUserService;
     @Autowired
     private SysRoleService sysRoleService;
+    @Autowired
+    private SysUserMapper sysUserMapper;
 
     @GetMapping("/info")
     public HttpResult info(String token){
@@ -108,14 +111,11 @@ public class SysUserController {
         if(user == null) {
             HttpResult.error("用户不存在!");
         }
-//        if(SysConstants.ADMIN.equalsIgnoreCase(user.getName())) {
-//            return HttpResult.error("超级管理员不允许修改!");
-//        }
         if(!PasswordUtils.matches(user.getSalt(), password, user.getPassword())) {
             return HttpResult.error("原密码不正确!");
         }
         user.setPassword(PasswordUtils.encode(newPassword, user.getSalt()));
-        return HttpResult.ok(sysUserService.save(user));
+        return HttpResult.ok(sysUserMapper.updateByPrimaryKeySelective(user));
     }
     @PostMapping("/fileUpload")
     @ResponseBody
