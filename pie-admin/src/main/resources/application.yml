@@ -2,11 +2,16 @@ server:
   port: 8081
 spring:
   application:
-    name: pie-admin
-  boot:
-    admin:
-      client:
-        url: "http://localhost:8000"
+    name: pie-admin-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: '*'
   datasource:
     name: druidDataSource
     type: com.alibaba.druid.pool.DruidDataSource
@@ -29,13 +34,13 @@ spring:
       pool-prepared-statements: true
       max-open-prepared-statements: 50
       max-pool-prepared-statement-per-connection-size: 20
-  cloud:
-    consul:
-      host: localhost
-      port: 8500
-      discovery:
-        hostname: localhost
-        serviceName: ${spring.application.name} # 注册到consul的服务名称
+  #  cloud:
+#    consul:
+#      host: localhost
+#      port: 8500
+#      discovery:
+#        hostname: localhost
+#        serviceName: ${spring.application.name} # 注册到consul的服务名称
   servlet:
     multipart:
       max-request-size: 10MB # 上传文件总的最大值
