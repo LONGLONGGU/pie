@@ -14,9 +14,7 @@
         <module>pie-core</module>
         <module>pie-pom</module>
         <module>pie-backup</module>
-        <module>pie-consumer</module>
         <module>pie-config</module>
-        <module>pie-activiti</module>
         <module>pie-HdfsClient</module>
         <module>pie-mapreduce</module>
         <module>pie-gateway80</module>
