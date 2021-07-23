@@ -1,8 +1,8 @@
 package com.framework.pie.admin.service;
 
 import com.framework.pie.admin.model.SysDept;
-import com.framework.pie.core.http.HttpResult;
-import com.framework.pie.core.service.CurdService;
+import com.framework.pie.http.HttpResult;
+import com.framework.pie.mybatis.service.CurdService;
 
 import java.util.List;
 

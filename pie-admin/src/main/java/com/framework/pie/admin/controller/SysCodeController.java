@@ -1,8 +1,8 @@
 package com.framework.pie.admin.controller;
 
 import com.framework.pie.admin.service.SysCodeService;
-import com.framework.pie.core.http.HttpResult;
-import com.framework.pie.core.page.PageRequest;
+import com.framework.pie.http.HttpResult;
+import com.framework.pie.mybatis.page.PageRequest;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

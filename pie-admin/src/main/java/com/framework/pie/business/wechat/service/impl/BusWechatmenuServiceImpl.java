@@ -3,12 +3,11 @@ package com.framework.pie.business.wechat.service.impl;
 import com.framework.pie.business.wechat.model.BusWechatmenu;
 import com.framework.pie.business.wechat.dao.BusWechatmenuMapper;
 import com.framework.pie.business.wechat.service.BusWechatmenuService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.framework.pie.mybatis.page.MybatisPageHelper;
+import com.framework.pie.mybatis.page.PageRequest;
+import com.framework.pie.mybatis.page.PageResult;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.framework.pie.core.page.MybatisPageHelper;
-import com.framework.pie.core.page.PageRequest;
-import com.framework.pie.core.page.PageResult;
 import javax.annotation.Resource;
 import java.util.List;
 

@@ -3,7 +3,7 @@ package com.framework.pie.admin.service;
 import com.framework.pie.admin.model.SysMenu;
 import com.framework.pie.admin.model.SysOrg;
 import com.framework.pie.admin.model.SysOrgMenu;
-import com.framework.pie.core.service.CurdService;
+import com.framework.pie.mybatis.service.CurdService;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;

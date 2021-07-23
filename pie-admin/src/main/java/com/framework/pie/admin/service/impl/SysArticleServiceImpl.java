@@ -1,14 +1,14 @@
 package com.framework.pie.admin.service.impl;
 
-import com.framework.pie.admin.model.SysArticle;
 import com.framework.pie.admin.dao.SysArticleMapper;
+import com.framework.pie.admin.model.SysArticle;
 import com.framework.pie.admin.service.SysArticleService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.framework.pie.mybatis.page.MybatisPageHelper;
+import com.framework.pie.mybatis.page.PageRequest;
+import com.framework.pie.mybatis.page.PageResult;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.framework.pie.core.page.MybatisPageHelper;
-import com.framework.pie.core.page.PageRequest;
-import com.framework.pie.core.page.PageResult;
+
 import javax.annotation.Resource;
 import java.util.List;
 

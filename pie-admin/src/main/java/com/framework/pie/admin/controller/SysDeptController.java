@@ -3,7 +3,7 @@ package com.framework.pie.admin.controller;
 import com.framework.pie.admin.model.SysDept;
 import com.framework.pie.admin.service.SysDeptService;
 import com.framework.pie.admin.util.syslog.Log;
-import com.framework.pie.core.http.HttpResult;
+import com.framework.pie.http.HttpResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,7 +1,7 @@
 package com.framework.pie.admin.websocket;
 
+import com.alibaba.cloud.commons.lang.StringUtils;
 import com.framework.pie.admin.util.JwtTokenUtils;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.stereotype.Component;

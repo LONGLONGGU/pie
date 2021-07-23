@@ -4,7 +4,7 @@ import com.framework.pie.admin.model.SysMenu;
 import com.framework.pie.admin.service.SysMenuService;
 import com.framework.pie.admin.util.SecurityUtils;
 import com.framework.pie.admin.util.syslog.Log;
-import com.framework.pie.core.http.HttpResult;
+import com.framework.pie.http.HttpResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;

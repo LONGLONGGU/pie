@@ -1,35 +1,33 @@
 package com.framework.pie.admin.controller;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.framework.pie.admin.dao.SysOrgMapper;
 import com.framework.pie.admin.model.SysOrg;
 import com.framework.pie.admin.model.SysUser;
 import com.framework.pie.admin.security.JwtAuthenticatioToken;
 import com.framework.pie.admin.service.SysLoginLogService;
-import com.framework.pie.admin.service.SysOrgService;
 import com.framework.pie.admin.service.SysUserService;
 import com.framework.pie.admin.util.IPUtils;
 import com.framework.pie.admin.util.PasswordUtils;
 import com.framework.pie.admin.util.SecurityUtils;
 import com.framework.pie.admin.vo.LoginBean;
-import com.framework.pie.common.utils.IOUtils;
-import com.framework.pie.core.http.HttpResult;
+import com.framework.pie.http.HttpResult;
+import com.framework.pie.utils.IOUtils;
+import com.google.code.kaptcha.Constants;
+import com.google.code.kaptcha.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.google.code.kaptcha.Constants;
-import com.google.code.kaptcha.Producer;
+
+import javax.imageio.ImageIO;
+import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 /**
  * 登录控制器

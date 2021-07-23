@@ -1,7 +1,7 @@
 package com.framework.pie.admin.controller;
 
 import com.framework.pie.admin.feignInterface.MysqlBackupInterface;
-import com.framework.pie.core.http.HttpResult;
+import com.framework.pie.http.HttpResult;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

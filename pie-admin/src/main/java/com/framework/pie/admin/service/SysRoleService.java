@@ -3,9 +3,7 @@ package com.framework.pie.admin.service;
 import com.framework.pie.admin.model.SysMenu;
 import com.framework.pie.admin.model.SysRole;
 import com.framework.pie.admin.model.SysRoleMenu;
-import com.framework.pie.admin.model.SysUser;
-import com.framework.pie.core.service.CurdService;
-import org.springframework.stereotype.Service;
+import com.framework.pie.mybatis.service.CurdService;
 
 import java.util.List;
 
