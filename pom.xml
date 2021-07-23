@@ -52,7 +52,7 @@
         <ip2region.version>1.7.2</ip2region.version>
         <swagger.version>2.9.2</swagger.version>
         <swagger-bootstrap.version>1.9.6</swagger-bootstrap.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <log4j.version>1.2.17</log4j.version>
         <kaptcha.version>0.0.9</kaptcha.version>
         <jjwt.version>0.9.1</jjwt.version>
