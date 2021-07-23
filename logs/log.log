@@ -2118,3 +2118,4 @@
 2021-07-21 14:00:17  [ SpringContextShutdownHook:477612 ] - [ DEBUG ]  {conn-10001, pstmt-20009} closed
 2021-07-21 14:00:17  [ SpringContextShutdownHook:477612 ] - [ DEBUG ]  {conn-10001, pstmt-20010} closed
 2021-07-21 14:00:17  [ SpringContextShutdownHook:477613 ] - [ DEBUG ]  {conn-10001} closed
+2021-07-23 14:43:52  [ restartedMain:0 ] - [ DEBUG ]  {conn-10001,procId-6} connected

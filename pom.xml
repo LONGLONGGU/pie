@@ -14,14 +14,8 @@
         <module>pie-core</module>
         <module>pie-pom</module>
         <module>pie-backup</module>
-        <module>pie-monitor</module>
-        <module>pie-producer</module>
-        <module>pie-producer2</module>
         <module>pie-consumer</module>
-        <module>pie-hystrix</module>
-        <module>pie-zuul</module>
         <module>pie-config</module>
-        <module>pie-websocket</module>
         <module>pie-activiti</module>
         <module>pie-HdfsClient</module>
         <module>pie-mapreduce</module>

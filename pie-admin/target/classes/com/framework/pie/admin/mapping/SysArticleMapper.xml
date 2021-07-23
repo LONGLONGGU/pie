@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.pie.admin.dao.SysArticleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.framework.pie.admin.model.SysArticle">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="type" property="type"/>
+        <result column="cover_image" property="coverImage"/>
+        <result column="author" property="author"/>
+        <result column="importance" property="importance"/>
+        <result column="content_short" property="contentShort"/>
+        <result column="content" property="content"/>
+        <result column="hit_count" property="hitCount"/>
+        <result column="release_time" property="releaseTime"/>
+        <result column="status" property="status"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_time" property="createdTime"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_time" property="updatedTime"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, title, type, cover_image, author, importance, content_short, content, hit_count, release_time, status, created_by, created_time, updated_by, updated_time
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from sys_article
+        where id = #{id}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete  from sys_article
+        where id = #{id}
+    </delete>
+    <insert id="insert" parameterType="com.framework.pie.admin.model.SysArticle">
+        insert into sys_article(id, title, type, cover_image, author, importance, content_short, content, hit_count, release_time, status, created_by, created_time, updated_by, updated_time)
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+         #{id},
+         #{title},
+         #{type},
+         #{cover_image},
+         #{author},
+         #{importance},
+         #{content_short},
+         #{content},
+         #{hit_count},
+         #{release_time},
+         #{status},
+         #{created_by},
+         #{created_time},
+         #{updated_by},
+         #{updated_time},
+    </trim>
+    </insert>
+    <insert id="insertSelective" parameterType="com.framework.pie.admin.model.SysArticle">
+        <selectKey  keyProperty="id" resultType="java.lang.Long" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into sys_article
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="coverImage != null">
+                cover_image,
+            </if>
+            <if test="author != null">
+                author,
+            </if>
+            <if test="importance != null">
+                importance,
+            </if>
+            <if test="contentShort != null">
+                content_short,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="hitCount != null">
+                hit_count,
+            </if>
+            <if test="releaseTime != null">
+                release_time,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createdBy != null">
+                created_by,
+            </if>
+            <if test="createdTime != null">
+                created_time,
+            </if>
+            <if test="updatedBy != null">
+                updated_by,
+            </if>
+            <if test="updatedTime != null">
+                updated_time,
+            </if>
+        </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+             #{id},
+            </if>
+            <if test="title != null">
+             #{title},
+            </if>
+            <if test="type != null">
+             #{type},
+            </if>
+            <if test="coverImage != null">
+             #{coverImage},
+            </if>
+            <if test="author != null">
+             #{author},
+            </if>
+            <if test="importance != null">
+             #{importance},
+            </if>
+            <if test="contentShort != null">
+             #{contentShort},
+            </if>
+            <if test="content != null">
+             #{content},
+            </if>
+            <if test="hitCount != null">
+             #{hitCount},
+            </if>
+            <if test="releaseTime != null">
+             #{releaseTime},
+            </if>
+            <if test="status != null">
+             #{status},
+            </if>
+            <if test="createdBy != null">
+             #{createdBy},
+            </if>
+            <if test="createdTime != null">
+             #{createdTime},
+            </if>
+            <if test="updatedBy != null">
+             #{updatedBy},
+            </if>
+            <if test="updatedTime != null">
+             #{updatedTime},
+            </if>
+    </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.framework.pie.admin.model.SysArticle">
+        update sys_article
+        <set>
+            <if test="id != null">
+                id = #{id},
+            </if>
+            <if test="title != null">
+                title = #{title},
+            </if>
+            <if test="type != null">
+                type = #{type},
+            </if>
+            <if test="coverImage != null">
+                cover_image = #{coverImage},
+            </if>
+            <if test="author != null">
+                author = #{author},
+            </if>
+            <if test="importance != null">
+                importance = #{importance},
+            </if>
+            <if test="contentShort != null">
+                content_short = #{contentShort},
+            </if>
+            <if test="content != null">
+                content = #{content},
+            </if>
+            <if test="hitCount != null">
+                hit_count = #{hitCount},
+            </if>
+            <if test="releaseTime != null">
+                release_time = #{releaseTime},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="createdBy != null">
+                created_by = #{createdBy},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime},
+            </if>
+            <if test="updatedBy != null">
+                updated_by = #{updatedBy},
+            </if>
+            <if test="updatedTime != null">
+                updated_time = #{updatedTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.framework.pie.admin.model.SysArticle">
+        update sys_article
+        set
+           id = #{id},
+           title = #{title},
+           type = #{type},
+           cover_image = #{coverImage},
+           author = #{author},
+           importance = #{importance},
+           content_short = #{contentShort},
+           content = #{content},
+           hit_count = #{hitCount},
+           release_time = #{releaseTime},
+           status = #{status},
+           created_by = #{createdBy},
+           created_time = #{createdTime},
+           updated_by = #{updatedBy},
+           updated_time = #{updatedTime}        where id = #{id}
+    </update>
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from sys_article
+    </select>
+    <select id="findPage" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from  sys_article
+    </select>
+</mapper>
