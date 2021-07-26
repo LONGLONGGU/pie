@@ -1,6 +1,7 @@
 package com.framework.pie.admin.dao;
 
 import com.framework.pie.admin.model.SysDept;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,4 +26,6 @@ public interface SysDeptMapper {
     List<SysDept> findAll();
 
     List<SysDept> findByDeptAll(Long orgId);
+
+    List<SysDept> findByParentId(@Param(value="orgId") Long orgId,@Param(value="parentId")  Long parentId);
 }

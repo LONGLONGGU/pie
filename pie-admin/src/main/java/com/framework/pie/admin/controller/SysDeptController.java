@@ -4,20 +4,20 @@ import com.framework.pie.admin.model.SysDept;
 import com.framework.pie.admin.service.SysDeptService;
 import com.framework.pie.admin.util.syslog.Log;
 import com.framework.pie.core.http.HttpResult;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 /**
- * 机构管理
+ * 部门管理
  * @author longlong
  */
+@Api(tags ="部门管理")
 @RestController
 @RequestMapping("dept")
 public class SysDeptController {
@@ -44,6 +44,14 @@ public class SysDeptController {
 	@GetMapping(value="/findTree")
 	public HttpResult findTree() {
 		return HttpResult.ok(sysDeptService.findTree());
+	}
+
+
+	@ApiOperation("异步加载部门tree")
+	@GetMapping(value="/findTree/{parentId}")
+	public HttpResult asyncFindTree(@PathVariable("parentId") Long parentId) {
+
+		return HttpResult.ok(sysDeptService.findTree(parentId));
 	}
 
 

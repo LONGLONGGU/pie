@@ -24,6 +24,8 @@ public class SysDept {
 
     // 非数据库字段
     private List<SysDept> children;
+    //是否有子节点
+    private boolean hasChildren;
     // 非数据库字段
     private String parentName;
     // 非数据库字段
@@ -125,6 +127,13 @@ public class SysDept {
         this.level = level;
     }
 
+    public boolean isHasChildren() {
+        return hasChildren;
+    }
+
+    public void setHasChildren(boolean hasChildren) {
+        this.hasChildren = hasChildren;
+    }
 //    public SysDept(String name,Integer orderNum){
 //        this.name = name;
 //        this.orderNum =orderNum;

@@ -158,4 +158,19 @@
     <include refid="Base_Column_List" />
     from sys_dept
   </select>
+  <select id="findByParentId" resultMap="BaseResultMap">
+    select a.*
+    from sys_dept a
+    INNER JOIN sys_org_dept b ON  a.id = b.dept_id
+    and b.org_id =#{orgId,jdbcType=BIGINT}
+    <choose>
+      <when test="parentId != null and parentId != '' ">
+        and parent_id = #{parentId,jdbcType=BIGINT}
+      </when>
+      <otherwise>
+        and parent_id is null
+      </otherwise>
+    </choose>
+
+  </select>
 </mapper>

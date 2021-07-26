@@ -90,6 +90,17 @@ public class SysDeptServiceImpl implements SysDeptService {
         return sysDepts;
     }
 
+    @Override
+    public List<SysDept> findTree(Long parentId) {
+        List<SysDept> sysDepts = sysDeptMapper.findByParentId(sysOrgService.findByOrg().getId(),parentId);
+        sysDepts.stream().forEach(item ->{
+            if(sysDeptMapper.findByParentId(sysOrgService.findByOrg().getId(),item.getId()).stream().count() > 0){
+                item.setHasChildren(true);
+            }
+        });
+        return sysDepts;
+    }
+
     private void findChildren(List<SysDept> sysDepts, List<SysDept> depts) {
         for (SysDept sysDept : sysDepts) {
             List<SysDept> children = new ArrayList<>();

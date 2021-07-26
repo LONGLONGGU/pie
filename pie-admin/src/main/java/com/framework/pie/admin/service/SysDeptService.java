@@ -19,5 +19,12 @@ public interface SysDeptService extends CurdService<SysDept> {
 	 */
 	List<SysDept> findTree();
 
+	/**
+	 * 异步加载树
+	 * @param parentId
+	 * @return
+	 */
+	List<SysDept> findTree(Long parentId);
+
 	 HttpResult remove(List<SysDept> records);
 }
