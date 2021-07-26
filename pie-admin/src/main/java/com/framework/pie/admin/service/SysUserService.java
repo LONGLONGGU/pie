@@ -1,12 +1,10 @@
 package com.framework.pie.admin.service;
 
-import com.framework.pie.admin.model.SysOrg;
 import com.framework.pie.admin.model.SysUser;
 import com.framework.pie.admin.model.SysUserRole;
-import com.framework.pie.core.http.HttpResult;
-import com.framework.pie.core.page.PageRequest;
-import com.framework.pie.core.service.CurdService;
-import org.springframework.web.bind.annotation.RequestBody;
+import com.framework.pie.http.HttpResult;
+import com.framework.pie.mybatis.page.PageRequest;
+import com.framework.pie.mybatis.service.CurdService;
 
 import java.io.File;
 import java.util.List;

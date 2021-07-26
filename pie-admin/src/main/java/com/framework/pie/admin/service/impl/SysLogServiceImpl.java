@@ -3,9 +3,9 @@ package com.framework.pie.admin.service.impl;
 import com.framework.pie.admin.dao.SysLogMapper;
 import com.framework.pie.admin.model.SysLog;
 import com.framework.pie.admin.service.SysLogService;
-import com.framework.pie.core.page.MybatisPageHelper;
-import com.framework.pie.core.page.PageRequest;
-import com.framework.pie.core.page.PageResult;
+import com.framework.pie.mybatis.page.MybatisPageHelper;
+import com.framework.pie.mybatis.page.PageRequest;
+import com.framework.pie.mybatis.page.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -5,9 +5,8 @@ import com.framework.pie.admin.model.SysAttachments;
 import com.framework.pie.admin.service.UploadService;
 import com.framework.pie.admin.service.SysAttachmentsService;
 import com.framework.pie.admin.util.SecurityUtils;
-import com.framework.pie.core.http.HttpResult;
+import com.framework.pie.http.HttpResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 

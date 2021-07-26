@@ -1,7 +1,7 @@
 package com.framework.pie.admin.Hystrix;
 
 import com.framework.pie.admin.feignInterface.MysqlBackupInterface;
-import com.framework.pie.core.http.HttpResult;
+import com.framework.pie.http.HttpResult;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 

@@ -4,94 +4,253 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <!--spring boot 版本信息 2.4.2-->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.4.2</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
     <groupId>com.framework</groupId>
     <artifactId>pie</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+
     <modules>
         <module>pie-admin</module>
         <module>pie-common</module>
-        <module>pie-core</module>
-        <module>pie-pom</module>
         <module>pie-backup</module>
-        <module>pie-config</module>
-        <module>pie-HdfsClient</module>
+        <!--<module>pie-HdfsClient</module>
         <module>pie-mapreduce</module>
-        <module>pie-gateway80</module>
+        <module>pie-gateway80</module>-->
     </modules>
+
     <!-- 统一管理jar包版本 -->
     <properties>
+        <pie.version>1.0-SNAPSHOT</pie.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <spring-cloud.version>2020.0.3</spring-cloud.version>
+        <spring-cloud-alibaba.version>2021.1</spring-cloud-alibaba.version>
+        <mysql.version>8.0.18</mysql.version>
+        <druid.version>1.2.4</druid.version>
+        <mybatis-plus.version>3.4.0</mybatis-plus.version>
+        <mybatis-velocity.version>2.0</mybatis-velocity.version>
+        <freemarker.version>2.3.31</freemarker.version>
+        <mybatis-pagehelper.version>5.2.0</mybatis-pagehelper.version>
+        <lombok.version>1.18.18</lombok.version>
+        <hutool.version>5.5.8</hutool.version>
+        <alibaba-fastjson.version>1.2.48</alibaba-fastjson.version>
+        <commons-beanutils.version>1.9.4</commons-beanutils.version>
+        <commons-io.version>2.7</commons-io.version>
+        <poi-ooxml.version>4.0.1</poi-ooxml.version>
+        <pinyin4j.version>2.5.1</pinyin4j.version>
+        <ip2region.version>1.7.2</ip2region.version>
+        <swagger.version>2.9.2</swagger.version>
+        <swagger-bootstrap.version>1.9.6</swagger-bootstrap.version>
         <junit.version>4.12</junit.version>
         <log4j.version>1.2.17</log4j.version>
-        <lombok.version>1.16.18</lombok.version>
-        <mysql.version>8.0.18</mysql.version>
-        <druid.version>1.1.16</druid.version>
-        <mybatis.spring.boot.version>1.3.0</mybatis.spring.boot.version>
+        <kaptcha.version>0.0.9</kaptcha.version>
+        <jjwt.version>0.9.1</jjwt.version>
+        <thumbnailator.version>0.4.12</thumbnailator.version>
     </properties>
-    <!-- 子模块继承之后，提供作用，锁定版本+子module不用写groupId和version -->
-    <dependencyManagement>
+
+    <!--直接放到dependencies，不放到dependencyManagement标签中，是因为这两个依赖在项目的大部分地方都
+    会使用到，所有直接放到dependencyManagement，子工程只要继承了这个工程，就会直接将这两个包依赖下去，如
+    果放到dependencyManagement标签中，子工程需要通过groupId和artifactId引用才能引入依赖包-->
     <dependencies>
-        <!--spring boot 2.2.2-->
+        <!--Lombok 依赖 -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-dependencies</artifactId>
-            <version>2.2.2.RELEASE</version>
-            <type>pom</type>
-            <scope>import</scope>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
         </dependency>
-        <!--spring cloud Hoxton.SR1-->
+
+        <!--糊涂工具类，整合了大部分字符串判断，时间格式化插件-->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-dependencies</artifactId>
-            <version>Hoxton.SR1</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
-        <!--spring cloud 阿里巴巴 2.1.0-->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-            <version>2.1.0.RELEASE</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
-        <!--mysql-->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <!-- druid-->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>${druid.version}</version>
-        </dependency>
-        <!--mybatis-->
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>${mybatis.spring.boot.version}</version>
-        </dependency>
-        <!--junit-->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-        </dependency>
-        <!--log4j-->
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>${log4j.version}</version>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
         </dependency>
     </dependencies>
+
+    <!-- 子模块继承之后，提供作用，锁定版本+子module  通过groupId和artifactId进行依赖，不用写version -->
+    <dependencyManagement>
+        <dependencies>
+            <!--Spring Cloud 相关依赖-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!--Spring cloud Alibaba 相关依赖-->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!--Mysql 数据库连接驱动-->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+
+            <!--Druid 数据库连接池-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+
+            <!--Mybatis-plus 依赖-->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <!--Mybatis 代码生成器-->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <!--Velocity 模板引擎, 默认 MyBatis代码生成 -->
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity-engine-core</artifactId>
+                <version>${mybatis-velocity.version}</version>
+            </dependency>
+
+            <!--Freemarker 模板引擎 MyBatis代码生成用到 -->
+            <dependency>
+                <groupId>org.freemarker</groupId>
+                <artifactId>freemarker</artifactId>
+                <version>${freemarker.version}</version>
+            </dependency>
+
+            <!--MyBatis 分页插件-->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper</artifactId>
+                <version>${mybatis-pagehelper.version}</version>
+            </dependency>
+
+            <!--Alibaba FastJson依赖 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${alibaba-fastjson.version}</version>
+            </dependency>
+
+            <!--Commons-BeanUtils -->
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>${commons-beanutils.version}</version>
+            </dependency>
+
+            <!--文件处理-->
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+
+            <!--Poi 导入导出相关依赖-->
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>${poi-ooxml.version}</version>
+            </dependency>
+
+            <!--中文转拼音-->
+            <dependency>
+                <groupId>com.belerweb</groupId>
+                <artifactId>pinyin4j</artifactId>
+                <version>${pinyin4j.version}</version>
+            </dependency>
+
+            <!-- IP转地区工具 -->
+            <dependency>
+                <groupId>org.lionsoul</groupId>
+                <artifactId>ip2region</artifactId>
+                <version>${ip2region.version}</version>
+            </dependency>
+
+            <!--Swagger 整合-->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+
+            <!--Swagger2 默认主题样式 -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+
+            <!--Swagger2 Bootstrap风格主题样式 -->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>swagger-bootstrap-ui</artifactId>
+                <version>${swagger-bootstrap.version}</version>
+            </dependency>
+
+            <!--Junit-->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+            </dependency>
+
+            <!--Log4j-->
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+
+            <!--Kaptcha-->
+            <dependency>
+                <groupId>com.github.axet</groupId>
+                <artifactId>kaptcha</artifactId>
+                <version>${kaptcha.version}</version>
+            </dependency>
+
+            <!--Jwt-->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+
+            <!--Thumbnailator-->
+            <dependency>
+                <groupId>net.coobird</groupId>
+                <artifactId>thumbnailator</artifactId>
+                <version>${thumbnailator.version}</version>
+            </dependency>
+        </dependencies>
     </dependencyManagement>
-    <build>
+
+    <!--<build>
         <finalName>springCloud</finalName>
         <plugins>
             <plugin>
@@ -120,5 +279,5 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
-    </build>
+    </build>-->
 </project>

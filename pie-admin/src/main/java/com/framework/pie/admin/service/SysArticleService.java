@@ -1,11 +1,7 @@
 package com.framework.pie.admin.service;
 
 import com.framework.pie.admin.model.SysArticle;
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.framework.pie.core.service.CurdService;
-
-import java.util.List;
+import com.framework.pie.mybatis.service.CurdService;
 
 /**
     * <p>

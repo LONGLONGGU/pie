@@ -1,9 +1,7 @@
 package com.framework.pie.admin.service;
 
 import com.framework.pie.admin.model.SysDict;
-import com.framework.pie.core.page.PageRequest;
-import com.framework.pie.core.page.PageResult;
-import com.framework.pie.core.service.CurdService;
+import com.framework.pie.mybatis.service.CurdService;
 
 import java.util.List;
 

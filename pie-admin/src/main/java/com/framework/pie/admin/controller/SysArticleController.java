@@ -1,27 +1,24 @@
 package com.framework.pie.admin.controller;
 
 
+import com.framework.pie.admin.model.SysArticle;
 import com.framework.pie.admin.model.SysAttachments;
+import com.framework.pie.admin.service.SysArticleService;
 import com.framework.pie.admin.service.SysAttachmentsService;
 import com.framework.pie.admin.service.UploadService;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.framework.pie.admin.service.SysArticleService;
-import com.framework.pie.admin.model.SysArticle;
+import com.framework.pie.http.HttpResult;
+import com.framework.pie.mybatis.page.PageRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-
-import java.io.*;
-import java.util.List;
-import com.framework.pie.core.http.HttpResult;
-import com.framework.pie.core.page.PageRequest;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.util.List;
 
 /**
  * <p>

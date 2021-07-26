@@ -8,10 +8,10 @@ import com.framework.pie.admin.model.SysOrgDept;
 import com.framework.pie.admin.model.SysUser;
 import com.framework.pie.admin.service.SysDeptService;
 import com.framework.pie.admin.service.SysOrgService;
-import com.framework.pie.core.http.HttpResult;
-import com.framework.pie.core.page.MybatisPageHelper;
-import com.framework.pie.core.page.PageRequest;
-import com.framework.pie.core.page.PageResult;
+import com.framework.pie.http.HttpResult;
+import com.framework.pie.mybatis.page.MybatisPageHelper;
+import com.framework.pie.mybatis.page.PageRequest;
+import com.framework.pie.mybatis.page.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

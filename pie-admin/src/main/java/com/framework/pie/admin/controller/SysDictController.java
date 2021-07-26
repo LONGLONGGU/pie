@@ -2,8 +2,8 @@ package com.framework.pie.admin.controller;
 
 import com.framework.pie.admin.model.SysDict;
 import com.framework.pie.admin.service.SysDictService;
-import com.framework.pie.core.http.HttpResult;
-import com.framework.pie.core.page.PageRequest;
+import com.framework.pie.http.HttpResult;
+import com.framework.pie.mybatis.page.PageRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;

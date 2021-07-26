@@ -3,16 +3,13 @@ package com.framework.pie.admin.service.impl;
 import com.framework.pie.admin.constant.SysConstants;
 import com.framework.pie.admin.dao.SysMenuMapper;
 import com.framework.pie.admin.dao.SysOrgMapper;
-import com.framework.pie.admin.dao.SysRoleMapper;
 import com.framework.pie.admin.model.SysMenu;
 import com.framework.pie.admin.model.SysOrg;
-import com.framework.pie.admin.model.SysRole;
 import com.framework.pie.admin.service.SysMenuService;
 import com.framework.pie.admin.service.SysOrgService;
 import com.framework.pie.admin.service.SysRoleService;
-import com.framework.pie.admin.util.SecurityUtils;
-import com.framework.pie.core.page.PageRequest;
-import com.framework.pie.core.page.PageResult;
+import com.framework.pie.mybatis.page.PageRequest;
+import com.framework.pie.mybatis.page.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

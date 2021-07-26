@@ -2,61 +2,37 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.4.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
-    <groupId>com.framework</groupId>
+
     <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.framework</groupId>
+        <artifactId>pie</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+
+    <groupId>com.framework</groupId>
     <artifactId>pie-backup</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
     <name>pie-backup</name>
     <description>pie-backup</description>
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
+
     <dependencies>
-        <!-- spring boot -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <!-- swagger -->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>2.9.2</version>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.9.2</version>
-        </dependency>
-        <!--spring-boot-admin-client-->
-        <dependency>
-            <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-client</artifactId>
-            <version>2.2.4</version>
-        </dependency>
+        <!--Spring Cloud Web公共依赖-->
         <dependency>
             <groupId>com.framework</groupId>
-            <artifactId>pie-common</artifactId>
-            <version>1.0.0</version>
+            <artifactId>common-web</artifactId>
+            <version>${pie.version}</version>
         </dependency>
-        <!--consul-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-consul-discovery</artifactId>
-        </dependency>
-        <!-- mysql -->
+
+        <!--Mysql 数据库连接驱动-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.18</version>
         </dependency>
+
         <!-- 数据库版本管理 依赖 -->
         <dependency>
             <groupId>org.flywaydb</groupId>
@@ -70,34 +46,34 @@
         </dependency>
     </dependencies>
 
-    <!--srping cloud-->
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Hoxton.RELEASE</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <includes>
-                    <include>**/*</include>
-                </includes>
-                <filtering>false</filtering>
-            </resource>
-        </resources>
+        <finalName>springCloud</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.4.4</version>
+                <configuration>
+                    <fork>true</fork>
+                    <addResources>true</addResources>
+                </configuration>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/mapping/*.xml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
 </project>

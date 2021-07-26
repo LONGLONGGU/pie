@@ -3,9 +3,9 @@ package com.framework.pie.admin.service.impl;
 import com.framework.pie.admin.dao.SysAttachmentsMapper;
 import com.framework.pie.admin.model.SysAttachments;
 import com.framework.pie.admin.service.SysAttachmentsService;
-import com.framework.pie.core.page.MybatisPageHelper;
-import com.framework.pie.core.page.PageRequest;
-import com.framework.pie.core.page.PageResult;
+import com.framework.pie.mybatis.page.MybatisPageHelper;
+import com.framework.pie.mybatis.page.PageRequest;
+import com.framework.pie.mybatis.page.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
