@@ -9,7 +9,7 @@
         <artifactId>pie</artifactId>
         <version>1.0-SNAPSHOT</version>
         <!--注意如果不加此路径，会提示:jar is missing-->
-        <relativePath/>
+        <relativePath>../../../pie/pom.xml</relativePath>
     </parent>
 
     <artifactId>common-mybatis</artifactId>

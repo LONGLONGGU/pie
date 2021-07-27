@@ -21,6 +21,7 @@
         <module>pie-admin</module>
         <module>pie-common</module>
         <module>pie-backup</module>
+        <module>pie-mybatis-generator</module>
         <!--<module>pie-HdfsClient</module>
         <module>pie-mapreduce</module>
         <module>pie-gateway80</module>-->

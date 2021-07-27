@@ -3,15 +3,19 @@ server:
 spring:
   application:
     name: pie-admin-service
+  #Nacos注册中心
   cloud:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
+
   management:
     endpoints:
       web:
         exposure:
           include: '*'
+
+  #数据源配置
   datasource:
     name: druidDataSource
     type: com.alibaba.druid.pool.DruidDataSource
@@ -34,17 +38,12 @@ spring:
       pool-prepared-statements: true
       max-open-prepared-statements: 50
       max-pool-prepared-statement-per-connection-size: 20
-  #  cloud:
-#    consul:
-#      host: localhost
-#      port: 8500
-#      discovery:
-#        hostname: localhost
-#        serviceName: ${spring.application.name} # 注册到consul的服务名称
+
   servlet:
     multipart:
       max-request-size: 10MB # 上传文件总的最大值
       max-file-size: 10MB # 单个文件的最大值
+
 # 开放健康检查接口
 management:
   endpoints:
@@ -54,15 +53,20 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
+
+#分页配置
 pagehelper:
   helper-dialect: mysql
   reasonable: true
   support-methods-arguments: true
   params: count=countSql
+
 #开启熔断器
 feign:
   hystrix:
     enabled: true
+
+#文件上传配置
 file:
   # 文件上传目录
   uploadFolder: /Users/longlong/working/files/
