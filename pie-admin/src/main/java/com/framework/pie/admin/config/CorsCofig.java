@@ -10,7 +10,7 @@ public class CorsCofig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry){
         registry.addMapping("/**") //允许跨域访问的路径
-                .allowedOrigins("*") //允许访问的源
+                .allowedOriginPatterns("*") //允许访问的源
                 .allowedMethods("POST","GET","PUT","OPTIONS","DELETE") //允许请求方法
                 .maxAge(16800)       //预检间隔时间
                 .allowedHeaders("*")    //允许头部设置
