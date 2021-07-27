@@ -8,8 +8,7 @@
         <groupId>com.framework</groupId>
         <artifactId>pie</artifactId>
         <version>1.0-SNAPSHOT</version>
-        <!--注意如果不加此路径，会提示:jar is missing-->
-        <!--注意如果不加此路径，会提示:jar is missing-->
+        <!--此处加入路径信息，否则出现:jar is missing错误信息-->
         <relativePath>../../../pie/pom.xml</relativePath>
     </parent>
 

@@ -21,10 +21,11 @@
         <module>pie-admin</module>
         <module>pie-common</module>
         <module>pie-backup</module>
+        <module>pie-gateway</module>
+        <!--<module>pie-security</module>-->
         <module>pie-mybatis-generator</module>
-        <!--<module>pie-HdfsClient</module>
-        <module>pie-mapreduce</module>
-        <module>pie-gateway80</module>-->
+        <!--<module>pie-HdfsClient</module>-->
+        <!--<module>pie-mapreduce</module>-->
     </modules>
 
     <!-- 统一管理jar包版本 -->
@@ -248,10 +249,33 @@
                 <artifactId>thumbnailator</artifactId>
                 <version>${thumbnailator.version}</version>
             </dependency>
+
+            <!--Begin Pie 公共依赖-->
+            <dependency>
+                <groupId>com.framework</groupId>
+                <artifactId>common-core</artifactId>
+                <version>${pie.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.framework</groupId>
+                <artifactId>common-mybatis</artifactId>
+                <version>${pie.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.framework</groupId>
+                <artifactId>common-web</artifactId>
+                <version>${pie.version}</version>
+            </dependency>
+            <!--End Pie 公共依赖-->
         </dependencies>
     </dependencyManagement>
 
-    <!--<build>
+    <!--  父工程不加打包策略，父工程加了打包策略会默认打所有的module包，项目中有部分是不需要打成jar包的，
+    所有此处的处理是在需要打成jar包的子工程中再来加打包策略 -->
+    <!--
+    <build>
         <finalName>springCloud</finalName>
         <plugins>
             <plugin>

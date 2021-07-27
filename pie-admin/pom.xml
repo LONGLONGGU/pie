@@ -110,9 +110,9 @@
 			<groupId>net.coobird</groupId>
 			<artifactId>thumbnailator</artifactId>
 		</dependency>
-
 	</dependencies>
 
+	<!--打包放到各个子工程中进行，有的包是不需要打包使用的-->
 	<build>
 		<finalName>springCloud</finalName>
 		<plugins>
