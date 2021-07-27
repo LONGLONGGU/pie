@@ -22,7 +22,7 @@
         <module>pie-common</module>
         <module>pie-backup</module>
         <module>pie-gateway</module>
-        <!--<module>pie-security</module>-->
+        <module>pie-security</module>
         <module>pie-mybatis-generator</module>
         <!--<module>pie-HdfsClient</module>-->
         <!--<module>pie-mapreduce</module>-->
@@ -59,6 +59,10 @@
         <kaptcha.version>0.0.9</kaptcha.version>
         <jjwt.version>0.9.1</jjwt.version>
         <thumbnailator.version>0.4.12</thumbnailator.version>
+        <jaxb-api.version>2.3.1</jaxb-api.version>
+        <jaxb-core.version>2.3.0.1</jaxb-core.version>
+        <jaxb-impl.version>2.3.0.1</jaxb-impl.version>
+        <activation.version>1.1.1</activation.version>
     </properties>
 
     <!--直接放到dependencies，不放到dependencyManagement标签中，是因为这两个依赖在项目的大部分地方都
@@ -249,6 +253,29 @@
                 <artifactId>thumbnailator</artifactId>
                 <version>${thumbnailator.version}</version>
             </dependency>
+
+            <!--Begin Jaxb 依赖包，jdk9以后需要重新依赖其中-->
+            <dependency>
+                <groupId>javax.xml.bind</groupId>
+                <artifactId>jaxb-api</artifactId>
+                <version>${jaxb-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-impl</artifactId>
+                <version>${jaxb-impl.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-core</artifactId>
+                <version>${jaxb-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.activation</groupId>
+                <artifactId>activation</artifactId>
+                <version>${activation.version}</version>
+            </dependency>
+            <!--End Jaxb 依赖包，jdk9以后需要重新依赖其中-->
 
             <!--Begin Pie 公共依赖-->
             <dependency>

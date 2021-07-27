@@ -23,7 +23,7 @@ public class SysMenuController {
     @PreAuthorize("hasAuthority('sys:menu:add') AND hasAuthority('sys:menu:edit')")
     @PostMapping(value="/save")
     public HttpResult save(@RequestBody SysMenu record) {
-        return HttpResult.ok(sysMenuService.save(record));
+        return HttpResult.ok(sysMenuService.saveByNativeSql(record));
     }
 
     @PostMapping(value = "/delete")

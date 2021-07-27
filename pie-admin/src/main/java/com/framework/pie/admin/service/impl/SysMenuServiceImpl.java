@@ -1,12 +1,12 @@
 package com.framework.pie.admin.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.framework.pie.admin.constant.SysConstants;
 import com.framework.pie.admin.dao.SysMenuMapper;
 import com.framework.pie.admin.dao.SysOrgMapper;
 import com.framework.pie.admin.model.SysMenu;
 import com.framework.pie.admin.model.SysOrg;
 import com.framework.pie.admin.service.SysMenuService;
-import com.framework.pie.admin.service.SysOrgService;
 import com.framework.pie.admin.service.SysRoleService;
 import com.framework.pie.mybatis.page.PageRequest;
 import com.framework.pie.mybatis.page.PageResult;
@@ -17,11 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class SysMenuServiceImpl implements SysMenuService {
+public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper,SysMenu> implements SysMenuService {
     @Autowired
     private SysMenuMapper sysMenuMapper;
-    @Autowired
-    private SysOrgService sysOrgService;
     @Autowired
     private SysRoleService sysRoleService;
     @Autowired
@@ -61,7 +59,7 @@ public class SysMenuServiceImpl implements SysMenuService {
     }
 
     @Override
-    public int save(SysMenu record) {
+    public int saveByNativeSql(SysMenu record) {
         if(record.getId() == null || record.getId() == 0) {
             return sysMenuMapper.insertSelective(record);
         }

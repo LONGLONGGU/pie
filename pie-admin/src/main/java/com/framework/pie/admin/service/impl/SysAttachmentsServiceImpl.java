@@ -1,6 +1,9 @@
 package com.framework.pie.admin.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.framework.pie.admin.dao.SysArticleMapper;
 import com.framework.pie.admin.dao.SysAttachmentsMapper;
+import com.framework.pie.admin.model.SysArticle;
 import com.framework.pie.admin.model.SysAttachments;
 import com.framework.pie.admin.service.SysAttachmentsService;
 import com.framework.pie.mybatis.page.MybatisPageHelper;
@@ -13,11 +16,13 @@ import java.io.File;
 import java.util.List;
 
 @Service
-public class SysAttachmentsServiceImpl implements SysAttachmentsService {
+public class SysAttachmentsServiceImpl extends ServiceImpl<SysAttachmentsMapper, SysAttachments> implements SysAttachmentsService {
+
     @Autowired
     private SysAttachmentsMapper sysAttachmentsMapper;
+
     @Override
-    public int save(SysAttachments record) {
+    public int saveByNativeSql(SysAttachments record) {
         if(record.getId() == null || record.getId() == 0) {
             return sysAttachmentsMapper.insertSelective(record);
         }

@@ -1,5 +1,6 @@
 package com.framework.pie.business.wechat.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.framework.pie.business.wechat.model.BusWechatinfo;
 import com.framework.pie.business.wechat.dao.BusWechatinfoMapper;
 import com.framework.pie.business.wechat.service.BusWechatinfoService;
@@ -22,18 +23,19 @@ import java.util.List;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class BusWechatinfoServiceImpl implements BusWechatinfoService {
+public class BusWechatinfoServiceImpl extends ServiceImpl<BusWechatinfoMapper,BusWechatinfo> implements BusWechatinfoService {
     @Resource
     private BusWechatinfoMapper busWechatinfoMapper;
 
     @Override
-    public int save(BusWechatinfo record) {
+    public int saveByNativeSql(BusWechatinfo record) {
       if (record.getId() == null || record.getId() == 0){
         return busWechatinfoMapper.insertSelective(record);
        }
        return busWechatinfoMapper.updateByPrimaryKeySelective(record);
     }
-   @Override
+
+    @Override
     public int delete(BusWechatinfo record) {
        return busWechatinfoMapper.deleteByPrimaryKey(record.getId());
     }

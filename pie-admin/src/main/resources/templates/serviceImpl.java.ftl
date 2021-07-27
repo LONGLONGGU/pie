@@ -6,9 +6,9 @@ import ${package.Service}.${table.serviceName};
 import ${superServiceImplClassPackage};
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.framework.pie.core.page.MybatisPageHelper;
-import com.framework.pie.core.page.PageRequest;
-import com.framework.pie.core.page.PageResult;
+import com.framework.pie.mybatis.page.MybatisPageHelper;
+import com.framework.pie.mybatis.page.PageRequest;
+import com.framework.pie.mybatis.page.PageResult;
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -28,18 +28,20 @@ open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperNam
 
 }
 <#else>
-public class ${table.serviceImplName} implements ${table.serviceName} {
+public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}> implements ${table.serviceName} {
+
     @Resource
     private ${table.mapperName} ${table.entityPath}Mapper;
 
     @Override
-    public int save(${entity} record) {
+    public int saveByNativeSql(${entity} record) {
       if (record.getId() == null || record.getId() == 0){
         return ${table.entityPath}Mapper.insertSelective(record);
        }
        return ${table.entityPath}Mapper.updateByPrimaryKeySelective(record);
     }
-   @Override
+
+    @Override
     public int delete(${entity} record) {
        return ${table.entityPath}Mapper.deleteByPrimaryKey(record.getId());
     }

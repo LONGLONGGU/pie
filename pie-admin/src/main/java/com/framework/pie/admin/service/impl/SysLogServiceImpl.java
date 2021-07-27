@@ -1,5 +1,6 @@
 package com.framework.pie.admin.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.framework.pie.admin.dao.SysLogMapper;
 import com.framework.pie.admin.model.SysLog;
 import com.framework.pie.admin.service.SysLogService;
@@ -12,11 +13,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class SysLogServiceImpl implements SysLogService {
+public class SysLogServiceImpl extends ServiceImpl<SysLogMapper,SysLog> implements SysLogService {
     @Autowired
     private SysLogMapper sysLogMapper;
     @Override
-    public int save(SysLog record) {
+    public int saveByNativeSql(SysLog record) {
         return sysLogMapper.insert(record);
     }
 

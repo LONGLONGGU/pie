@@ -1,5 +1,6 @@
 package com.framework.pie.admin.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.framework.pie.admin.dao.SysLoginLogMapper;
 import com.framework.pie.admin.model.SysLoginLog;
 import com.framework.pie.admin.service.SysLoginLogService;
@@ -13,11 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class SysLoginLogServiceImpl implements SysLoginLogService {
+public class SysLoginLogServiceImpl extends ServiceImpl<SysLoginLogMapper,SysLoginLog> implements SysLoginLogService {
+
     @Autowired
     private SysLoginLogMapper sysLoginLogMapper;
+
     @Override
-    public int save(SysLoginLog record){
+    public int saveByNativeSql(SysLoginLog record){
         if(record.getId() == null || record.getId() == 0) {
         return sysLoginLogMapper.insertSelective(record);
     }

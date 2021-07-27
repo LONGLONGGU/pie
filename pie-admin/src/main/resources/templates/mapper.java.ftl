@@ -3,13 +3,12 @@ package ${package.Mapper};
 import ${package.Entity}.${entity};
 import ${superMapperClassPackage};
 import org.springframework.stereotype.Repository;
-import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 /**
  * <p>
-    * ${table.comment!} Mapper 接口
-    * </p>
+ * ${table.comment!} Mapper 接口
+ * </p>
  *
  * @author ${author}
  * @since ${date}

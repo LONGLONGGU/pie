@@ -1,11 +1,11 @@
 package com.framework.pie.admin.service.impl;
 
 import com.alibaba.cloud.commons.lang.StringUtils;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.framework.pie.admin.constant.SysConstants;
 import com.framework.pie.admin.dao.*;
 import com.framework.pie.admin.model.*;
 import com.framework.pie.admin.service.SysOrgService;
-import com.framework.pie.admin.service.SysRoleService;
 import com.framework.pie.admin.service.SysUserService;
 import com.framework.pie.admin.util.SecurityUtils;
 import com.framework.pie.mybatis.page.MybatisPageHelper;
@@ -19,7 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class SysOrgServiceImpl implements SysOrgService {
+public class SysOrgServiceImpl extends ServiceImpl<SysOrgMapper,SysOrg> implements SysOrgService {
 
     @Autowired
     private SysOrgMapper sysOrgMapper;
@@ -32,8 +32,6 @@ public class SysOrgServiceImpl implements SysOrgService {
     @Autowired
     private SysOrgDeptMapper sysOrgDeptMapper;
     @Autowired
-    private SysRoleService sysRoleService;
-    @Autowired
     private SysUserService sysUserService;
     @Autowired
     private SysUserRoleMapper sysUserRoleMapper;
@@ -41,7 +39,7 @@ public class SysOrgServiceImpl implements SysOrgService {
     private SysRoleMapper sysRoleMapper;
 
     @Override
-    public int save(SysOrg sysOrg) {
+    public int saveByNativeSql(SysOrg sysOrg) {
         if(sysOrg.getId() == null || sysOrg.getId() == 0) {
             //新建默认部门
             SysDept sysDept = new SysDept();

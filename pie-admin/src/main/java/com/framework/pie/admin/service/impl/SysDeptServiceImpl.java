@@ -1,5 +1,6 @@
 package com.framework.pie.admin.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.framework.pie.admin.dao.SysDeptMapper;
 import com.framework.pie.admin.dao.SysOrgDeptMapper;
 import com.framework.pie.admin.dao.SysUserMapper;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class SysDeptServiceImpl implements SysDeptService {
+public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper,SysDept> implements SysDeptService {
 
     @Autowired
     private SysDeptMapper sysDeptMapper;
@@ -31,7 +32,7 @@ public class SysDeptServiceImpl implements SysDeptService {
     private SysUserMapper sysUserMapper;
 
     @Override
-    public int save(SysDept record) {
+    public int saveByNativeSql(SysDept record) {
         if(record.getId() == null || record.getId() == 0) {
             sysDeptMapper.insertSelective(record);
             Long deptId = record.getId();

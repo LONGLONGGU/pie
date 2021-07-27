@@ -1,5 +1,6 @@
 package com.framework.pie.admin.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.framework.pie.admin.constant.SysConstants;
 import com.framework.pie.admin.dao.*;
 import com.framework.pie.admin.model.SysMenu;
@@ -28,7 +29,7 @@ import java.io.File;
 import java.util.*;
 
 @Service
-public class SysUserServiceImpl implements SysUserService {
+public class SysUserServiceImpl extends ServiceImpl<SysUserMapper,SysUser> implements SysUserService {
 
     @Autowired
     private SysUserMapper sysUserMapper;
@@ -163,7 +164,7 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    public int save(SysUser record) {
+    public int saveByNativeSql(SysUser record) {
         return sysUserMapper.insertSelective(record);
     }
 

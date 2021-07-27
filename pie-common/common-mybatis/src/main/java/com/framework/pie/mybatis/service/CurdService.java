@@ -1,6 +1,7 @@
 package com.framework.pie.mybatis.service;
 
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.framework.pie.mybatis.page.PageRequest;
 import com.framework.pie.mybatis.page.PageResult;
 
@@ -11,13 +12,13 @@ import java.util.List;
  * @param <T>
  * @author longlong
  */
-public interface CurdService<T> {
+public interface CurdService<T> extends IService<T> {
     /**
      * 保存操作
      * @param record
      * @return
      */
-    int save(T record);
+    int saveByNativeSql(T record);
 
     /**
      * 删除操作

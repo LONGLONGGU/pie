@@ -1,5 +1,6 @@
 package com.framework.pie.admin.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 import com.baomidou.mybatisplus.generator.config.GlobalConfig;
@@ -18,15 +19,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import javax.sql.DataSource;
 import java.util.Map;
 
 @Service
 public class SysCodeServiceImpl implements SysCodeService {
     @Autowired
     private SysTableMapper sysTableMapper;
-    @Autowired
-    private DataSource dataSource;
     @Autowired
     private DruidDataSourceProperties properties;
 
@@ -44,6 +42,10 @@ public class SysCodeServiceImpl implements SysCodeService {
         String tableName = record.get("tableName").toString();
         String path = record.get("path").toString();
         String author = record.get("author").toString();
+        String moduleName = "";
+        if(!StrUtil.isEmptyIfStr(record.get("moduleName"))){
+            moduleName = record.get("moduleName").toString();
+        }
 
         // 代码生成器
         AutoGenerator mpg = new AutoGenerator();
@@ -80,7 +82,7 @@ public class SysCodeServiceImpl implements SysCodeService {
         mpg.setDataSource(dsc);
         // 包配置
         PackageConfig pc = new PackageConfig();
-        pc.setModuleName("");
+        pc.setModuleName(moduleName);
         pc.setParent(path);
         pc.setMapper("dao");
         pc.setXml("mapping");

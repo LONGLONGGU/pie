@@ -14,14 +14,14 @@
         <id column="${field.name}" property="${field.propertyName}"/>
             </#if>
         </#list>
-<#list table.commonFields as field><#--生成公共字段 -->
-    <result column="${field.name}" property="${field.propertyName}"/>
-</#list>
-<#list table.fields as field>
-    <#if !field.keyFlag><#--生成普通字段 -->
+        <#list table.commonFields as field><#--生成公共字段 -->
         <result column="${field.name}" property="${field.propertyName}"/>
-    </#if>
-</#list>
+        </#list>
+        <#list table.fields as field>
+            <#if !field.keyFlag><#--生成普通字段 -->
+        <result column="${field.name}" property="${field.propertyName}"/>
+            </#if>
+        </#list>
     </resultMap>
 
 </#if>
@@ -43,18 +43,21 @@
         from ${table.name}
         where id = <@mapperEl 'id'/>
     </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete  from ${table.name}
         where id = <@mapperEl 'id'/>
     </delete>
+
     <insert id="insert" parameterType="${package.Entity}.${entity}">
         insert into ${table.name}(${table.fieldNames})
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-        <#list table.fields as field>
-         <@mapperEl field.name/>,
-        </#list>
-    </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <#list table.fields as field>
+             <@mapperEl field.name/>,
+            </#list>
+        </trim>
     </insert>
+
     <insert id="insertSelective" parameterType="${package.Entity}.${entity}">
         <selectKey  keyProperty="id" resultType="java.lang.Long" order="AFTER">
             SELECT LAST_INSERT_ID()
@@ -67,13 +70,13 @@
             </if>
         </#list>
         </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-       <#list table.fields as field>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+           <#list table.fields as field>
             <if test="${field.propertyName} != null">
              <@mapperEl field.propertyName/>,
             </if>
-       </#list>
-    </trim>
+           </#list>
+        </trim>
     </insert>
 
     <update id="updateByPrimaryKeySelective" parameterType="${package.Entity}.${entity}">
@@ -87,6 +90,7 @@
         </set>
         where id = <@mapperEl 'id'/>
     </update>
+
     <update id="updateByPrimaryKey" parameterType="${package.Entity}.${entity}">
         update ${table.name}
         set
@@ -95,11 +99,13 @@
          </#list>
         where id = <@mapperEl 'id'/>
     </update>
+
     <select id="findAll" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
         from ${table.name}
     </select>
+
     <select id="findPage" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />

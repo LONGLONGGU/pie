@@ -3,7 +3,6 @@ package com.framework.pie.admin.dao;
 import com.framework.pie.admin.model.SysArticle;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
-import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 /**

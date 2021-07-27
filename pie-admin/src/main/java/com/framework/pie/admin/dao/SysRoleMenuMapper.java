@@ -1,11 +1,12 @@
 package com.framework.pie.admin.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.framework.pie.admin.model.SysRoleMenu;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface SysRoleMenuMapper {
+public interface SysRoleMenuMapper extends BaseMapper<SysRoleMenu> {
     int deleteByPrimaryKey(Long id);
 
     int insert(SysRoleMenu record);

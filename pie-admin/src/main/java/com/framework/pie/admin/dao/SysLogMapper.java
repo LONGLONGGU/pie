@@ -1,5 +1,6 @@
 package com.framework.pie.admin.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.framework.pie.admin.model.SysLog;
 import com.framework.pie.admin.model.SysUser;
 import org.apache.ibatis.annotations.Param;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface SysLogMapper {
+public interface SysLogMapper extends BaseMapper<SysLog> {
     int deleteByPrimaryKey(Long id);
 
     int insert(SysLog record);

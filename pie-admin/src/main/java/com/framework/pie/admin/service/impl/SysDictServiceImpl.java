@@ -1,5 +1,6 @@
 package com.framework.pie.admin.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.framework.pie.admin.dao.SysDictMapper;
 import com.framework.pie.admin.model.SysDict;
 import com.framework.pie.admin.service.SysDictService;
@@ -12,13 +13,14 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class SysDictServiceImpl implements SysDictService {
+public class SysDictServiceImpl extends ServiceImpl<SysDictMapper,SysDict> implements SysDictService {
+
     @Autowired
     private SysDictMapper sysDictMapper;
 
 
     @Override
-    public int save(SysDict record) {
+    public int saveByNativeSql(SysDict record) {
         if (record.getId() == null || record.getId() == 0){
             return sysDictMapper.insertSelective(record);
         }

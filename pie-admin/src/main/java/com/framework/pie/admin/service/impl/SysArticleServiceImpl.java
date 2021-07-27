@@ -1,5 +1,6 @@
 package com.framework.pie.admin.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.framework.pie.admin.dao.SysArticleMapper;
 import com.framework.pie.admin.model.SysArticle;
 import com.framework.pie.admin.service.SysArticleService;
@@ -23,18 +24,19 @@ import java.util.List;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class SysArticleServiceImpl implements SysArticleService {
+public class SysArticleServiceImpl extends ServiceImpl<SysArticleMapper,SysArticle> implements SysArticleService {
     @Resource
     private SysArticleMapper sysArticleMapper;
 
     @Override
-    public int save(SysArticle record) {
+    public int saveByNativeSql(SysArticle record) {
       if (record.getId() == null || record.getId() == 0){
         return sysArticleMapper.insertSelective(record);
        }
        return sysArticleMapper.updateByPrimaryKeySelective(record);
     }
-   @Override
+
+    @Override
     public int delete(SysArticle record) {
        return sysArticleMapper.deleteByPrimaryKey(record.getId());
     }

@@ -43,7 +43,7 @@ public class SysOrgController {
         if((record.getId() == null || record.getId() == 0) && !sysOrgService.findByName(record.getName()).isEmpty()) {
             return HttpResult.error("机构已存在!");
         }
-        return HttpResult.ok(sysOrgService.save(record));
+        return HttpResult.ok(sysOrgService.saveByNativeSql(record));
     }
     @PreAuthorize("hasAuthority('sys:org:view')")
     @PostMapping(value="/findPage")

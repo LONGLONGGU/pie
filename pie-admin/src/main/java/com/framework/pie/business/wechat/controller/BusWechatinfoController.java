@@ -45,7 +45,7 @@ public class BusWechatinfoController {
     @ApiOperation(value = "新增修改数据")
     @PostMapping(value = "/add")
     public HttpResult add(@RequestBody BusWechatinfo record){
-       return HttpResult.ok(busWechatinfoService.save(record));
+       return HttpResult.ok(busWechatinfoService.saveByNativeSql(record));
     }
 
     /**

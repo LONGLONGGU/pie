@@ -1,5 +1,6 @@
 package com.framework.pie.admin.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.framework.pie.admin.constant.SysConstants;
 import com.framework.pie.admin.dao.SysMenuMapper;
 import com.framework.pie.admin.dao.SysRoleMapper;
@@ -17,7 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-public class SysRoleServiceImpl implements SysRoleService {
+public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper,SysRole> implements SysRoleService {
     @Autowired
     private SysRoleMapper sysRoleMapper;
     @Autowired
@@ -70,7 +71,7 @@ public class SysRoleServiceImpl implements SysRoleService {
     }
 
     @Override
-    public int save(SysRole record) {
+    public int saveByNativeSql(SysRole record) {
         if(record.getId() == null || record.getId() == 0) {
             return sysRoleMapper.insertSelective(record);
         }

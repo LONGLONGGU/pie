@@ -48,7 +48,7 @@ public class BusWechatuserController {
     @ApiOperation(value = "新增修改数据")
     @PostMapping(value = "/add")
     public HttpResult add(@RequestBody BusWechatuser record){
-       return HttpResult.ok(busWechatuserService.save(record));
+       return HttpResult.ok(busWechatuserService.saveByNativeSql(record));
     }
 
     /**

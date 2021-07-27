@@ -12,11 +12,11 @@
 	</parent>
 
 	<groupId>com.framework</groupId>
-	<artifactId>pie-admin</artifactId>
+	<artifactId>pie-security</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
-	<name>pie-admin</name>
-	<description>pie-admin</description>
+	<name>pie-security</name>
+	<description>pie-security</description>
 
 	<dependencies>
 		<!--公共类依赖-->
@@ -102,29 +102,6 @@
 			<artifactId>jjwt</artifactId>
 		</dependency>
 
-		<!--thumbnailator-->
-		<dependency>
-			<groupId>net.coobird</groupId>
-			<artifactId>thumbnailator</artifactId>
-		</dependency>
-
-		<!--Jaxb 依赖包，jdk9以后需要重新依赖其中-->
-		<dependency>
-			<groupId>javax.xml.bind</groupId>
-			<artifactId>jaxb-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.xml.bind</groupId>
-			<artifactId>jaxb-impl</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.xml.bind</groupId>
-			<artifactId>jaxb-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>javax.activation</groupId>
-			<artifactId>activation</artifactId>
-		</dependency>
 	</dependencies>
 
 	<!--打包放到各个子工程中进行，有的包是不需要打包使用的-->

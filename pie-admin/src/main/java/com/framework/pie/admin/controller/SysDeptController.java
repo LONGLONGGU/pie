@@ -26,7 +26,7 @@ public class SysDeptController {
 	@PreAuthorize("hasAuthority('sys:dept:add') AND hasAuthority('sys:dept:edit')")
 	@PostMapping(value="/save")
 	public HttpResult save(@RequestBody SysDept record) {
-		return HttpResult.ok(sysDeptService.save(record));
+		return HttpResult.ok(sysDeptService.saveByNativeSql(record));
 	}
 
 	@Log(value = "删除部门")

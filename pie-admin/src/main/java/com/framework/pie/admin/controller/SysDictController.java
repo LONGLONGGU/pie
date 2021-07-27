@@ -22,7 +22,7 @@ public class SysDictController {
     @PreAuthorize("hasAuthority('sys:dict:add') and hasAnyAuthority('sys:dict:edit')")
     @PostMapping(value="/save")
     public HttpResult save(@RequestBody SysDict record) {
-        return HttpResult.ok(sysDictService.save(record));
+        return HttpResult.ok(sysDictService.saveByNativeSql(record));
     }
 
     @PreAuthorize("hasAuthority('sys:dict:delete')")

@@ -49,7 +49,7 @@ public class BusWechatmenuController {
        if (null != busWechatmenu){
            record.setId(busWechatmenu.getId());
        }
-       return HttpResult.ok(busWechatmenuService.save(record));
+       return HttpResult.ok(busWechatmenuService.saveByNativeSql(record));
     }
 
     /**

@@ -51,7 +51,7 @@ public class SysRoleController {
         }
         SysOrg sysOrg = sysOrgService.findByOrg();
         record.setOrgId(sysOrg.getId());
-        return HttpResult.ok(sysRoleService.save(record));
+        return HttpResult.ok(sysRoleService.saveByNativeSql(record));
     }
 
     @Log(value = "删除角色")

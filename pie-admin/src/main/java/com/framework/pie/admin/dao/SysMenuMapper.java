@@ -1,5 +1,6 @@
 package com.framework.pie.admin.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.framework.pie.admin.model.SysMenu;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -7,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface SysMenuMapper {
+public interface SysMenuMapper extends BaseMapper<SysMenu> {
     int deleteByPrimaryKey(Long id);
 
     int insert(SysMenu record);

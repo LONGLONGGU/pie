@@ -1,6 +1,5 @@
 package ${package.Controller};
 
-
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import ${package.Service}.${table.serviceName};
@@ -9,10 +8,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import java.util.List;
-import com.framework.pie.core.http.HttpResult;
-import com.framework.pie.core.page.PageRequest;
+import com.framework.pie.http.HttpResult;
+import com.framework.pie.mybatis.page.PageRequest;
 <#if restControllerStyle>
 import org.springframework.web.bind.annotation.RestController;
 <#else>
@@ -24,8 +22,8 @@ import ${superControllerClassPackage};
 
 /**
  * <p>
-    * ${table.comment!} 前端控制器
-    * </p>
+ * ${table.comment!} 前端控制器
+ * </p>
  *
  * @author ${author}
  * @since ${date}
@@ -47,6 +45,7 @@ public class ${table.controllerName} extends ${superControllerClass} {
 public class ${table.controllerName} {
     </#if>
     private Logger logger = LoggerFactory.getLogger(getClass());
+
     @Autowired
     private ${table.serviceName} ${table.serviceName?uncap_first};
 
@@ -54,26 +53,26 @@ public class ${table.controllerName} {
      * 查询分页数据
      */
     @ApiOperation(value = "查询分页数据")
-    @PostMapping(value = "/findPage")
+    @GetMapping(value = "/findPage")
     public HttpResult findPage(@RequestBody PageRequest pageRequest){
       return HttpResult.ok(${table.serviceName?uncap_first}.findPage(pageRequest));
     }
+
     /**
      * 新增
      */
     @ApiOperation(value = "新增修改数据")
     @PostMapping(value = "/save")
     public HttpResult save(@RequestBody ${entity} record){
-       return HttpResult.ok(${table.serviceName?uncap_first}.save(record));
+       return HttpResult.ok(${table.serviceName?uncap_first}.saveByNativeSql(record));
     }
 
     /**
      * 删除
      */
     @ApiOperation(value = "删除数据")
-    @PostMapping(value = "/delete")
+    @DeleteMapping(value = "/delete")
     public HttpResult delete(@RequestBody List<${entity}> records){
-
         return HttpResult.ok(${table.serviceName?uncap_first}.delete(records));
     }
 
