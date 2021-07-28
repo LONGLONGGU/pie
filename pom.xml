@@ -22,7 +22,7 @@
         <module>pie-common</module>
         <module>pie-backup</module>
         <module>pie-gateway</module>
-        <module>pie-security</module>
+<!--        <module>pie-security</module>-->
         <module>pie-mybatis-generator</module>
         <!--<module>pie-HdfsClient</module>-->
         <!--<module>pie-mapreduce</module>-->
