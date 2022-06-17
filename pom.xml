@@ -46,7 +46,7 @@
         <mybatis-pagehelper.version>5.2.0</mybatis-pagehelper.version>
         <lombok.version>1.18.18</lombok.version>
         <hutool.version>5.5.8</hutool.version>
-        <alibaba-fastjson.version>1.2.48</alibaba-fastjson.version>
+        <alibaba-fastjson.version>1.2.83</alibaba-fastjson.version>
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <commons-io.version>2.7</commons-io.version>
         <poi-ooxml.version>4.0.1</poi-ooxml.version>
