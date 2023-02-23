@@ -1,0 +1,147 @@
+{
+  "groups": [
+    {
+      "name": "redis",
+      "type": "com.framework.pie.quartz.redis.config.RedisConfig",
+      "sourceType": "com.framework.pie.quartz.redis.config.RedisConfig"
+    },
+    {
+      "name": "spring.datasource.druid",
+      "type": "com.framework.pie.quartz.config.druid.DruidDataSourceProperties",
+      "sourceType": "com.framework.pie.quartz.config.druid.DruidDataSourceProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "redis.database",
+      "type": "java.lang.Integer",
+      "sourceType": "com.framework.pie.quartz.redis.config.RedisConfig"
+    },
+    {
+      "name": "redis.max-idle",
+      "type": "java.lang.Integer",
+      "sourceType": "com.framework.pie.quartz.redis.config.RedisConfig"
+    },
+    {
+      "name": "redis.max-total",
+      "type": "java.lang.Integer",
+      "sourceType": "com.framework.pie.quartz.redis.config.RedisConfig"
+    },
+    {
+      "name": "redis.max-wait",
+      "type": "java.lang.Integer",
+      "sourceType": "com.framework.pie.quartz.redis.config.RedisConfig"
+    },
+    {
+      "name": "redis.min-idle",
+      "type": "java.lang.Integer",
+      "sourceType": "com.framework.pie.quartz.redis.config.RedisConfig"
+    },
+    {
+      "name": "redis.password",
+      "type": "java.lang.String",
+      "sourceType": "com.framework.pie.quartz.redis.config.RedisConfig"
+    },
+    {
+      "name": "redis.port",
+      "type": "java.lang.Integer",
+      "sourceType": "com.framework.pie.quartz.redis.config.RedisConfig"
+    },
+    {
+      "name": "redis.test-on-borrow",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.framework.pie.quartz.redis.config.RedisConfig"
+    },
+    {
+      "name": "redis.url",
+      "type": "java.lang.String",
+      "sourceType": "com.framework.pie.quartz.redis.config.RedisConfig"
+    },
+    {
+      "name": "spring.datasource.druid.driver-class-name",
+      "type": "java.lang.String",
+      "sourceType": "com.framework.pie.quartz.config.druid.DruidDataSourceProperties"
+    },
+    {
+      "name": "spring.datasource.druid.filters",
+      "type": "java.lang.String",
+      "sourceType": "com.framework.pie.quartz.config.druid.DruidDataSourceProperties"
+    },
+    {
+      "name": "spring.datasource.druid.initial-size",
+      "type": "java.lang.Integer",
+      "sourceType": "com.framework.pie.quartz.config.druid.DruidDataSourceProperties"
+    },
+    {
+      "name": "spring.datasource.druid.max-active",
+      "type": "java.lang.Integer",
+      "sourceType": "com.framework.pie.quartz.config.druid.DruidDataSourceProperties"
+    },
+    {
+      "name": "spring.datasource.druid.max-pool-prepared-statement-per-connection-size",
+      "type": "java.lang.Integer",
+      "sourceType": "com.framework.pie.quartz.config.druid.DruidDataSourceProperties"
+    },
+    {
+      "name": "spring.datasource.druid.max-wait",
+      "type": "java.lang.Long",
+      "sourceType": "com.framework.pie.quartz.config.druid.DruidDataSourceProperties"
+    },
+    {
+      "name": "spring.datasource.druid.min-evictable-idle-time-millis",
+      "type": "java.lang.Long",
+      "sourceType": "com.framework.pie.quartz.config.druid.DruidDataSourceProperties"
+    },
+    {
+      "name": "spring.datasource.druid.min-idle",
+      "type": "java.lang.Integer",
+      "sourceType": "com.framework.pie.quartz.config.druid.DruidDataSourceProperties"
+    },
+    {
+      "name": "spring.datasource.druid.password",
+      "type": "java.lang.String",
+      "sourceType": "com.framework.pie.quartz.config.druid.DruidDataSourceProperties"
+    },
+    {
+      "name": "spring.datasource.druid.pool-prepared-statements",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.framework.pie.quartz.config.druid.DruidDataSourceProperties"
+    },
+    {
+      "name": "spring.datasource.druid.test-on-borrow",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.framework.pie.quartz.config.druid.DruidDataSourceProperties"
+    },
+    {
+      "name": "spring.datasource.druid.test-on-return",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.framework.pie.quartz.config.druid.DruidDataSourceProperties"
+    },
+    {
+      "name": "spring.datasource.druid.test-while-idle",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.framework.pie.quartz.config.druid.DruidDataSourceProperties"
+    },
+    {
+      "name": "spring.datasource.druid.time-between-eviction-runs-millis",
+      "type": "java.lang.Long",
+      "sourceType": "com.framework.pie.quartz.config.druid.DruidDataSourceProperties"
+    },
+    {
+      "name": "spring.datasource.druid.url",
+      "type": "java.lang.String",
+      "sourceType": "com.framework.pie.quartz.config.druid.DruidDataSourceProperties"
+    },
+    {
+      "name": "spring.datasource.druid.username",
+      "type": "java.lang.String",
+      "sourceType": "com.framework.pie.quartz.config.druid.DruidDataSourceProperties"
+    },
+    {
+      "name": "spring.datasource.druid.validation-query",
+      "type": "java.lang.String",
+      "sourceType": "com.framework.pie.quartz.config.druid.DruidDataSourceProperties"
+    }
+  ],
+  "hints": []
+}
