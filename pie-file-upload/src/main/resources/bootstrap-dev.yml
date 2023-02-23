@@ -12,7 +12,6 @@ spring:
         #Nacos获取配置文件的地址，此处配置中心和注册中心的配置地址一至，直接引用就可以
         server-addr: ${spring.cloud.nacos.discovery.server-addr}
         file-extension: yaml #获取配置文件的扩展名，默认是propertites
-        group: PIE_GROUP
   #sentinel 熔断降级
   sentinel:
     transport:

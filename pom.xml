@@ -24,7 +24,6 @@
         <module>pie-auth</module>
         <module>pie-quartz</module>
         <module>pie-file-upload</module>
-        <module>pie-mybatis-generator</module>
     </modules>
 
     <!-- 统一管理jar包版本 -->
