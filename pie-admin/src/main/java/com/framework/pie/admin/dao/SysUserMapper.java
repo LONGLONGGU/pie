@@ -1,25 +1,16 @@
 package com.framework.pie.admin.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.framework.pie.admin.dto.UserExportDTO;
 import com.framework.pie.admin.model.SysUser;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
-@Repository
+@Mapper
 public interface SysUserMapper extends BaseMapper<SysUser> {
-    int deleteByPrimaryKey(Long id);
-
-    int insert(SysUser record);
-
-    int insertSelective(SysUser record);
-
-    SysUser selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(SysUser record);
-
-    int updateByPrimaryKey(SysUser record);
     /**
      * 查询全部
      * @return
@@ -36,9 +27,14 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
      * @param name
      * @return
      */
-    SysUser findByName(@Param(value="name") String name);
+    SysUser getByName(@Param(value="name") String name);
 
-    List<SysUser> findByDept(@Param(value = "deptId") Long deptId);
+    /**
+     * 通过部门查询用户信息
+     * @param deptId
+     * @return
+     */
+    List<SysUser> findByDept(@Param(value = "deptId") String deptId);
 
     /**
      * 根据用户名分页查询
@@ -55,8 +51,32 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
 
     /**
      * 根据org查询
-     * @param orgId
+     * @param params
      * @return
      */
-    List<SysUser> findPageByOrgAndName(@Param(value="orgId") Long orgId, @Param(value="name") String name);
+    List<SysUser> findPageByOrgAndDeptAndName(@Param("params") Map<String,Object> params);
+
+    /**
+     * 通过用户id查询用户角色信息
+     * @param map
+     * @return
+     */
+    List<String> listRoleIdsByUserId(@Param("param") Map map);
+
+    /**
+     * 查询用户导出信息
+     * @param params
+     * @return
+     */
+    List<UserExportDTO> listUserExportData(@Param("params") Map<String,Object> params);
+
+    /**
+     * 查询用户信息
+     * @param params
+     * @return
+     */
+    List<SysUser> getByOrgIdAndDeptId(@Param("params") Map<String,Object> params);
+
+
+    String checkPhone(String phone);
 }

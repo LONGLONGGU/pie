@@ -3,7 +3,7 @@ package com.framework.pie.admin.util.syslog;
 import com.framework.pie.admin.dao.SysLogMapper;
 import com.framework.pie.admin.model.SysLog;
 import com.framework.pie.admin.util.IPUtils;
-import com.framework.pie.admin.util.SecurityUtils;
+import com.framework.pie.web.utils.JwtUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -25,6 +25,7 @@ public class LogAspect {
 
     @Autowired
     private SysLogMapper sysLogMapper;
+
     @Pointcut("@annotation(com.framework.pie.admin.util.syslog.Log)")
     public void pointcut() { }
 
@@ -75,7 +76,7 @@ public class LogAspect {
         // 设置IP地址
         sysLog.setIp(IPUtils.getIpAddr(request));
         // 模拟一个用户名
-        sysLog.setUserName(SecurityUtils.getUsername());
+        sysLog.setUserName(JwtUtils.getUsername());
         sysLog.setTime(time);
         sysLog.setCreateTime(new Date());
         // 保存系统日志

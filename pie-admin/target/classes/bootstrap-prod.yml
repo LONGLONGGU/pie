@@ -1,0 +1,14 @@
+spring:
+  application:
+    # 这里的应用名对应 Nacos Config 中的 Data ID，实际应用名称以配置中心的配置为准
+    name: pie-admin-prod
+  cloud:
+    nacos:
+      #Nacos 注册中心配置
+      discovery:
+        server-addr: http://172.16.1.7:8848 #Nacos服务注册中心地址
+      #Nacos 配置中心配置
+      config:
+        #Nacos获取配置文件的地址，此处配置中心和注册中心的配置地址一至，直接引用就可以
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        file-extension: yaml #获取配置文件的扩展名，默认是propertites

@@ -30,7 +30,7 @@ public class SysArticleServiceImpl extends ServiceImpl<SysArticleMapper,SysArtic
 
     @Override
     public int saveByNativeSql(SysArticle record) {
-      if (record.getId() == null || record.getId() == 0){
+      if (record.getId() == null){
         return sysArticleMapper.insertSelective(record);
        }
        return sysArticleMapper.updateByPrimaryKeySelective(record);
@@ -50,7 +50,7 @@ public class SysArticleServiceImpl extends ServiceImpl<SysArticleMapper,SysArtic
     }
 
     @Override
-    public SysArticle findById(Long id) {
+    public SysArticle findById(String id) {
         return sysArticleMapper.selectByPrimaryKey(id);
     }
 
@@ -62,7 +62,7 @@ public class SysArticleServiceImpl extends ServiceImpl<SysArticleMapper,SysArtic
 
     @Override
     public SysArticle saveArticle(SysArticle record) {
-        if (record.getId() == null || record.getId() == 0){
+        if (record.getId() == null){
             sysArticleMapper.insertSelective(record);
             return record;
         }

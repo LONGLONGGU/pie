@@ -1,188 +1,59 @@
 package com.framework.pie.admin.model;
 
-import java.util.Date;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.framework.pie.mybatis.model.BaseEntity;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import java.util.List;
 
-public class SysMenu {
+@Data
+@EqualsAndHashCode(callSuper = false)
+@ApiModel(value = "SysMenu对象",description = "系统菜单")
+public class SysMenu extends BaseEntity {
 
-    private Long id;
-
+    @ApiModelProperty(value = "菜单名称")
     private String name;
 
-    private Long parentId;
+    @ApiModelProperty(value = "父菜单ID，一级机构为0")
+    private String parentId;
 
+    @ApiModelProperty(value = "菜单URL")
     private String url;
 
+    @ApiModelProperty(value = "外部站点嵌套url")
     private String nestedUrl;
 
+    @ApiModelProperty(value = "授权")
     private String perms;
 
+    @ApiModelProperty(value = "所属系统模块")
+    private String moduleInfo;
+
+    @ApiModelProperty(value = "功能请求路径")
+    private String pathInfo;
+
+    @ApiModelProperty(value = "类型：0：目录 1：菜单 2：按钮")
     private Integer type;
 
+    @ApiModelProperty(value = "是否显示")
     private Boolean hidden;
 
+    @ApiModelProperty(value = "菜单图标")
     private String icon;
 
+    @ApiModelProperty(value = "排序")
     private Integer orderNum;
 
-    private String createBy;
-
-    private Date createTime;
-
-    private String lastUpdateBy;
-
-    private Date lastUpdateTime;
-
-    private Byte delFlag;
-
     // 非数据库字段
+    @TableField(exist = false)
     private String parentName;
     // 非数据库字段
+    @TableField(exist = false)
     private Integer level;
     // 非数据库字段
+    @TableField(exist = false)
     private List<SysMenu> children;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
-
-    public Long getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url == null ? null : url.trim();
-    }
-
-    public String getNestedUrl() {
-        return nestedUrl;
-    }
-
-    public void setNestedUrl(String nestedUrl) {
-        this.nestedUrl = nestedUrl;
-    }
-
-    public String getPerms() {
-        return perms;
-    }
-
-    public void setPerms(String perms) {
-        this.perms = perms == null ? null : perms.trim();
-    }
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public Boolean getHidden() {
-        return hidden;
-    }
-
-    public void setHidden(Boolean hidden) {
-        this.hidden = hidden;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon == null ? null : icon.trim();
-    }
-
-    public Integer getOrderNum() {
-        return orderNum;
-    }
-
-    public void setOrderNum(Integer orderNum) {
-        this.orderNum = orderNum;
-    }
-
-    public String getCreateBy() {
-        return createBy;
-    }
-
-    public void setCreateBy(String createBy) {
-        this.createBy = createBy == null ? null : createBy.trim();
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getLastUpdateBy() {
-        return lastUpdateBy;
-    }
-
-    public void setLastUpdateBy(String lastUpdateBy) {
-        this.lastUpdateBy = lastUpdateBy == null ? null : lastUpdateBy.trim();
-    }
-
-    public Date getLastUpdateTime() {
-        return lastUpdateTime;
-    }
-
-    public void setLastUpdateTime(Date lastUpdateTime) {
-        this.lastUpdateTime = lastUpdateTime;
-    }
-
-    public Byte getDelFlag() {
-        return delFlag;
-    }
-
-    public void setDelFlag(Byte delFlag) {
-        this.delFlag = delFlag;
-    }
-
-    public String getParentName() {
-        return parentName;
-    }
-
-    public void setParentName(String parentName) {
-        this.parentName = parentName;
-    }
-
-    public Integer getLevel() {
-        return level;
-    }
-
-    public void setLevel(Integer level) {
-        this.level = level;
-    }
-
-    public List<SysMenu> getChildren() {
-        return children;
-    }
-
-    public void setChildren(List<SysMenu> children) {
-        this.children = children;
-    }
 }

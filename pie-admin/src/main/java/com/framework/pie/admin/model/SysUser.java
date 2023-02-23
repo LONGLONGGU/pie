@@ -1,192 +1,58 @@
 package com.framework.pie.admin.model;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.framework.pie.mybatis.model.BaseEntity;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class SysUser  implements Serializable {
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+@ApiModel(value = "SysUser对象",description = "系统用户表")
+public class SysUser extends BaseEntity {
 
+    @ApiModelProperty(value = "用户名")
     private String name;
 
+    @ApiModelProperty(value = "昵称")
     private String nickName;
 
-    private Long avatarId;
+    @ApiModelProperty(value = "头像Id")
+    private String avatarId;
 
+    @ApiModelProperty(value = "密码")
     private String password;
 
+    @ApiModelProperty(value = "加密盐")
     private String salt;
 
+    @ApiModelProperty(value = "邮箱")
     private String email;
 
+    @ApiModelProperty(value = "手机号")
     private String mobile;
 
+    @ApiModelProperty(value = "状态 0：禁用 1：正常")
     private Byte status = 1;
 
-    private Long deptId;
+    @ApiModelProperty(value = "部门id")
+    private String deptId;
 
-    private String createBy;
-
-    private Date createTime;
-
-    private String lastUpdateBy;
-
-    private Date lastUpdateTime;
-
-    private Byte delFlag;
-
+    @ApiModelProperty(value = "排序值信息")
+    private String orderNum;
     // 非数据库字段
+    @TableField(exist = false)
     private String deptName;
     // 非数据库字段
+    @TableField(exist = false)
     private String roleNames;
     // 非数据库字段
+    @TableField(exist = false)
     private List<SysUserRole> userRoles = new ArrayList<>();
 
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName == null ? null : nickName.trim();
-    }
-
-    public Long getAvatarId() {
-        return avatarId;
-    }
-
-    public void setAvatarId(Long avatarId) {
-        this.avatarId = avatarId;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
-    }
-
-    public String getSalt() {
-        return salt;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt == null ? null : salt.trim();
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile == null ? null : mobile.trim();
-    }
-
-    public Byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(Byte status) {
-        this.status = status;
-    }
-
-    public Long getDeptId() {
-        return deptId;
-    }
-
-    public void setDeptId(Long deptId) {
-        this.deptId = deptId;
-    }
-
-    public String getCreateBy() {
-        return createBy;
-    }
-
-    public void setCreateBy(String createBy) {
-        this.createBy = createBy == null ? null : createBy.trim();
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getLastUpdateBy() {
-        return lastUpdateBy;
-    }
-
-    public void setLastUpdateBy(String lastUpdateBy) {
-        this.lastUpdateBy = lastUpdateBy == null ? null : lastUpdateBy.trim();
-    }
-
-    public Date getLastUpdateTime() {
-        return lastUpdateTime;
-    }
-
-    public void setLastUpdateTime(Date lastUpdateTime) {
-        this.lastUpdateTime = lastUpdateTime;
-    }
-
-    public Byte getDelFlag() {
-        return delFlag;
-    }
-
-    public void setDelFlag(Byte delFlag) {
-        this.delFlag = delFlag;
-    }
-
-    public String getDeptName() {
-        return deptName;
-    }
-    public void setDeptName(String deptName) {
-        this.deptName = deptName;
-    }
-    public String getRoleNames() {
-        return roleNames;
-    }
-    public void setRoleNames(String roleNames) {
-        this.roleNames = roleNames;
-    }
-    public List<SysUserRole> getUserRoles() {
-        return userRoles;
-    }
-    public void setUserRoles(List<SysUserRole> userRoles) {
-        this.userRoles = userRoles;
-    }
+    // 非数据库字段
+    @TableField(exist = false)
+    private String deptPath;
 }

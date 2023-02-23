@@ -6,15 +6,18 @@
 
     <parent>
         <groupId>com.framework</groupId>
-        <artifactId>pie</artifactId>
+        <artifactId>pie-common</artifactId>
         <version>1.0-SNAPSHOT</version>
-        <!--此处加入路径信息，否则出现:jar is missing错误信息-->
-        <relativePath>../../../pie/pom.xml</relativePath>
     </parent>
 
     <artifactId>common-web</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>com.framework</groupId>
+            <artifactId>common-core</artifactId>
+        </dependency>
+
         <!--Spring Cloud Web依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -40,23 +43,30 @@
             <artifactId>ip2region</artifactId>
         </dependency>
 
+        <!--文件传输-->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+
+        <!--IP转地区工具-->
+        <dependency>
+            <groupId>org.lionsoul</groupId>
+            <artifactId>ip2region</artifactId>
+        </dependency>
+
         <!--Swagger 整合-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
-            <version>${swagger.version}</version>
         </dependency>
-
-        <!--Swagger2 默认主题样式 -->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
         </dependency>
-
-        <!--Swagger2 Bootstrap风格主题样式 -->
         <dependency>
-            <groupId>com.github.xiaoymin</groupId>
-            <artifactId>swagger-bootstrap-ui</artifactId>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
         </dependency>
     </dependencies>
 </project>

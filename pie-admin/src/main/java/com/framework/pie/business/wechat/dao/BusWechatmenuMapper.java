@@ -1,10 +1,10 @@
 package com.framework.pie.business.wechat.dao;
 
-import com.framework.pie.business.wechat.model.BusWechatmenu;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
+import com.framework.pie.business.wechat.model.BusWechatmenu;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 /**
@@ -15,7 +15,7 @@ import java.util.List;
  * @author longlong
  * @since 2020-09-25
  */
-@Repository
+@Mapper
 public interface BusWechatmenuMapper extends BaseMapper<BusWechatmenu> {
 
     int deleteByPrimaryKey(Long id);
@@ -24,7 +24,7 @@ public interface BusWechatmenuMapper extends BaseMapper<BusWechatmenu> {
 
     int insertSelective(BusWechatmenu record);
 
-    BusWechatmenu selectByPrimaryKey(Long id);
+    BusWechatmenu selectByPrimaryKey(String id);
 
     int updateByPrimaryKeySelective(BusWechatmenu record);
 

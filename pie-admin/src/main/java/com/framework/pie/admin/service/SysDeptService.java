@@ -1,8 +1,8 @@
 package com.framework.pie.admin.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.framework.pie.admin.model.SysDept;
 import com.framework.pie.http.HttpResult;
-import com.framework.pie.mybatis.service.CurdService;
 
 import java.util.List;
 
@@ -11,7 +11,14 @@ import java.util.List;
  * 机构管理
  * @author longlong
  */
-public interface SysDeptService extends CurdService<SysDept> {
+public interface SysDeptService extends IService<SysDept> {
+
+	/**
+	 * 添加和修改部门信息
+	 * @param sysDept
+	 * @return
+	 */
+	HttpResult addOrUpdate(SysDept sysDept);
 
 	/**
 	 * 查询机构树
@@ -24,7 +31,26 @@ public interface SysDeptService extends CurdService<SysDept> {
 	 * @param parentId
 	 * @return
 	 */
-	List<SysDept> findTree(Long parentId);
+	List<SysDept> findTree(String parentId);
 
-	 HttpResult remove(List<SysDept> records);
+	/**
+	 * 批量删除部门信息
+	 * @param records
+	 * @return
+	 */
+	HttpResult batchDelete(List<SysDept> records);
+
+	/**
+	 * 通过名称查询部门信息
+	 * @param name
+	 * @return
+	 */
+	SysDept selectByName(String name);
+
+	/**
+	 * 查询部门角色信息
+	 * @param deptId
+	 * @return
+	 */
+	HttpResult getDeptRoles(String deptId);
 }

@@ -7,6 +7,7 @@ import com.framework.pie.admin.service.SysDictService;
 import com.framework.pie.mybatis.page.MybatisPageHelper;
 import com.framework.pie.mybatis.page.PageRequest;
 import com.framework.pie.mybatis.page.PageResult;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,7 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper,SysDict> imple
 
     @Override
     public int saveByNativeSql(SysDict record) {
-        if (record.getId() == null || record.getId() == 0){
+        if (StringUtils.isEmpty(record.getId())){
             return sysDictMapper.insertSelective(record);
         }
         return sysDictMapper.updateByPrimaryKeySelective(record);
@@ -41,7 +42,7 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper,SysDict> imple
     }
 
     @Override
-    public SysDict findById(Long id) {
+    public SysDict findById(String id) {
         return sysDictMapper.selectByPrimaryKey(id);
     }
 

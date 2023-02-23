@@ -2,20 +2,20 @@ package com.framework.pie.admin.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.framework.pie.admin.model.SysDict;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+@Mapper
 public interface SysDictMapper extends BaseMapper<SysDict> {
-    int deleteByPrimaryKey(Long id);
+    int deleteByPrimaryKey(String id);
 
     int insert(SysDict record);
 
     int insertSelective(SysDict record);
 
-    SysDict selectByPrimaryKey(Long id);
+    SysDict selectByPrimaryKey(String id);
 
     int updateByPrimaryKeySelective(SysDict record);
 

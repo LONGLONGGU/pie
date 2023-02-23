@@ -61,7 +61,12 @@ public class ReflectionUtils {
 						if(arg == null) {
 							arg = "";
 						}
-						if(!parameterTypes[i].equals(args[i].getClass())) {
+						/*if(!parameterTypes[i].equals(args[i].getClass())) {
+							isSameMethod = false;
+						}*/
+						// 判断参数类型是否一致,这里通过isInstance方法来进行判断,因为定义接口参数的时候我们一般写的顶层接口类型，
+						// 而在使用的时候则需要指定具体的参数实现类 如定义Mapper接口的里接口参数是Map，实现类传参我们则传入HashMap
+						if(!parameterTypes[i].getClass().isInstance(args[i].getClass())){
 							isSameMethod = false;
 						}
 					}

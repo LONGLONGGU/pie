@@ -32,7 +32,7 @@ public class SysLogServiceImpl extends ServiceImpl<SysLogMapper,SysLog> implemen
     }
 
     @Override
-    public SysLog findById(Long id) {
+    public SysLog findById(String id) {
         return null;
     }
 

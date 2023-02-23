@@ -1,20 +1,25 @@
 package com.framework.pie.admin.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.util.StrUtil;
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.framework.pie.admin.constant.SysConstants;
 import com.framework.pie.admin.dao.SysMenuMapper;
 import com.framework.pie.admin.dao.SysOrgMapper;
+import com.framework.pie.admin.dto.MenuRolesDTO;
 import com.framework.pie.admin.model.SysMenu;
 import com.framework.pie.admin.model.SysOrg;
 import com.framework.pie.admin.service.SysMenuService;
 import com.framework.pie.admin.service.SysRoleService;
-import com.framework.pie.mybatis.page.PageRequest;
-import com.framework.pie.mybatis.page.PageResult;
+import com.framework.pie.constant.GlobalConstants;
+import com.framework.pie.redis.client.RedisClient;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper,SysMenu> implements SysMenuService {
@@ -24,13 +29,26 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper,SysMenu> imple
     private SysRoleService sysRoleService;
     @Autowired
     private SysOrgMapper sysOrgMapper;
+    @Autowired
+    private RedisClient redisClient;
+
+    @Override
+    public int addOrUpdate(SysMenu record) {
+        if(StringUtils.isEmpty(record.getId())) {
+            return sysMenuMapper.insert(record);
+        }
+        if(StringUtils.isEmpty(record.getParentId())) {
+            record.setParentId(null);
+        }
+        return sysMenuMapper.updateById(record);
+    }
 
     @Override
     public List<SysMenu> findTree(String userName, int menuType) {
         List<SysMenu> sysMenus = new ArrayList<>();
         List<SysMenu> menus = findByUser(userName);
         for (SysMenu menu : menus) {
-            if (menu.getParentId() == null || menu.getParentId() == 0) {
+            if (menu.getParentId() == null || "".equals(menu.getParentId()) || "0".equals(menu.getParentId())) {
                 menu.setLevel(0);
                 if(!exists(sysMenus, menu)) {
                     sysMenus.add(menu);
@@ -59,38 +77,31 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper,SysMenu> imple
     }
 
     @Override
-    public int saveByNativeSql(SysMenu record) {
-        if(record.getId() == null || record.getId() == 0) {
-            return sysMenuMapper.insertSelective(record);
+    public List<MenuRolesDTO> listMenuRoles() {
+        return sysMenuMapper.listMenuRoles();
+    }
+
+    @Override
+    public boolean refreshMenuRoles() {
+        //先删除缓存信息
+        redisClient.del(GlobalConstants.URL_PERM_ROLES_KEY);
+        Map<String,List<String>> menuRoleMap = new HashMap<>();
+        List<MenuRolesDTO> menuRoleList = sysMenuMapper.listMenuRoles();
+        if(CollectionUtil.isNotEmpty(menuRoleList)){
+            //排除URL为空的菜单角色信息
+            List<MenuRolesDTO> menuRole = menuRoleList.stream().filter(item -> StrUtil.isNotBlank(item.getModuleInfo())
+                    && StrUtil.isNotBlank(item.getPathInfo())).collect(Collectors.toList());
+            if(CollectionUtil.isNotEmpty(menuRole)){
+                menuRole.forEach(item -> {
+                    String menuKey = item.getModuleInfo()+item.getPathInfo();
+                    List<String> roles = Arrays.asList(item.getRoleIds().split(","));
+                    menuRoleMap.put(menuKey,roles);
+                });
+            }
         }
-        if(record.getParentId() == null) {
-            record.setParentId(0L);
-        }
-        return sysMenuMapper.updateByPrimaryKeySelective(record);
+        redisClient.set(GlobalConstants.URL_PERM_ROLES_KEY, JSONObject.toJSONString(menuRoleMap));
+        return true;
     }
-
-    @Override
-    public int delete(SysMenu record) {
-        sysMenuMapper.deleteByPrimaryKey(record.getId());
-        return 1;
-    }
-
-    @Override
-    public int delete(List<SysMenu> records) {
-        return 0;
-    }
-
-    @Override
-    public SysMenu findById(Long id) {
-        return null;
-    }
-
-    @Override
-    public PageResult findPage(PageRequest pageRequest) {
-        return null;
-    }
-
-
     private void findChildren(List<SysMenu> SysMenus, List<SysMenu> menus, int menuType) {
         for (SysMenu SysMenu : SysMenus) {
             List<SysMenu> children = new ArrayList<>();

@@ -2,11 +2,10 @@ package com.framework.pie.admin.controller;
 
 import com.framework.pie.admin.model.SysMenu;
 import com.framework.pie.admin.service.SysMenuService;
-import com.framework.pie.admin.util.SecurityUtils;
 import com.framework.pie.admin.util.syslog.Log;
 import com.framework.pie.http.HttpResult;
+import com.framework.pie.web.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,28 +19,25 @@ public class SysMenuController {
 
 
     @Log(value = "新增修改菜单")
-    @PreAuthorize("hasAuthority('sys:menu:add') AND hasAuthority('sys:menu:edit')")
     @PostMapping(value="/save")
     public HttpResult save(@RequestBody SysMenu record) {
-        return HttpResult.ok(sysMenuService.saveByNativeSql(record));
+        return HttpResult.ok(sysMenuService.addOrUpdate(record));
     }
 
-    @PostMapping(value = "/delete")
-    public HttpResult delete(@RequestBody SysMenu record){
-
-        return HttpResult.ok(sysMenuService.delete(record));
+    @Log(value = "删除菜单")
+    @GetMapping(value = "/delete/{id}")
+    public HttpResult delete(@PathVariable("id") String id){
+        return HttpResult.ok(sysMenuService.removeById(id));
     }
 
-//    @PreAuthorize("hasAuthority('sys:menu:view')")
     @GetMapping(value="/findNavTree")
     public HttpResult findNavTree(@RequestParam String userName) {
         return HttpResult.ok(sysMenuService.findTree(userName, 1));
     }
 
-//    @PreAuthorize("hasAuthority('sys:menu:view')")
     @GetMapping(value="/findMenuTree")
     public HttpResult findMenuTree() {
-        List<SysMenu> tree = sysMenuService.findTree(SecurityUtils.getUsername(), 0);
+        List<SysMenu> tree = sysMenuService.findTree(JwtUtils.getUsername(), 0);
         return HttpResult.ok(tree);
     }
 

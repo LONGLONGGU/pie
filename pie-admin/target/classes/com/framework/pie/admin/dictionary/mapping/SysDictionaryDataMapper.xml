@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.pie.admin.dictionary.dao.SysDictionaryDataMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.framework.pie.admin.dictionary.model.SysDictionaryData">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="value" property="value"/>
+        <result column="mark" property="mark"/>
+        <result column="dictionary_id" property="dictionaryId"/>
+        <result column="dictionaryName" property="dictionaryName"/>
+        <result column="order_num" property="orderNum"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="last_update_by" jdbcType="VARCHAR" property="lastUpdateBy" />
+        <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+        <result column="del_flag" jdbcType="TINYINT" property="delFlag" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, del_flag, order_num, value, mark, dictionary_id
+    </sql>
+
+    <select id="findPage" resultMap="BaseResultMap">
+        SELECT
+            A.*,
+            B.name AS dictionaryName
+        FROM
+            sys_dictionary_data A
+        LEFT JOIN
+            sys_dictionary B ON A.dictionary_id = B.id
+        WHERE A.del_flag = 1
+        <if test="params.dictCode != null and params.dictCode != ''">
+            AND B.path_info LIKE CONCAT('%',#{params.dictCode},'%')
+        </if>
+        <if test="params.dictDataName != null and params.dictDataName != ''">
+            AND A.name LIKE CONCAT('%',#{params.dictDataName},'%')
+        </if>
+        ORDER BY B.order_num ASC, A.order_num ASC
+    </select>
+
+    <select id="findByCode" resultMap="BaseResultMap" parameterType="java.util.Map">
+        SELECT
+            b.*
+        FROM
+            sys_dictionary a INNER JOIN sys_dictionary_data b ON a.id = b.dictionary_id
+        WHERE
+            b.del_flag = 1 AND a.del_flag = 1
+        <if test="params.code != null and params.code != ''">
+            AND a.code = #{params.code}
+        </if>
+        ORDER BY order_num
+    </select>
+
+</mapper>

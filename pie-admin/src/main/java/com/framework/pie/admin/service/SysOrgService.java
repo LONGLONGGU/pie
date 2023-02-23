@@ -1,14 +1,31 @@
 package com.framework.pie.admin.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.framework.pie.admin.model.SysMenu;
 import com.framework.pie.admin.model.SysOrg;
 import com.framework.pie.admin.model.SysOrgMenu;
-import com.framework.pie.mybatis.service.CurdService;
+import com.framework.pie.http.HttpResult;
+import com.framework.pie.mybatis.page.PageRequest;
+import com.framework.pie.mybatis.page.PageResult;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-public interface SysOrgService extends CurdService<SysOrg> {
+public interface SysOrgService extends IService<SysOrg> {
+    /**
+     * 新增或修改机构信息
+     * @param sysOrg
+     * @return
+     */
+    HttpResult addOrUpdate(SysOrg sysOrg);
+
+    /**
+     * 删除机构信息
+     * @param orgId
+     * @return
+     */
+    HttpResult removeOrg(String orgId);
+
     /**
      * 根据名称查询
      * @param name
@@ -20,14 +37,14 @@ public interface SysOrgService extends CurdService<SysOrg> {
      * 查询机构菜单集合
      * @return
      */
-    List<SysMenu> findOrgMenus(@RequestParam Long orgId);
+    List<SysMenu> findOrgMenus(@RequestParam String orgId);
 
     /**
      * 保存机构菜单
      * @param records
      * @return
      */
-    int saveRoleMenus(Long orgId,List<SysOrgMenu> records);
+    int saveRoleMenus(String orgId,List<SysOrgMenu> records);
 
     /**
      * 通过用户名查询用户所属机构
@@ -35,4 +52,15 @@ public interface SysOrgService extends CurdService<SysOrg> {
      */
 
     SysOrg findByOrg();
+
+    /**
+     * 分页查询
+     * 这里统一封装了分页请求和结果，避免直接引入具体框架的分页对象, 如MyBatis或JPA的分页对象
+     * 从而避免因为替换ORM框架而导致服务层、控制层的分页接口也需要变动的情况，替换ORM框架也不会
+     * 影响服务层以上的分页接口，起到了解耦的作用
+     * @param pageRequest 自定义，统一分页查询请求
+     * @return PageResult 自定义，统一分页查询结果
+     */
+    PageResult findPage(PageRequest pageRequest);
+
 }

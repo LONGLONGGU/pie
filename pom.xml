@@ -9,7 +9,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.4.2</version>
-        <relativePath/> <!-- lookup parent from  repository - -->
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <groupId>com.framework</groupId>
@@ -18,14 +18,12 @@
     <version>1.0-SNAPSHOT</version>
 
     <modules>
-        <module>pie-admin</module>
         <module>pie-common</module>
-        <module>pie-backup</module>
+        <module>pie-admin</module>
         <module>pie-gateway</module>
-<!--        <module>pie-security</module>-->
-        <module>pie-mybatis-generator</module>
-        <!--<module>pie-HdfsClient</module>-->
-        <!--<module>pie-mapreduce</module>-->
+        <module>pie-auth</module>
+        <module>pie-quartz</module>
+        <module>pie-file-upload</module>
     </modules>
 
     <!-- 统一管理jar包版本 -->
@@ -43,26 +41,27 @@
         <mybatis-plus.version>3.4.0</mybatis-plus.version>
         <mybatis-velocity.version>2.0</mybatis-velocity.version>
         <freemarker.version>2.3.31</freemarker.version>
-        <mybatis-pagehelper.version>5.2.0</mybatis-pagehelper.version>
+        <mybatis-pagehelper.version>1.3.0</mybatis-pagehelper.version>
         <lombok.version>1.18.18</lombok.version>
         <hutool.version>5.5.8</hutool.version>
-        <alibaba-fastjson.version>1.2.48</alibaba-fastjson.version>
+        <alibaba-fastjson.version>1.2.78</alibaba-fastjson.version>
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <commons-io.version>2.7</commons-io.version>
-        <poi-ooxml.version>4.0.1</poi-ooxml.version>
+        <poi-ooxml.version>4.1.1</poi-ooxml.version>
         <pinyin4j.version>2.5.1</pinyin4j.version>
         <ip2region.version>1.7.2</ip2region.version>
         <swagger.version>2.9.2</swagger.version>
-        <swagger-bootstrap.version>1.9.6</swagger-bootstrap.version>
         <junit.version>4.12</junit.version>
         <log4j.version>1.2.17</log4j.version>
         <kaptcha.version>0.0.9</kaptcha.version>
         <jjwt.version>0.9.1</jjwt.version>
         <thumbnailator.version>0.4.12</thumbnailator.version>
+        <redis.version>2.9.2</redis.version>
         <jaxb-api.version>2.3.1</jaxb-api.version>
         <jaxb-core.version>2.3.0.1</jaxb-core.version>
         <jaxb-impl.version>2.3.0.1</jaxb-impl.version>
         <activation.version>1.1.1</activation.version>
+        <guava.version>26.0-jre</guava.version>
     </properties>
 
     <!--直接放到dependencies，不放到dependencyManagement标签中，是因为这两个依赖在项目的大部分地方都
@@ -152,7 +151,7 @@
             <!--MyBatis 分页插件-->
             <dependency>
                 <groupId>com.github.pagehelper</groupId>
-                <artifactId>pagehelper</artifactId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
                 <version>${mybatis-pagehelper.version}</version>
             </dependency>
 
@@ -212,11 +211,10 @@
                 <version>${swagger.version}</version>
             </dependency>
 
-            <!--Swagger2 Bootstrap风格主题样式 -->
             <dependency>
-                <groupId>com.github.xiaoymin</groupId>
-                <artifactId>swagger-bootstrap-ui</artifactId>
-                <version>${swagger-bootstrap.version}</version>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
             </dependency>
 
             <!--Junit-->
@@ -252,6 +250,13 @@
                 <groupId>net.coobird</groupId>
                 <artifactId>thumbnailator</artifactId>
                 <version>${thumbnailator.version}</version>
+            </dependency>
+
+            <!--Redis 依赖信息-->
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${redis.version}</version>
             </dependency>
 
             <!--Begin Jaxb 依赖包，jdk9以后需要重新依赖其中-->
@@ -293,6 +298,12 @@
             <dependency>
                 <groupId>com.framework</groupId>
                 <artifactId>common-web</artifactId>
+                <version>${pie.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.framework</groupId>
+                <artifactId>common-redis</artifactId>
                 <version>${pie.version}</version>
             </dependency>
             <!--End Pie 公共依赖-->

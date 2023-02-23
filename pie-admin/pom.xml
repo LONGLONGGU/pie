@@ -11,12 +11,7 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
-	<groupId>com.framework</groupId>
 	<artifactId>pie-admin</artifactId>
-	<version>1.0.0</version>
-	<packaging>jar</packaging>
-	<name>pie-admin</name>
-	<description>pie-admin</description>
 
 	<dependencies>
 		<!--公共类依赖-->
@@ -31,10 +26,16 @@
 			<artifactId>common-web</artifactId>
 		</dependency>
 
-		<!--MyBatis相关依赖-->
+		<!--MyBatis 相关依赖-->
 		<dependency>
 			<groupId>com.framework</groupId>
 			<artifactId>common-mybatis</artifactId>
+		</dependency>
+
+		<!--Redis 依赖包-->
+		<dependency>
+			<groupId>com.framework</groupId>
+			<artifactId>common-redis</artifactId>
 		</dependency>
 
 		<!--Spring Cloud Alibaba服务注册中心-->
@@ -42,10 +43,33 @@
 			<groupId>com.alibaba.cloud</groupId>
 			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-loadbalancer</artifactId>
+		</dependency>
+
+		<!--sentinel熔断器-->
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+		</dependency>
+
+		<!-- 配置中心 -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-bootstrap</artifactId>
+		</dependency>
+
+		<!--注意新版本必须添加此依赖后bootstrap.xxx配置文件才会生效，不添加此依赖会提示配置文件无法读取-->
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+		</dependency>
+
+		<!-- 配置读取 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
 		</dependency>
 
 		<!--SpringCloud Feign -->
@@ -90,18 +114,6 @@
 			<artifactId>kaptcha</artifactId>
 		</dependency>
 
-		<!--Spring security -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-
-		<!-- jwt -->
-		<dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt</artifactId>
-		</dependency>
-
 		<!--thumbnailator-->
 		<dependency>
 			<groupId>net.coobird</groupId>
@@ -125,11 +137,24 @@
 			<groupId>javax.activation</groupId>
 			<artifactId>activation</artifactId>
 		</dependency>
+
+		<!--SpringBoot 整合Junit单元测试-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<!--打包放到各个子工程中进行，有的包是不需要打包使用的-->
 	<build>
-		<finalName>springCloud</finalName>
+		<finalName>${project.artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

@@ -1,0 +1,57 @@
+{
+  "groups": [
+    {
+      "name": "redis",
+      "type": "com.framework.pie.redis.config.RedisConfig",
+      "sourceType": "com.framework.pie.redis.config.RedisConfig"
+    }
+  ],
+  "properties": [
+    {
+      "name": "redis.database",
+      "type": "java.lang.Integer",
+      "sourceType": "com.framework.pie.redis.config.RedisConfig"
+    },
+    {
+      "name": "redis.max-idle",
+      "type": "java.lang.Integer",
+      "sourceType": "com.framework.pie.redis.config.RedisConfig"
+    },
+    {
+      "name": "redis.max-total",
+      "type": "java.lang.Integer",
+      "sourceType": "com.framework.pie.redis.config.RedisConfig"
+    },
+    {
+      "name": "redis.max-wait",
+      "type": "java.lang.Integer",
+      "sourceType": "com.framework.pie.redis.config.RedisConfig"
+    },
+    {
+      "name": "redis.min-idle",
+      "type": "java.lang.Integer",
+      "sourceType": "com.framework.pie.redis.config.RedisConfig"
+    },
+    {
+      "name": "redis.password",
+      "type": "java.lang.String",
+      "sourceType": "com.framework.pie.redis.config.RedisConfig"
+    },
+    {
+      "name": "redis.port",
+      "type": "java.lang.Integer",
+      "sourceType": "com.framework.pie.redis.config.RedisConfig"
+    },
+    {
+      "name": "redis.test-on-borrow",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.framework.pie.redis.config.RedisConfig"
+    },
+    {
+      "name": "redis.url",
+      "type": "java.lang.String",
+      "sourceType": "com.framework.pie.redis.config.RedisConfig"
+    }
+  ],
+  "hints": []
+}

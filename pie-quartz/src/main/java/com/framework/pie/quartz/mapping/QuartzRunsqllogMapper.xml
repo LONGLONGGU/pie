@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.pie.quartz.dao.QuartzRunsqllogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.framework.pie.quartz.model.QuartzRunsqllog">
+        <id column="id" property="id"/>
+        <result column="sqls" property="sqls"/>
+        <result column="runTime" property="runTime" />
+        <result column="message" property="message"/>
+        <result column="createTime" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="databasesNmae" property="databasesNmae"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, sqls, runTime, message, createTime, databasesNmae
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from quartz_runsqlslog
+        where id = #{id}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete  from quartz_runsqlslog
+        where id = #{id}
+    </delete>
+
+    <insert id="insert" parameterType="com.framework.pie.quartz.model.QuartzRunsqllog">
+        insert into quartz_runsqlslog(id,sqls, runTime, message, createTime, databasesNmae)
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+             #{id}
+             #{sqls},
+             #{runTime},
+             #{message},
+             #{createTime},
+             #{databasesNmae},
+        </trim>
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.framework.pie.quartz.model.QuartzRunsqllog">
+        <selectKey  keyProperty="id" resultType="java.lang.Long" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into quartz_runsqlslog
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="sqls != null">
+                sqls,
+            </if>
+            <if test="runTime != null">
+                runTime,
+            </if>
+            <if test="message != null">
+                message,
+            </if>
+            <if test="createTime != null">
+                createTime,
+            </if>
+            <if test="databasesNmae != null">
+                databasesNmae,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+             #{id},
+            </if>
+            <if test="sqls != null">
+             #{sqls},
+            </if>
+            <if test="runTime != null">
+             #{runTime},
+            </if>
+            <if test="message != null">
+             #{message},
+            </if>
+            <if test="createTime != null">
+             #{createTime},
+            </if>
+            <if test="databasesNmae != null">
+             #{databasesNmae},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.framework.pie.quartz.model.QuartzRunsqllog">
+        update quartz_runsqlslog
+        <set>
+            <if test="id != null">
+                id = #{id},
+            </if>
+            <if test="sqls != null">
+                sqls = #{sqls},
+            </if>
+            <if test="runTime != null">
+                runTime = #{runTime},
+            </if>
+            <if test="message != null">
+                message = #{message},
+            </if>
+            <if test="createTime != null">
+                createTime = #{createTime},
+            </if>
+            <if test="databasesNmae != null">
+                databasesNmae = #{databasesNmae},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.framework.pie.quartz.model.QuartzRunsqllog">
+        update quartz_runsqlslog
+        set
+           id = #{id},
+           sqls = #{sqls},
+           runTime = #{runTime},
+           message = #{message},
+           createTime = #{createTime},
+           databasesNmae = #{databasesNmae}        where id = #{id}
+    </update>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from quartz_runsqlslog
+    </select>
+
+    <select id="findPage" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from  quartz_runsqlslog
+    </select>
+</mapper>

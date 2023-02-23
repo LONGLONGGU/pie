@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.pie.admin.dao.SysTokenAppleMapper">
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.framework.pie.admin.model.SysTokenApple">
+        <id column="id" property="id" />
+        <result column="create_by" property="createBy" />
+        <result column="create_time" property="createTime" />
+        <result column="last_update_by" property="lastUpdateBy" />
+        <result column="last_update_time" property="lastUpdateTime" />
+        <result column="del_flag" property="delFlag" />
+        <result column="name" property="name" />
+        <result column="apply_time" property="applyTime" />
+        <result column="overdue_time" property="overdueTime" />
+        <result column="user_name" property="userName" />
+        <result column="user_id" property="userId" />
+        <result column="password" property="password" />
+        <result column="token_status" property="tokenStatus" />
+        <result column="request_count" property="requestCount" />
+        <result column="token" property="token" />
+        <result column="note" property="note" />
+    </resultMap>
+
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,create_by,create_time,last_update_by,last_update_time,del_flag,name, apply_time, overdue_time, user_name, user_id, password, token_status, request_count, token, note
+    </sql>
+
+    <select id="findPage" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM
+            sys_token_apple A
+        WHERE
+            A.del_flag = 1
+        <if test="params.name != null and params.name != '' ">
+            AND  A.name LIKE CONCAT('%',#{params.name},'%')
+        </if>
+    </select>
+</mapper>

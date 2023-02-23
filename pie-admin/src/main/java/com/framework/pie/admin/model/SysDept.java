@@ -1,141 +1,49 @@
 package com.framework.pie.admin.model;
 
-import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.framework.pie.mybatis.model.BaseEntity;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import java.util.List;
 
-public class SysDept {
-    private Long id;
+@Data
+@EqualsAndHashCode(callSuper = false)
+@ApiModel(value = "SysDept对象",description = "部门")
+public class SysDept extends BaseEntity {
 
+    @ApiModelProperty(value = "部门名称")
     private String name;
 
-    private Long parentId;
+    @ApiModelProperty(value = "上级机构ID，一级机构为0")
+    private String parentId;
 
+    @ApiModelProperty(value = "路径信息")
+    private String pathInfo;
+
+    @ApiModelProperty(value = "排序")
     private Integer orderNum;
 
-    private String createBy;
-
-    private Date createTime;
-
-    private String lastUpdateBy;
-
-    private Date lastUpdateTime;
-
-    private Byte delFlag;
-
     // 非数据库字段
+    @TableField(exist = false)
     private List<SysDept> children;
+
     //是否有子节点
-    private boolean hasChildren;
+    @TableField(exist = false)
+    private boolean hasChildren = true;
+
     // 非数据库字段
+    @TableField(exist = false)
     private String parentName;
+
     // 非数据库字段
+    @TableField(exist = false)
     private Integer level;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
-
-    public Long getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
-    }
-
-    public Integer getOrderNum() {
-        return orderNum;
-    }
-
-    public void setOrderNum(Integer orderNum) {
-        this.orderNum = orderNum;
-    }
-
-    public String getCreateBy() {
-        return createBy;
-    }
-
-    public void setCreateBy(String createBy) {
-        this.createBy = createBy == null ? null : createBy.trim();
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getLastUpdateBy() {
-        return lastUpdateBy;
-    }
-
-    public void setLastUpdateBy(String lastUpdateBy) {
-        this.lastUpdateBy = lastUpdateBy == null ? null : lastUpdateBy.trim();
-    }
-
-    public Date getLastUpdateTime() {
-        return lastUpdateTime;
-    }
-
-    public void setLastUpdateTime(Date lastUpdateTime) {
-        this.lastUpdateTime = lastUpdateTime;
-    }
-
-    public Byte getDelFlag() {
-        return delFlag;
-    }
-
-    public void setDelFlag(Byte delFlag) {
-        this.delFlag = delFlag;
-    }
-
-    public List<SysDept> getChildren() {
-        return children;
-    }
-
-    public void setChildren(List<SysDept> children) {
-        this.children = children;
-    }
-
-    public String getParentName() {
-        return parentName;
-    }
-
-    public void setParentName(String parentName) {
-        this.parentName = parentName;
-    }
-
-    public Integer getLevel() {
-        return level;
-    }
-
-    public void setLevel(Integer level) {
-        this.level = level;
-    }
-
-    public boolean isHasChildren() {
-        return hasChildren;
-    }
-
-    public void setHasChildren(boolean hasChildren) {
-        this.hasChildren = hasChildren;
-    }
-//    public SysDept(String name,Integer orderNum){
-//        this.name = name;
-//        this.orderNum =orderNum;
-//    }
+    // 非数据库字段
+    @TableField(exist = false)
+    @ApiModelProperty(value = "部门角色信息")
+    private List<SysDeptRole> deptRoles;
 }

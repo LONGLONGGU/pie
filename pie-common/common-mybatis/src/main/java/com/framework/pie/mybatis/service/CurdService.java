@@ -39,7 +39,7 @@ public interface CurdService<T> extends IService<T> {
      * @param id
      * @return
      */
-    T findById(Long id);
+    T findById(String id);
 
     /**
      * 分页查询

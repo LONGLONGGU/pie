@@ -1,7 +1,7 @@
 package com.framework.pie.admin.websocket;
 
 import com.alibaba.cloud.commons.lang.StringUtils;
-import com.framework.pie.admin.util.JwtTokenUtils;
+import com.framework.pie.web.utils.JwtUtils;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.stereotype.Component;
@@ -27,8 +27,8 @@ public class PrincipalHandshakeHandler extends DefaultHandshakeHandler {
             /**
              * 这边就获取你最熟悉的陌生人,携带参数，你可以cookie，请求头，或者url携带，这边我采用url携带
              */
-            final String token = httpRequest.getParameter("token");
-            final  String name =  JwtTokenUtils.getUsernameFromToken(token);
+            //final String token = httpRequest.getParameter("token");
+            final  String name = JwtUtils.getUsername();
             if (StringUtils.isEmpty(name)) {
                 return null;
             }

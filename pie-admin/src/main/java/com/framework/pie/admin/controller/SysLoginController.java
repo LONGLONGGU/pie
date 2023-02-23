@@ -1,24 +1,19 @@
 package com.framework.pie.admin.controller;
 
 import com.framework.pie.admin.dao.SysOrgMapper;
-import com.framework.pie.admin.model.SysOrg;
-import com.framework.pie.admin.model.SysUser;
-import com.framework.pie.admin.security.JwtAuthenticatioToken;
 import com.framework.pie.admin.service.SysLoginLogService;
 import com.framework.pie.admin.service.SysUserService;
-import com.framework.pie.admin.util.IPUtils;
-import com.framework.pie.admin.util.PasswordUtils;
-import com.framework.pie.admin.util.SecurityUtils;
-import com.framework.pie.admin.vo.LoginBean;
+import com.framework.pie.admin.util.ImageUtil;
+import com.framework.pie.constant.RedisConstants;
 import com.framework.pie.http.HttpResult;
+import com.framework.pie.redis.client.RedisClient;
 import com.framework.pie.utils.IOUtils;
+import com.framework.pie.web.utils.IPUtils;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.imageio.ImageIO;
@@ -28,6 +23,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * 登录控制器
@@ -39,9 +37,9 @@ public class SysLoginController {
 	@Autowired
 	private Producer producer;
 	@Autowired
-	private SysUserService sysUserService;
+	private RedisClient redisClient;
 	@Autowired
-	private AuthenticationManager authenticationManager;
+	private SysUserService sysUserService;
 	@Autowired
 	private SysLoginLogService sysLoginLogService;
 	@Autowired
@@ -69,8 +67,30 @@ public class SysLoginController {
 	}
 
 	/**
-	 * 登录接口
+	 * 获取登录验证码
+	 * @throws ServletException
+	 * @throws IOException
 	 */
+	@GetMapping("getLoginCaptcha")
+	public HttpResult getLoginCaptcha() throws IOException {
+		// 生成文字验证码
+		String text = producer.createText();
+		// 生成图片验证码,并将图片验证码转换成base的格式返回
+		BufferedImage image = producer.createImage(text);
+		String imageInfo = ImageUtil.getBufferedImageToBase64(image,"jpg");
+
+		//将验证码信息存储到redis当中
+		String capToken = UUID.randomUUID().toString();
+		redisClient.set(RedisConstants.CAP_CODE_PREFIX+capToken,text,RedisConstants.CAP_CODE_EXPIRE);
+		Map<String,Object> capInfo = new HashMap<>();
+		capInfo.put("imageInfo",imageInfo);
+		capInfo.put("capToken",capToken);
+		return HttpResult.ok(capInfo);
+	}
+
+	/**
+	 * 登录接口
+	 *//*
 	@PostMapping(value = "/login")
 	public HttpResult login(@RequestBody LoginBean loginBean, HttpServletRequest request) throws IOException {
 		String username = loginBean.getAccount();
@@ -107,6 +127,19 @@ public class SysLoginController {
 		// 记录登录日志
 		sysLoginLogService.writeLoginLog(username, IPUtils.getIpAddr(request));
 		return HttpResult.ok(token);
+	}*/
+
+	/**
+	 * 退出登录
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	@GetMapping("loginOut")
+	public HttpResult loginOut(@RequestParam("userName") String userName, @RequestParam("loginType") String loginType, HttpServletRequest request)  {
+		String ip = IPUtils.getIpAddr(request);
+		String ipAddr = IPUtils.getCityInfo(ip);
+		sysLoginLogService.writeLoginOut(userName,ip,ipAddr,loginType);
+		return HttpResult.ok("退出成功!");
 	}
 
 }

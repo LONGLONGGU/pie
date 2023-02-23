@@ -1,8 +1,9 @@
 package com.framework.pie.admin.dao;
 
-import com.framework.pie.admin.model.SysArticle;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.springframework.stereotype.Repository;
+import com.framework.pie.admin.model.SysArticle;
+import org.apache.ibatis.annotations.Mapper;
+
 import java.util.List;
 
 /**
@@ -13,16 +14,16 @@ import java.util.List;
  * @author longlong
  * @since 2020-09-25
  */
-@Repository
+@Mapper
 public interface SysArticleMapper extends BaseMapper<SysArticle> {
 
-    int deleteByPrimaryKey(Long id);
+    int deleteByPrimaryKey(String id);
 
     int insert(SysArticle record);
 
     int insertSelective(SysArticle record);
 
-    SysArticle selectByPrimaryKey(Long id);
+    SysArticle selectByPrimaryKey(String id);
 
     int updateByPrimaryKeySelective(SysArticle record);
 

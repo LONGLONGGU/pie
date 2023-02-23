@@ -67,4 +67,15 @@ public class PageResult {
     public void setContent(List<?> content) {
         this.content = content;
     }
+
+    public PageResult(int pageNum, int pageSize, long totalSize, int totalPages, List<?> content) {
+        this.pageNum = pageNum;
+        this.pageSize = pageSize;
+        this.totalSize = totalSize;
+        this.totalPages = totalPages;
+        this.content = content;
+    }
+
+    public PageResult() {
+    }
 }

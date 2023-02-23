@@ -49,7 +49,7 @@ public class BusWechatuserServiceImpl extends ServiceImpl<BusWechatuserMapper,Bu
     }
 
     @Override
-    public BusWechatuser findById(Long id) {
+    public BusWechatuser findById(String id) {
         return busWechatuserMapper.selectByPrimaryKey(id);
     }
 

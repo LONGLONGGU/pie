@@ -19,28 +19,7 @@ public class SysLoginLogServiceImpl extends ServiceImpl<SysLoginLogMapper,SysLog
     @Autowired
     private SysLoginLogMapper sysLoginLogMapper;
 
-    @Override
-    public int saveByNativeSql(SysLoginLog record){
-        if(record.getId() == null || record.getId() == 0) {
-        return sysLoginLogMapper.insertSelective(record);
-    }
-      return sysLoginLogMapper.updateByPrimaryKeySelective(record);
-    }
 
-    @Override
-    public int delete(SysLoginLog record) {
-        return 0;
-    }
-
-    @Override
-    public int delete(List<SysLoginLog> records) {
-        return 0;
-    }
-
-    @Override
-    public SysLoginLog findById(Long id) {
-        return null;
-    }
 
     @Override
     public PageResult findPage(PageRequest pageRequest) {
@@ -55,32 +34,40 @@ public class SysLoginLogServiceImpl extends ServiceImpl<SysLoginLogMapper,SysLog
         }
         return MybatisPageHelper.findPage(pageRequest, sysLoginLogMapper);
     }
+
     @Transactional
     @Override
-    public int writeLoginLog(String userName, String ip) {
-        List<SysLoginLog> sysLoginLogs = sysLoginLogMapper.findByUserNameAndStatus(userName, SysLoginLog.STATUS_ONLINE);
-        for(SysLoginLog sysLoginLog:sysLoginLogs) {
-            sysLoginLog.setStatus(SysLoginLog.STATUS_LOGIN);
-            sysLoginLogMapper.updateByPrimaryKey(sysLoginLog);
-        }
+    public int writeLoginLog(String userName, String ip ,String ipAddr, String loginType) {
+//        List<SysLoginLog> sysLoginLogs = sysLoginLogMapper.findByUserNameAndStatus(userName, SysLoginLog.STATUS_ONLINE, loginType);
+//        for(SysLoginLog sysLoginLog:sysLoginLogs) {
+//            sysLoginLog.setStatus(SysLoginLog.STATUS_LOGIN);
+//            sysLoginLogMapper.updateById(sysLoginLog);
+//        }
         SysLoginLog record = new SysLoginLog();
         record.setUserName(userName);
         record.setIp(ip);
-        record.setStatus(SysLoginLog.STATUS_LOGOUT);
-        sysLoginLogMapper.insertSelective(record);
-        record.setStatus(SysLoginLog.STATUS_ONLINE);
-        sysLoginLogMapper.insertSelective(record);
+        record.setIpAddr(ipAddr);
+        record.setLoginType(loginType);
+        record.setStatus(SysLoginLog.STATUS_LOGIN);
+        sysLoginLogMapper.insert(record);
         return 0;
     }
 
     @Transactional
     @Override
-    public int  writeLoginOut(String userName, String ip){
-        List<SysLoginLog> sysLoginLogs = sysLoginLogMapper.findByUserNameAndStatus(userName, SysLoginLog.STATUS_ONLINE);
-        for(SysLoginLog sysLoginLog:sysLoginLogs) {
-            sysLoginLog.setStatus(SysLoginLog.STATUS_LOGOUT);
-            sysLoginLogMapper.updateByPrimaryKey(sysLoginLog);
-        }
+    public int  writeLoginOut(String userName, String ip,String ipAddr, String loginType){
+//        List<SysLoginLog> sysLoginLogs = sysLoginLogMapper.findByUserNameAndStatus(userName, SysLoginLog.STATUS_ONLINE,loginType);
+//        for(SysLoginLog sysLoginLog:sysLoginLogs) {
+//            sysLoginLog.setStatus(SysLoginLog.STATUS_LOGIN);
+//            sysLoginLogMapper.updateById(sysLoginLog);
+//        }
+        SysLoginLog record = new SysLoginLog();
+        record.setUserName(userName);
+        record.setIp(ip);
+        record.setIpAddr(ipAddr);
+        record.setLoginType(loginType);
+        record.setStatus(SysLoginLog.STATUS_LOGOUT);
+        sysLoginLogMapper.insert(record);
         return 0;
     }
 }

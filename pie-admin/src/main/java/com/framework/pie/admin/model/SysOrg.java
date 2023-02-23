@@ -1,95 +1,43 @@
 package com.framework.pie.admin.model;
 
-import java.util.Date;
 
-public class SysOrg {
-    private Long id;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.framework.pie.mybatis.model.BaseEntity;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@Data
+@EqualsAndHashCode(callSuper = false)
+@ApiModel(value = "SysOrg对象",description = "机构表")
+public class SysOrg extends BaseEntity {
+
+    @ApiModelProperty("机构名称")
     private String name;
 
+    @ApiModelProperty("状态 0：禁用 1：正常")
     private Byte status = 1;
 
+    @ApiModelProperty("行政区划Id信息，关联zst-crawler库中bus_district表")
+    private String districtId;
+
+    @ApiModelProperty("行政区划名称")
+    private String districtName;
+
+    @ApiModelProperty("排序")
     private Integer orderNum;
 
-    private String createBy;
+    @ApiModelProperty("备注信息")
+    private String remark;
 
-    private Date createTime;
+    // 非数据库字段
+    @ApiModelProperty("机构管理员密码信息")
+    @TableField(exist = false)
+    private String orgAdminPwd;
 
-    private String lastUpdateBy;
-
-    private Date lastUpdateTime;
-
-    private Byte delFlag;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
-
-    public Byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(Byte status) {
-        this.status = status;
-    }
-
-    public Integer getOrderNum() {
-        return orderNum;
-    }
-
-    public void setOrderNum(Integer orderNum) {
-        this.orderNum = orderNum;
-    }
-
-    public String getCreateBy() {
-        return createBy;
-    }
-
-    public void setCreateBy(String createBy) {
-        this.createBy = createBy == null ? null : createBy.trim();
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getLastUpdateBy() {
-        return lastUpdateBy;
-    }
-
-    public void setLastUpdateBy(String lastUpdateBy) {
-        this.lastUpdateBy = lastUpdateBy == null ? null : lastUpdateBy.trim();
-    }
-
-    public Date getLastUpdateTime() {
-        return lastUpdateTime;
-    }
-
-    public void setLastUpdateTime(Date lastUpdateTime) {
-        this.lastUpdateTime = lastUpdateTime;
-    }
-
-    public Byte getDelFlag() {
-        return delFlag;
-    }
-
-    public void setDelFlag(Byte delFlag) {
-        this.delFlag = delFlag;
-    }
+    // 非数据库字段
+    @ApiModelProperty("创建用户名称")
+    @TableField(exist = false)
+    private String createUserName;
 }
