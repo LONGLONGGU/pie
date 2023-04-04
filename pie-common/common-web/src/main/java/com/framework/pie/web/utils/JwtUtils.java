@@ -4,6 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.framework.pie.constant.AuthConstants;
+import com.framework.pie.utils.Base64Util;
 import com.framework.pie.utils.StringUtils;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -139,13 +140,13 @@ public class JwtUtils {
         String basic = request.getHeader(AuthConstants.AUTHORIZATION_KEY);
         if (StrUtil.isNotBlank(basic) && basic.startsWith(AuthConstants.BASIC_PREFIX)) {
             basic = basic.replace(AuthConstants.BASIC_PREFIX, Strings.EMPTY);
-            String basicPlainText = new String(new BASE64Decoder().decodeBuffer(basic), "UTF-8");
+            String basicPlainText = Base64Util.decode(basic,"UTF-8");
             clientId = basicPlainText.split(":")[0]; //client:secret
         }
         if (StringUtils.isBlank(clientId)){
             basic = request.getHeader(AuthConstants.TOKEN_AUTHORIZATION_KEY);
             basic = basic.replace(AuthConstants.BASIC_PREFIX, Strings.EMPTY);
-            String basicPlainText = new String(new BASE64Decoder().decodeBuffer(basic), "UTF-8");
+            String basicPlainText = Base64Util.decode(basic,"UTF-8");
             clientId = basicPlainText.split(":")[0]; //client:secret
         }
         return clientId;
